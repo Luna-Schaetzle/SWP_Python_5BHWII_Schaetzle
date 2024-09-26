@@ -155,4 +155,127 @@ Der code muss allerdings in Python interpretiert werden, was halt python eine de
 - In Java gibt es kein direktes Äquivalent zu `del`, da die Speicherverwaltung automatisch durch die JVM erfolgt. Der sogenaannte **Garbage Collector** löscht nicht mehr benötigte Objekte automatisch.
 
 
+## Iteration und Rekursion
+
+### Iteration
+
+Iteration ist ein Konzept in der Informatik, bei dem ein Block von Code wiederholt ausgeführt wird, bis eine bestimmte Bedingung erfüllt ist. Iteration wird oft verwendet, um über Datenstrukturen wie Listen oder Arrays zu iterieren.
+
+### Beispiel: Summe berechnen
+Die Summe der Zahlen von `1` bis `n` kann iterativ wie folgt berechnet werden:
+
+```python
+def summe(n):
+    result = 0
+    for i in range(1, n + 1):
+        result += i
+    return result
+
+print(summe(5))  # Ausgabe: 15
+```
+
+### Rekursion
+
+Rekursion ist ein Konzept in der Informatik, bei dem eine Funktion sich selbst aufruft, um ein Problem in kleinere Teilprobleme zu zerlegen. Rekursion ist ein leistungsstarkes Werkzeug, um komplexe Probleme auf elegante Weise zu lösen.
+
+### Beispiel: Fakultät berechnen
+Die Fakultät einer Zahl `n` (geschrieben als `n!`) ist das Produkt aller positiven ganzen Zahlen von `1` bis `n`. Die Fakultät einer Zahl `n` kann rekursiv wie folgt berechnet werden:
+
+```python
+def fakultaet(n):
+    if n == 0:
+        return 1
+    else:
+        return n * fakultaet(n - 1)
+
+print(fakultaet(5))  # Ausgabe: 120
+```
+Der vorteil von Rekursion ist, dass es die Lesbarkeit des Codes erhöht. Der Nachteil ist, dass es zu einer hohen Speicherbelastung führen kann, da für jede rekursive Aufruf eine neue Instanz der Funktion im Speicher erstellt wird.
+
+Der Compiler wandelt die Rekursion in eine iterative Schleife um, um den Speicher zu schonen.
+
+
+## Unterschied zwischen Prozess und Thread
+### Prozess
+Ein Prozess ist ein Programm, wie zum Beispiel ein Texteditor oder ein Browser, aber auch Systemkomponenten wie die Tastatur. Prozesse sind voneinander isoliert und können von Haus aus nicht direkt miteinander kommunizieren.
+
+### Thread
+Ein Thread ist ein Bestandteil eines Prozesses. Ein Prozess kann mehrere Threads haben, die innerhalb desselben Prozesses agieren und miteinander kommunizieren können.
+
+
+## Array Lists
+
+Grundsätzlich gibt es nur zwei arten von Datenstrukturen und zwar die Arrays und die Listen. Alle anderen Datenstrukturen sind nur erweiterungen dieser beiden. 
+
+### Arrays
+
+Ein Array ist eine Datenstruktur, die eine Sammlung von Elementen speichert, die alle denselben Datentyp haben. Die Elemente eines Arrays sind über einen Index zugänglich, der die Position jedes Elements im Array angibt. Array haben eine feste Größe, die bei der Erstellung festgelegt wird und nicht geändert werden kann.
+
+In Python sind Arrays nicht standardmäßig verfügbar, aber es gibt Bibliotheken wie `array`, die Arrays bereitstellen. Denn es ist in Python üblich, Listen zu verwenden, die flexibler sind als Arrays.
+
+```python
+from array import array
+
+arr = array('i', [1, 2, 3, 4, 5])  # Erstellt ein Integer-Array
+```
+
+### Linked Lists
+
+Eine Linked List ist eine Datenstruktur, die aus Knoten besteht, die miteinander verbunden sind. Jeder knoten hat zwei Teile: die Load also die Daten und den Pointer, der auf den nächsten Knoten zeigt. Mit diesen Pointer werden die Knoten miteinander verbunden. Listen sind langsamer als Arrays, da sie nicht direkt auf die Elemente zugreifen können, sondern den Pointer folgen müssen. Dafür sind Listen flexibler und können dynamisch wachsen.
+
+In Python können Listen mit der `list`-Klasse erstellt werden.
+
+```python
+from typing import List
+
+linked_list: List[int] = [1, 2, 3, 4, 5]  # Erstellt eine Liste von Ganzzahlen
+```
+
+
+### Array Lists 
+
+Array Lists sind eine Kombination aus Arrays und Listen. Sie bieten die Flexibilität von Listen und die direkte Zugriffsmöglichkeit von Arrays. In Python können Array Lists mit der `list`-Klasse erstellt werden.
+
+```python
+array_list: List[int] = [1, 2, 3, 4, 5]  # Erstellt eine Array List von Ganzzahlen
+array_list.append(6)  # Fügt ein Element am Ende der Liste hinzu 
+                      # dadurch wird die Liste dynamisch erweitert
+```
+
+
+## Dictionary
+
+Ein Dictionary ist eine art Wärterbuch in Python. Es besteht aus Schlüssel-Wert-Paaren, wobei jeder Schlüssel eindeutig ist und auf einen Wert verweist. Dictionaries sind sehr effizient, wenn es darum geht, Werte anhand eines Schlüssels abzurufen oder zu ändern.
+
+In Python können Dictionaries mit der `dict`-Klasse erstellt werden.
+
+```python
+person = {
+    "name": "Alice", # Schlüssel: "name", Wert: "Alice"
+    "age": 30,       # Schlüssel: "age", Wert: 30
+    "city": "Berlin" # Schlüssel: "city", Wert: "Berlin"
+}
+```
+
+Oder ein Beispiel für ein Wörterbuch:
+
+```python
+woerterbuch = {
+    "apple": "Apfel",
+    "banana": "Banane",
+    "cherry": "Kirsche"
+}
+```
+
+# Erste Aufgabe: Lottoziehung
+
+## Aufgabenstellung
+
+1. Algorithmus zur Lottoziehung -> keine doppelten Zahlen. Wird in einer Methode gemacht. Ziehe 6 Zahlen zwischen 1 und 45 und gib sie aus. Passendes Programm: `lotto_1.py`
+2. Lottoziehung Statistik als Methode ->
+    - Mache 1000 Ziehungen
+    - Erstelle ein Dictionary, wie oft welche Zahl gezogen wurde
+    - Rufe die Methode nach jeder Ziehung auf und inkrementiere den passenden Wert im Dictionary um 1
+    - Gib das Dictionary am Ende aus
+    - Passendes Programm: `lotto_2.py`
 

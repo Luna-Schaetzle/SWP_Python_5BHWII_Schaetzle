@@ -9,11 +9,17 @@ Python ist eine plattformunabhängige, interpretierte und hochabstrakte Programm
 
 ### 2. Interpretierte Sprache
 - Python ist eine **interpretierte Sprache**, d.h. der Code wird zur Laufzeit direkt interpretiert, anstatt vorab in Maschinencode (wie bei kompilierte Sprachen) übersetzt zu werden. Dies ermöglicht eine direkte Ausführung des Codes ohne Zwischenschritte.
-  
-  **Beispiele für interpretierte Sprachen:**  
-  - Python  
-  - Java (hier wird Code allerdings zunächst in Bytecode umgewandelt, der von der Java Virtual Machine (JVM) ausgeführt wird)  
-  - C# (wird auch zunächst in einen Bytecode übersetzt, der von der .NET Runtime interpretiert wird)
+
+**Beispiele für Interpreter Sprachen:**
+- Python
+- php 
+- Ruby
+
+**Unterschied zwischen interpretierten und kompilierten Sprachen**
+- **Kompilierte Sprachen:** Der Code wird vor dem Ausführen in Maschinencode übersetzt, was zu einer schnelleren Ausführung führen kann. Beispiele: C, C++, Java.
+- **Interpretierte Sprachen:** Der Code wird zur Laufzeit interpretiert, was eine flexiblere und dynamischere Entwicklung ermöglicht. Beispiele: Python, JavaScript, Ruby.
+
+#### Es gibt auch noc
 
 ### 3. Hochsprache
 - Python ist eine **höhere Programmiersprache**, was bedeutet, dass sie sehr nah an der natürlichen menschlichen Sprache liegt und einfach zu lesen und zu schreiben ist.
@@ -21,6 +27,41 @@ Python ist eine plattformunabhängige, interpretierte und hochabstrakte Programm
   **Vergleich:**  
   - **Maschinensprachen** wie C oder Assembler sind schwerer zu verstehen und zu schreiben, da sie sehr nah an der Hardware arbeiten.  
   - **Hochsprachen** wie Python, Java oder C# abstrahieren viele hardwarenahe Details und machen das Programmieren einfacher.
+
+Ein Beispiel für Assembler Code:
+```asm
+section .data
+  num1 db 5
+  num2 db 10
+  result db 0
+
+section .text
+  global _start
+
+_start:
+  ; Load the first number into AL register
+  mov al, [num1]
+  
+  ; Add the second number to AL register
+  add al, [num2]
+  
+  ; Store the result in the result variable
+  mov [result], al
+  
+  ; Exit the program
+  mov eax, 60         ; syscall: exit
+  xor edi, edi        ; status: 0
+  syscall
+```
+Das gleiche Programm in Python:
+```python
+num1 = 5
+num2 = 10
+result = num1 + num2
+```
+Also man sieht das der Python Code viel einfacher zu lesen und zu schreiben ist.
+
+Der code muss allerdings in Python interpretiert werden, was halt python eine der langsameren Sprachen macht.
 
 ### 4. Bytecode in Python
 - Obwohl Python interpretiert wird, gibt es sogenannte **Bytecode-Dateien** (mit der Endung `.pyc`), die beim Speichern von Python-Dateien erstellt werden. Diese Dateien enthalten eine kompilierte Version des Codes, die bei späteren Ausführungen die Startzeit verkürzen kann. Python kann den Code jedoch auch ohne diese Bytecode-Dateien ausführen.
@@ -72,18 +113,142 @@ Python ist eine plattformunabhängige, interpretierte und hochabstrakte Programm
 ### 4. Speicherfreigabe
 - **"Löschen" von Speicher:** In der Informatik kann Speicher nicht wirklich gelöscht, sondern nur **freigegeben** werden. Der freigegebene Speicherplatz kann dann später überschrieben werden.
 
+
 ## Wichtige Konzepte in Python
 
 ### 1. Instanzen und Referenzen
-- **Instanz:** Eine Instanz ist ein konkretes Objekt einer Klasse oder eine Variable.
-- **Referenz:** Eine Referenz zeigt auf eine Instanz, d.h. es ist eine Art Zeiger auf den Speicherort einer Instanz.
+- **Instanz:** Eine Instanz ist ein konkretes Objekt auf dem ein Zeiger (Referenz) zeigt. Instanzen können Klassenattribute und Methoden enthalten.
+  
+  ```python
+  class Person:
+      def __init__(self, name):
+          self.name = name
+  
+  p1 = Person("Alice")  # p1 ist eine Instanz der Klasse Person
+  ```
+- **Referenz:** Eine Referenz zeigt auf eine Instanz, d.h. es ist eine Art Zeiger auf den Speicherort einer Instanz. Mehrere Referenzen können auf dieselbe Instanz zeigen.
+    ```python
+    p2 = p1  # p2 zeigt auf die gleiche Instanz wie p1
+    ```
 
 ### 2. Schlüsselwort `del`
 - Mit dem Schlüsselwort `del` kann man eine Instanz oder Referenz explizit löschen. Allerdings wird dabei nur die Referenz gelöscht, nicht das Objekt selbst, es sei denn, keine weiteren Referenzen zeigen mehr auf das Objekt.
 - In Java gibt es kein direktes Äquivalent zu `del`, da die Speicherverwaltung automatisch durch die JVM erfolgt. Der sogenaannte **Garbage Collector** löscht nicht mehr benötigte Objekte automatisch.
 
 
+## Iteration und Rekursion
 
-# 26.09.2024
+### Iteration
+
+Iteration ist ein Konzept in der Informatik, bei dem ein Block von Code wiederholt ausgeführt wird, bis eine bestimmte Bedingung erfüllt ist. Iteration wird oft verwendet, um über Datenstrukturen wie Listen oder Arrays zu iterieren.
+
+### Beispiel: Summe berechnen
+Die Summe der Zahlen von `1` bis `n` kann iterativ wie folgt berechnet werden:
+
+```python
+def summe(n):
+    result = 0
+    for i in range(1, n + 1):
+        result += i
+    return result
+
+print(summe(5))  # Ausgabe: 15
+```
+
+### Rekursion
+
+Rekursion ist ein Konzept in der Informatik, bei dem eine Funktion sich selbst aufruft, um ein Problem in kleinere Teilprobleme zu zerlegen. Rekursion ist ein leistungsstarkes Werkzeug, um komplexe Probleme auf elegante Weise zu lösen.
+
+### Beispiel: Fakultät berechnen
+Die Fakultät einer Zahl `n` (geschrieben als `n!`) ist das Produkt aller positiven ganzen Zahlen von `1` bis `n`. Die Fakultät einer Zahl `n` kann rekursiv wie folgt berechnet werden:
+
+```python
+def fakultaet(n):
+    if n == 0:
+        return 1
+    else:
+        return n * fakultaet(n - 1)
+
+print(fakultaet(5))  # Ausgabe: 120
+```
+Der vorteil von Rekursion ist, dass es die Lesbarkeit des Codes erhöht. Der Nachteil ist, dass es zu einer hohen Speicherbelastung führen kann, da für jede rekursive Aufruf eine neue Instanz der Funktion im Speicher erstellt wird.
+
+Der Compiler wandelt die Rekursion in eine iterative Schleife um, um den Speicher zu schonen.
+
+
+## Unterschied zwischen Prozess und Thread
+### Prozess
+Ein Prozess ist ein Programm, wie zum Beispiel ein Texteditor oder ein Browser, aber auch Systemkomponenten wie die Tastatur. Prozesse sind voneinander isoliert und können von Haus aus nicht direkt miteinander kommunizieren.
+
+### Thread
+Ein Thread ist ein Bestandteil eines Prozesses. Ein Prozess kann mehrere Threads haben, die innerhalb desselben Prozesses agieren und miteinander kommunizieren können.
+
+
+## Array Lists
+
+Grundsätzlich gibt es nur zwei arten von Datenstrukturen und zwar die Arrays und die Listen. Alle anderen Datenstrukturen sind nur erweiterungen dieser beiden. 
+
+### Arrays
+
+Ein Array ist eine Datenstruktur, die eine Sammlung von Elementen speichert, die alle denselben Datentyp haben. Die Elemente eines Arrays sind über einen Index zugänglich, der die Position jedes Elements im Array angibt. Array haben eine feste Größe, die bei der Erstellung festgelegt wird und nicht geändert werden kann.
+
+In Python sind Arrays nicht standardmäßig verfügbar, aber es gibt Bibliotheken wie `array`, die Arrays bereitstellen. Denn es ist in Python üblich, Listen zu verwenden, die flexibler sind als Arrays.
+
+```python
+from array import array
+
+arr = array('i', [1, 2, 3, 4, 5])  # Erstellt ein Integer-Array
+```
+
+### Linked Lists
+
+Eine Linked List ist eine Datenstruktur, die aus Knoten besteht, die miteinander verbunden sind. Jeder knoten hat zwei Teile: die Load also die Daten und den Pointer, der auf den nächsten Knoten zeigt. Mit diesen Pointer werden die Knoten miteinander verbunden. Listen sind langsamer als Arrays, da sie nicht direkt auf die Elemente zugreifen können, sondern den Pointer folgen müssen. Dafür sind Listen flexibler und können dynamisch wachsen.
+
+In Python können Listen mit der `list`-Klasse erstellt werden.
+
+```python
+from typing import List
+
+linked_list: List[int] = [1, 2, 3, 4, 5]  # Erstellt eine Liste von Ganzzahlen
+```
+
+
+### Array Lists 
+
+Array Lists sind eine Kombination aus Arrays und Listen. Sie bieten die Flexibilität von Listen und die direkte Zugriffsmöglichkeit von Arrays. In Python können Array Lists mit der `list`-Klasse erstellt werden.
+
+```python
+array_list: List[int] = [1, 2, 3, 4, 5]  # Erstellt eine Array List von Ganzzahlen
+array_list.append(6)  # Fügt ein Element am Ende der Liste hinzu 
+                      # dadurch wird die Liste dynamisch erweitert
+```
+
+
+## Dictionary
+
+Ein Dictionary ist eine art Wärterbuch in Python. Es besteht aus Schlüssel-Wert-Paaren, wobei jeder Schlüssel eindeutig ist und auf einen Wert verweist. Dictionaries sind sehr effizient, wenn es darum geht, Werte anhand eines Schlüssels abzurufen oder zu ändern.
+
+In Python können Dictionaries mit der `dict`-Klasse erstellt werden.
+
+```python
+person = {
+    "name": "Alice", # Schlüssel: "name", Wert: "Alice"
+    "age": 30,       # Schlüssel: "age", Wert: 30
+    "city": "Berlin" # Schlüssel: "city", Wert: "Berlin"
+}
+```
+
+Oder ein Beispiel für ein Wörterbuch:
+
+```python
+woerterbuch = {
+    "apple": "Apfel",
+    "banana": "Banane",
+    "cherry": "Kirsche"
+}
+```
+
+
+
 
 
