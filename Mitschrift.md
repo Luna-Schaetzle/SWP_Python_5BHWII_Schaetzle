@@ -1,29 +1,83 @@
-# Einführung
+# Einführung in Python
 
-Python ist Platformunabhängig was bedeutet das es auf allen gängigen Betriebssystemen läuft. Python ist eine interpretierte Sprache, was bedeutet das der Code zur Laufzeit interpretiert wird. Python ist eine Hochsprache, was bedeutet das sie sehr einfach zu lesen und zu schreiben ist.
-- Es gibt Maschinensprachen wie C oder Assembler, die sehr schwer zu lesen und zu schreiben sind. Da sie sehr tief in die Hardware eingreifen können. 
-- Und es gibt Hochsprachen wie Python, Java oder C#, die sehr einfach zu lesen und zu schreiben sind. Da sie sehr abstrakt sind und nicht tief in die Hardware eingreifen können.
-- Interpreterter Sprachen wie Python, Java oder C# werden zur Laufzeit interpretiert. Das bedeutet das der Code nicht in Maschinensprache übersetzt wird, sondern in eine Zwischensprache die dann von einem Interpreter ausgeführt wird.
-- In Java muss der Code erst mittels Javac in eine .class datei übersetzt werden, die dann mittels Java ausgeführt wird.
-- In Python wird der Code direkt ausgeführt, da Python eine interpretierte Sprache ist. Das ist in Python eine schritt und man muss nicht erst den Code übersetzen. Es gibt aber trotzdem Python bitecode Dateien die erstellt werden, wenn wir den Code in einer Datei speichern. Diese Dateien haben die Endung .pyc und sind Bytecode Dateien. Diese Dateien werden erstellt, wenn wir den Code in einer Datei speichern. Diese Dateien sind aber nicht notwendig, da Python den Code auch ohne diese Dateien ausführen kann.
-- Java und Python sind in C Programmiert und C ist in Assembler programmiert. Das bedeutet das Java und Python auf C aufbauen und C auf Assembler aufbaut
-- Python hat sehr viele standard Bibliotheken anders als in Java oder C# 
-- In Python ist es einfacher eine Bibliothek zu installieren als in Java oder C#
-- in Python reicht es eine Bibliothek zu installieren mittels pip install <Bibliothek> und dann kann man die Bibliothek importieren und verwenden
-- In Java muss man um eine Bibliothek zu verwenden die Bibliothek herunterladen und dann in das Projekt einbinden
-- rapit prototyping: Python ist sehr gut geeignet um schnell Prototypen zu erstellen da man weniger Code schreiben muss als in Java 
-- Unterschiede zu Java
-  - In Python gibt muss man keine Typen angeben, was bedeut das Python dynamisch typisiert ist. 
-  - Java ist statisch typisiert, was bedeutet das man wenn man eine Variable deklariert auch den Typen angeben muss. 
-  - In Python werden diese Typen zur Laufzeit zugewiesen vom Interpreter.
-  - python kann man funktionale Programmierung betreiben, was bedeutet das man Funktionen als Parameter übergeben kann
-  - In Java ist man gezwungen Objektorientiert zu programmieren, da Java eine objektorientierte Sprache ist.
-  - In Python kann man objektorient oder funktional programmieren
-- Was ist eine instanz in Python: ist ein objekt zum beispiel eine Variable oder eine Klasse
-- Was ist eine Referenz in Python: ist ein Zeiger auf eine Instanz
-- Was ist ein Referenzzähler in Python: ist ein Zähler der zählt wie oft eine Instanz referenziert wird. Wenn der Zähler auf 0 fällt wird die Instanz gelöscht. 
-- Was ist Garbage Collection in Python: ist ein Mechanismus der Instanzen löscht die nicht mehr referenziert werden.
-- Was ist del in Python: ist ein Schlüsselwort das eine Instanz löscht
-- In interpretersprachen wird die Garbage Collection automatisch durchgeführt
-- Man kann in der informatik eigentlich nichts löschen, sondern nur überschreiben. Man gibt den Speicher frei und man kann ihn dann Überchreiben also die Speicherstelle neu beschreiben.
-- 
+Python ist eine plattformunabhängige, interpretierte und hochabstrakte Programmiersprache. Diese Eigenschaften machen Python vielseitig und leicht zugänglich für Entwickler.
+
+## Eigenschaften von Python
+
+### 1. Plattformunabhängigkeit
+- **Plattformunabhängig** bedeutet, dass Python auf allen gängigen Betriebssystemen (Windows, Linux, macOS) läuft. Einmal geschriebener Code kann ohne Anpassungen auf verschiedenen Systemen ausgeführt werden.
+
+### 2. Interpretierte Sprache
+- Python ist eine **interpretierte Sprache**, d.h. der Code wird zur Laufzeit direkt interpretiert, anstatt vorab in Maschinencode (wie bei kompilierte Sprachen) übersetzt zu werden. Dies ermöglicht eine direkte Ausführung des Codes ohne Zwischenschritte.
+  
+  **Beispiele für interpretierte Sprachen:**  
+  - Python  
+  - Java (hier wird Code allerdings zunächst in Bytecode umgewandelt, der von der Java Virtual Machine (JVM) ausgeführt wird)  
+  - C# (wird auch zunächst in einen Bytecode übersetzt, der von der .NET Runtime interpretiert wird)
+
+### 3. Hochsprache
+- Python ist eine **höhere Programmiersprache**, was bedeutet, dass sie sehr nah an der natürlichen menschlichen Sprache liegt und einfach zu lesen und zu schreiben ist.
+  
+  **Vergleich:**  
+  - **Maschinensprachen** wie C oder Assembler sind schwerer zu verstehen und zu schreiben, da sie sehr nah an der Hardware arbeiten.  
+  - **Hochsprachen** wie Python, Java oder C# abstrahieren viele hardwarenahe Details und machen das Programmieren einfacher.
+
+### 4. Bytecode in Python
+- Obwohl Python interpretiert wird, gibt es sogenannte **Bytecode-Dateien** (mit der Endung `.pyc`), die beim Speichern von Python-Dateien erstellt werden. Diese Dateien enthalten eine kompilierte Version des Codes, die bei späteren Ausführungen die Startzeit verkürzen kann. Python kann den Code jedoch auch ohne diese Bytecode-Dateien ausführen.
+
+### 5. Standardbibliotheken und Module
+- **Umfangreiche Standardbibliotheken:** Python bietet eine Vielzahl vorinstallierter Module, die häufige Programmieraufgaben abdecken (z.B. für Dateioperationen, Netzwerke, Webentwicklung). Im Vergleich zu Sprachen wie Java oder C# ist die Installation und Nutzung von Bibliotheken in Python besonders einfach.
+  - **Installation von Bibliotheken** erfolgt meist über den Paketmanager `pip`:  
+    ```bash
+    pip install <Bibliothek>
+    ```
+  - In Java hingegen müssen Bibliotheken oft manuell heruntergeladen und in das Projekt integriert werden.
+
+### 6. Rapid Prototyping
+- Python eignet sich sehr gut für **Rapid Prototyping**, da es in der Regel weniger Code benötigt, um eine Lösung zu implementieren, verglichen mit Sprachen wie Java. Dies macht Python besonders nützlich für schnelle Entwicklungszyklen.
+
+## Unterschiede zwischen Python und Java
+
+### 1. Typisierung
+- **Dynamische Typisierung in Python:**  
+  Python ist **dynamisch typisiert**, d.h. Variablen müssen beim Deklarieren keinen Datentyp erhalten. Der Interpreter weist den Typ zur Laufzeit zu.
+  
+  ```python
+  x = 10  # x ist automatisch ein Integer
+  x = "Hallo"  # x wird jetzt ein String
+  ```
+  
+- **Statische Typisierung in Java:**  
+  In Java müssen Datentypen explizit angegeben werden, was eine **statische Typisierung** darstellt.
+  
+  ```java
+  int x = 10;
+  ```
+
+### 2. Programmierparadigmen
+- **Python:** unterstützt sowohl **objektorientierte** als auch **funktionale Programmierung**. Man kann Funktionen als Parameter übergeben und mit rein funktionalen Konzepten arbeiten.
+  
+- **Java:** ist stark auf **objektorientierte Programmierung** ausgerichtet. In Java muss nahezu jede Funktionalität in Klassen verpackt werden.
+
+### 3. Speicherverwaltung und Garbage Collection
+- In Python wird die Speicherverwaltung größtenteils durch den Interpreter und die automatische **Garbage Collection** durchgeführt. Nicht mehr genutzte Objekte (Instanzen) werden gelöscht, sobald keine Referenzen mehr darauf existieren.
+  - **Referenzzähler:** Python verwendet einen Zähler, der festhält, wie oft eine Instanz referenziert wird. Sinkt der Zähler auf null, wird die Instanz freigegeben und gelöscht.
+  
+  ```python
+  del x  # Löscht die Referenz auf x
+  ```
+
+- Java verwendet ebenfalls **Garbage Collection**, allerdings mit einem komplexeren Speicherverwaltungssystem, das in der JVM integriert ist.
+
+### 4. Speicherfreigabe
+- **"Löschen" von Speicher:** In der Informatik kann Speicher nicht wirklich gelöscht, sondern nur **freigegeben** werden. Der freigegebene Speicherplatz kann dann später überschrieben werden.
+
+## Wichtige Konzepte in Python
+
+### 1. Instanzen und Referenzen
+- **Instanz:** Eine Instanz ist ein konkretes Objekt einer Klasse oder eine Variable.
+- **Referenz:** Eine Referenz zeigt auf eine Instanz, d.h. es ist eine Art Zeiger auf den Speicherort einer Instanz.
+
+### 2. Schlüsselwort `del`
+- Mit dem Schlüsselwort `del` kann man eine Instanz oder Referenz explizit löschen. Allerdings wird dabei nur die Referenz gelöscht, nicht das Objekt selbst, es sei denn, keine weiteren Referenzen zeigen mehr auf das Objekt.
+- In Java gibt es kein direktes Äquivalent zu `del`, da die Speicherverwaltung automatisch durch die JVM erfolgt. Der sogenaannte **Garbage Collector** löscht nicht mehr benötigte Objekte automatisch.
