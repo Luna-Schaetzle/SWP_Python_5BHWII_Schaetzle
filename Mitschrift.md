@@ -81,3 +81,9 @@ Python ist eine plattformunabhängige, interpretierte und hochabstrakte Programm
 ### 2. Schlüsselwort `del`
 - Mit dem Schlüsselwort `del` kann man eine Instanz oder Referenz explizit löschen. Allerdings wird dabei nur die Referenz gelöscht, nicht das Objekt selbst, es sei denn, keine weiteren Referenzen zeigen mehr auf das Objekt.
 - In Java gibt es kein direktes Äquivalent zu `del`, da die Speicherverwaltung automatisch durch die JVM erfolgt. Der sogenaannte **Garbage Collector** löscht nicht mehr benötigte Objekte automatisch.
+
+
+
+# 26.09.2024
+
+

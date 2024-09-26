@@ -28,11 +28,17 @@ Python ist eine plattformunabhängige, interpretierte und hochabstrakte Programm
 
 ### 2. Interpretierte Sprache
 - Python ist eine **interpretierte Sprache**, d.h. der Code wird zur Laufzeit direkt interpretiert, anstatt vorab in Maschinencode (wie bei kompilierte Sprachen) übersetzt zu werden. Dies ermöglicht eine direkte Ausführung des Codes ohne Zwischenschritte.
-  
-  **Beispiele für interpretierte Sprachen:**  
-  - Python  
-  - Java (hier wird Code allerdings zunächst in Bytecode umgewandelt, der von der Java Virtual Machine (JVM) ausgeführt wird)  
-  - C# (wird auch zunächst in einen Bytecode übersetzt, der von der .NET Runtime interpretiert wird)
+
+**Beispiele für Interpreter Sprachen:**
+- Python
+- php 
+- Ruby
+
+**Unterschied zwischen interpretierten und kompilierten Sprachen**
+- **Kompilierte Sprachen:** Der Code wird vor dem Ausführen in Maschinencode übersetzt, was zu einer schnelleren Ausführung führen kann. Beispiele: C, C++, Java.
+- **Interpretierte Sprachen:** Der Code wird zur Laufzeit interpretiert, was eine flexiblere und dynamischere Entwicklung ermöglicht. Beispiele: Python, JavaScript, Ruby.
+
+#### Es gibt auch noc
 
 ### 3. Hochsprache
 - Python ist eine **höhere Programmiersprache**, was bedeutet, dass sie sehr nah an der natürlichen menschlichen Sprache liegt und einfach zu lesen und zu schreiben ist.
@@ -40,6 +46,41 @@ Python ist eine plattformunabhängige, interpretierte und hochabstrakte Programm
   **Vergleich:**  
   - **Maschinensprachen** wie C oder Assembler sind schwerer zu verstehen und zu schreiben, da sie sehr nah an der Hardware arbeiten.  
   - **Hochsprachen** wie Python, Java oder C# abstrahieren viele hardwarenahe Details und machen das Programmieren einfacher.
+
+Ein Beispiel für Assembler Code:
+```asm
+section .data
+  num1 db 5
+  num2 db 10
+  result db 0
+
+section .text
+  global _start
+
+_start:
+  ; Load the first number into AL register
+  mov al, [num1]
+  
+  ; Add the second number to AL register
+  add al, [num2]
+  
+  ; Store the result in the result variable
+  mov [result], al
+  
+  ; Exit the program
+  mov eax, 60         ; syscall: exit
+  xor edi, edi        ; status: 0
+  syscall
+```
+Das gleiche Programm in Python:
+```python
+num1 = 5
+num2 = 10
+result = num1 + num2
+```
+Also man sieht das der Python Code viel einfacher zu lesen und zu schreiben ist.
+
+Der code muss allerdings in Python interpretiert werden, was halt python eine der langsameren Sprachen macht.
 
 ### 4. Bytecode in Python
 - Obwohl Python interpretiert wird, gibt es sogenannte **Bytecode-Dateien** (mit der Endung `.pyc`), die beim Speichern von Python-Dateien erstellt werden. Diese Dateien enthalten eine kompilierte Version des Codes, die bei späteren Ausführungen die Startzeit verkürzen kann. Python kann den Code jedoch auch ohne diese Bytecode-Dateien ausführen.
@@ -91,12 +132,27 @@ Python ist eine plattformunabhängige, interpretierte und hochabstrakte Programm
 ### 4. Speicherfreigabe
 - **"Löschen" von Speicher:** In der Informatik kann Speicher nicht wirklich gelöscht, sondern nur **freigegeben** werden. Der freigegebene Speicherplatz kann dann später überschrieben werden.
 
+
 ## Wichtige Konzepte in Python
 
 ### 1. Instanzen und Referenzen
-- **Instanz:** Eine Instanz ist ein konkretes Objekt einer Klasse oder eine Variable.
-- **Referenz:** Eine Referenz zeigt auf eine Instanz, d.h. es ist eine Art Zeiger auf den Speicherort einer Instanz.
+- **Instanz:** Eine Instanz ist ein konkretes Objekt auf dem ein Zeiger (Referenz) zeigt. Instanzen können Klassenattribute und Methoden enthalten.
+  
+  ```python
+  class Person:
+      def __init__(self, name):
+          self.name = name
+  
+  p1 = Person("Alice")  # p1 ist eine Instanz der Klasse Person
+  ```
+- **Referenz:** Eine Referenz zeigt auf eine Instanz, d.h. es ist eine Art Zeiger auf den Speicherort einer Instanz. Mehrere Referenzen können auf dieselbe Instanz zeigen.
+    ```python
+    p2 = p1  # p2 zeigt auf die gleiche Instanz wie p1
+    ```
 
 ### 2. Schlüsselwort `del`
 - Mit dem Schlüsselwort `del` kann man eine Instanz oder Referenz explizit löschen. Allerdings wird dabei nur die Referenz gelöscht, nicht das Objekt selbst, es sei denn, keine weiteren Referenzen zeigen mehr auf das Objekt.
 - In Java gibt es kein direktes Äquivalent zu `del`, da die Speicherverwaltung automatisch durch die JVM erfolgt. Der sogenaannte **Garbage Collector** löscht nicht mehr benötigte Objekte automatisch.
+
+
+

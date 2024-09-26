@@ -16,11 +16,11 @@ def lotto_ziehung(x):
                 statistik_dict[zahl] += 1
             else:
                 statistik_dict[zahl] = 1
-
+    
     statistik_dict = {}
-
+    
     for _ in range(1000):
         ziehung = lotto_ziehung(6)
         statistik(ziehung, statistik_dict)
-
+    
     print(statistik_dict)
