@@ -172,6 +172,40 @@ Der code muss allerdings in Python interpretiert werden, was halt python eine de
 - Mit dem Schlüsselwort `del` kann man eine Instanz oder Referenz explizit löschen. Allerdings wird dabei nur die Referenz gelöscht, nicht das Objekt selbst, es sei denn, keine weiteren Referenzen zeigen mehr auf das Objekt.
 - In Java gibt es kein direktes Äquivalent zu `del`, da die Speicherverwaltung automatisch durch die JVM erfolgt. Der sogenaannte **Garbage Collector** löscht nicht mehr benötigte Objekte automatisch.
 
+**beispiel:**
+```python
+p1 = Person("Alice")  # Erstellt eine Instanz von Person
+p2 = p1  # p2 zeigt auf die gleiche Instanz wie p1 somit sind p1 und p2 gleich 
+         # deshalb koennen wir p1 nun loeschen
+del p1  # Löscht die Referenz auf p1
+```
+
+### 3. Python interaktiver Modus
+
+Der Interaktive Modus ist ein Modus in Python, in dem der Code Zeile für Zeile ausgeführt wird. Dies ermöglicht es, den Code schrittweise zu testen und die Ausgabe direkt zu sehen. 
+'''bash
+python3
+'''
+mit diesem Beffehl starten wir den interaktiven Modus von Python.
+
+Der sieht dann so aus:
+```bash
+Python 3.10.0 (default, Oct  8 2021, 16:02:42)
+[GCC 10.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+```
+Dann kann man in Python code eingeben und er wird sofort ausgeführt. Das sieht dann so aus:
+```bash
+>>> print("Hallo Welt")
+Hallo Welt
+```
+
+Man kann auch Rechnungen machen:
+```bash
+>>> 5 + 5
+10
+```
 
 ## Iteration und Rekursion
 
@@ -190,6 +224,15 @@ def summe(n):
     return result
 
 print(summe(5))  # Ausgabe: 15
+```
+
+### Best Practices bei for-Schleifen
+
+Wenn wir in einer for schleife die gesetze Variable nicht brauchen, dann können wir sie durch ein `_` ersetzen. Dies diehnt dazu um zu zeigen, dass die Variable nicht verwendet wird und das es schöner aussieht.
+
+```python
+for _ in range(5):
+    print("Hallo") # Gibt "Hallo" 5 mal aus
 ```
 
 ### Rekursion
@@ -241,6 +284,38 @@ from array import array
 arr = array('i', [1, 2, 3, 4, 5])  # Erstellt ein Integer-Array
 ```
 
+### Listen
+
+Eine Liste ist eine Datenstruktur, die eine Sammlung von Elementen speichert, die nicht denselben Datentyp haben müssen. Listen sind flexibel und können dynamisch wachsen, d.h. Elemente können hinzugefügt oder entfernt werden, ohne die Größe der Liste explizit festzulegen.
+
+In Python können Listen mit der `list`-Klasse erstellt werden.
+
+```python
+liste = [1, 2, 3, 4, 5]  # Erstellt eine Liste von Ganzzahlen
+```
+
+#### List komprehension
+
+List Comprehension ist eine elegante Möglichkeit, Listen in Python zu erstellen. Es ermöglicht, Listen mit einer einzigen Zeile Code zu erstellen, was den Code lesbarer und kompakter macht.
+
+```python
+liste = [i for i in range(1, 6)]  # Erstellt eine Liste von 1 bis 5
+```
+
+Man kann auch Bedingungen in die List Comprehension einbauen:
+
+```python
+liste = [i for i in range(1, 6) if i % 2 == 0]  # Erstellt eine Liste von 1 bis 5, aber nur die geraden Zahlen
+```
+
+Ein Beispiel für Quadriete Zahlen 
+
+```python
+quadrate = [i*i for i in range(1, 6)]  # Erstellt eine Liste der Quadrate von 1 bis 5
+quadrate_gerade = [i*i for i in range(1, 6) if i % 2 == 0]  # Erstellt eine Liste der Quadrate von 1 bis 5, aber nur die geraden Zahlen
+```
+
+
 ### Linked Lists
 
 Eine Linked List ist eine Datenstruktur, die aus Knoten besteht, die miteinander verbunden sind. Jeder knoten hat zwei Teile: die Load also die Daten und den Pointer, der auf den nächsten Knoten zeigt. Mit diesen Pointer werden die Knoten miteinander verbunden. Listen sind langsamer als Arrays, da sie nicht direkt auf die Elemente zugreifen können, sondern den Pointer folgen müssen. Dafür sind Listen flexibler und können dynamisch wachsen.
@@ -289,9 +364,208 @@ woerterbuch = {
 }
 ```
 
-# Erste Aufgabe: Lottoziehung
+### Dictionary Komprehension
 
-## Aufgabenstellung
+Wie bei listen gibt es auch bei Dictionaries die Möglichkeit, sie mit einer einzigen Zeile Code zu erstellen. Dies wird als Dictionary Comprehension bezeichnet.
+
+Wir können auch wie bei einer liste if bedingungen einbauen.
+
+```python
+zahl = {i: i for i in range(1, 6)}  # Erstellt ein Dictionary
+zahl_gerade = {i: i for i in range(1, 6) if i % 2 == 0}  # Erstellt ein Dictionary, aber nur die geraden Zahlen
+quadrat = {i: i*i for i in range(1, 6)}  # Erstellt ein Dictionary der Quadrate von 1 bis
+quadrat_gerade = {i: i*i for i in range(1, 6) if i % 2 == 0}  # Erstellt ein Dictionary der Quadrate von 1 bis 5, aber nur die geraden Zahlen
+```
+
+## Array vertauschen 
+
+In Python kann man bei einem Array die Elemente vertauschen. 
+
+```python
+arr = [1, 2, 3, 4, 5]
+arr[0], arr[1] = arr[1], arr[0]
+print(arr)  # Ausgabe: [2, 1, 3, 4, 5]
+```
+
+Dieser Code tauscht die Elemente an den Positionen 0 und 1 im Array `arr` aus. Das gleiche
+
+## Array einfach letztes Element heraussuchen
+
+In Python kann man anstat das letzte Element mit `arr[len(arr) - 1]` auch einfach `arr[-1]` schreiben.
+
+```python
+arr = [1, 2, 3, 4, 5]
+print(arr[-1])  # Ausgabe: 5
+print(arr[-2])  # Ausgabe: 4
+```
+Das Funktioniert da man mit -1 das letzte Element auswählt und mit -2 das vorletzte Element und so weiter. Weil der Compiler bei -1 anfängt zu zählen und nicht bei 0. was dazu führt das -1 das letzte Element ist.
+
+Das funktioniert Folgendermaßen:
+
+| Zahl | 1 | 2 | 3 | 4 | 5 |
+|------|---|---|---|---|---|
+| Index| 0 | 1 | 2 | 3 | 4 |
+| Negativ Index | -5 | -4 | -3 | -2 | -1 |
+
+Mittels des Negativen Indexes kann man also Elemente von hinten auswählen ohne die Länge des Arrays zu kennen.
+
+
+## Array slicing
+
+In Python kann auch ein Array gesliced werden. Das bedeut das man nur einen Teil des Arrays auswählt.
+
+```python
+arr = [1, 2, 3, 4, 5]
+print(arr[1:4])  # Ausgabe: [2, 3, 4]
+print(arr[:3])   # Ausgabe: [1, 2, 3]
+print(arr[2:])   # Ausgabe: [3, 4, 5]
+print(arr[:-2])  # Ausgabe: [1, 2, 3]
+print(arr[-2:])  # Ausgabe: [4, 5]
+```
+
+Mittels des slicing kann man sich also einen Teil des Arrays auswählen. 
+
+### Der ":" in Arrays
+
+Wenn wir den `:` in einem Array verwenden, dann bedeutet das, dass wir alle Elemente von einem Index bis zu einem anderen Index auswählen. 
+
+## Datentypen in Python
+
+### ganze Zahlen (int)
+
+Ganze Zahlen sind Zahlen ohne Dezimalstellen. In Python können ganze Zahlen beliebig groß sein, da Python automatisch die Größe des Speichers anpasst, um große Zahlen zu unterstützen.
+
+```python
+zahl = 42
+```
+
+### Division zweier ganzer Zahlen
+
+Wenn wir einfach zwei ganze Zahlen dividieren, dann wird das Ergebnis immer eine Fließkommazahl sein. 
+
+```python
+ergebnis = 5 / 2
+print(ergebnis)  # Ausgabe: 2.5
+```
+
+Java macht Floor Division, was bedeutet das es das Ergebnis auf die nächst kleinere ganze Zahl rundet. Also die Kommerstellen werden abgeschnitten.
+
+```java
+int ergebnis = 5 / 2;
+System.out.println(ergebnis);  // Ausgabe: 2
+```
+
+### Floor Division in Python
+
+Wir können in Python auch Floor Division machen. Das bedeutet das wir das Ergebnis auf die nächst kleinere ganze Zahl runden.
+
+```python
+ergebnis = 5 // 2
+print(ergebnis)  # Ausgabe: 2
+```
+Mittels des "//" können wir also Floor Division machen.
+
+## Schlüßelwörter in Python
+
+In Python gibt es ca. 35 Schlüsselwörter. Diese Schlüsselwörter sind reserviert und können nicht als Variablennamen verwendet werden. In Java gibt es auch Schlüsselwörter, viel mehr als in Python. und in SQL gibt es auch Schlüsselwörter aber ca. 100.
+
+### Schlüsselwörter in Python
+
+- `and` ... verwendet in logischen Ausdrücken (z.B. `if x and y:`) um zu prüfen ob beide Bedingungen wahr sind.
+- `as` ... wird verwendet um einen Alias für ein Modul zu erstellen (z.B. `import numpy as np`)
+- `assert` ... wird verwendet um eine Bedingung zu überprüfen und einen Fehler zu werfen, wenn die Bedingung falsch ist.
+- `break` ... wird verwendet um eine Schleife zu beenden.
+- `class` ... wird verwendet um eine Klasse zu definieren.
+- `continue` ... wird verwendet um den Rest einer Schleife zu überspringen und mit der nächsten Iteration fortzufahren.
+- `def` ... wird verwendet um eine Funktion zu definieren.
+- `del` ... wird verwendet um eine Variable oder ein Element aus einer Liste zu löschen.
+- `elif` ... wird verwendet um eine weitere Bedingung in einer if-Anweisung zu überprüfen.
+- `else` ... wird verwendet um den Codeblock auszuführen, wenn keine der vorherigen Bedingungen wahr ist.
+- `except` ... wird verwendet um eine Ausnahme in einem try-Block zu behandeln.
+- `False` ... ist ein boolescher Wert, der falsch ist. **Achtung:** Der Wert `False` ist ein Schlüsselwort und muss groß geschrieben werden.
+- `True` ... ist ein boolescher Wert, der wahr ist. **Achtung:** Der Wert `True` ist ein Schlüsselwort und muss groß geschrieben werden.
+- `finally` ... wird verwendet um Code auszuführen, unabhängig davon, ob eine Ausnahme aufgetreten ist oder nicht.
+- `for` ... wird verwendet um über eine Sequenz zu iterieren.
+- `from` ... wird verwendet um bestimmte Elemente aus einem Modul zu importieren.
+- `global` ... wird verwendet um eine globale Variable innerhalb einer Funktion zu deklarieren.
+- `if` ... wird verwendet um eine Bedingung zu überprüfen.
+- `import` ... wird verwendet um ein Modul zu importieren.
+- `in` ... wird verwendet um zu überprüfen, ob ein Element in einer Sequenz vorhanden ist.
+- `is` ... wird verwendet um zu überprüfen, ob zwei Variablen auf dasselbe Objekt verweisen.
+- `lambda` ... wird verwendet um eine anonyme Funktion zu erstellen.
+- `None` ... ist ein spezieller Wert, der verwendet wird, um anzuzeigen, dass keine Daten vorhanden sind.
+- `nonlocal` ... wird verwendet um eine nichtlokale Variable innerhalb einer Funktion zu deklarieren.
+- `not` ... wird verwendet um eine logische Negation durchzuführen.
+- `or` ... wird verwendet um in logischen Ausdrücken (z.B. `if x or y:`) zu prüfen, ob mindestens eine Bedingung wahr ist.
+- `pass` ... wird verwendet um einen leeren Codeblock zu erstellen.
+- `raise` ... wird verwendet um eine Ausnahme manuell auszulösen.
+- `return` ... wird verwendet um einen Wert aus einer Funktion zurückzugeben.
+- `try` ... wird verwendet um Code zu schreiben, der möglicherweise eine Ausnahme auslöst.
+- `while` ... wird verwendet um eine Schleife zu erstellen, die so lange ausgeführt wird, wie eine Bedingung wahr ist.
+- `with` ... wird verwendet um eine Datei oder ein Objekt zu öffnen und automatisch zu schließen, wenn der Block beendet ist.
+- `yield` ... wird verwendet um einen Generator zu erstellen.
+
+## Programmendung .py
+
+Dateiendungen sind in der Informatik wichtig, da sie anzeigen, um welchen Dateityp es sich handelt und welches Programm verwendet werden soll, um die Datei zu öffnen. In Python haben Dateien mit der Endung `.py` eine besondere Bedeutung, da sie Python-Skripte enthalten. Python-Skripte sind Textdateien, die Python-Code enthalten und mit dem Python-Interpreter ausgeführt werden können. 
+
+### Sehbang
+
+Der Shebang ist eine spezielle Zeile am Anfang einer Datei, die dem Betriebssystem mitteilt, welcher Interpreter verwendet werden soll, um die Datei auszuführen. In Python-Skripten wird oft der Shebang `#!/usr/bin/env python3` verwendet, um den Python-Interpreter zu starten.
+
+Damit weiß das Betriebssystem, dass es den Python-Interpreter verwenden soll, um das Skript auszuführen. Der Shebang ist optional, aber empfohlen, da er die Ausführung des Skripts erleichtert. 
+
+Nach dem `#!` wird der Pfad zum Python-Interpreter angegeben, in diesem Fall `python3`. Das `env`-Programm sucht nach dem Python-Interpreter im System und verwendet die Version, die standardmäßig installiert ist.
+
+### Tabs sind in Python wichtig
+
+In manchen Programmiersprachen sind Tabs nicht wichtig, aber in Python sind sie sehr wichtig. Tabs werden in Python verwendet, um Blöcke von Code zu definieren, z.B. in Schleifen oder Funktionen. Wenn die Einrückung nicht korrekt ist, wird ein IndentationError ausgelöst.
+
+In Python 3 ist ein Tab als 4 Leerzeichen definiert. Das bedeutet, dass ein Tab durch 4 Leerzeichen ersetzt wird. Es ist wichtig, konsistent zu sein und entweder Tabs oder Leerzeichen zu verwenden, aber nicht beides gemischt.
+
+## Kommentare 
+
+Kommentare macht man mit einem `#` in Python. Kommentare sind nützlich, um den Code zu dokumentieren und zu erklären, was er tut. Kommentare werden vom Interpreter ignoriert und haben keinen Einfluss auf die Ausführung des Codes.
+
+```python
+# Dies ist ein Kommentar
+print("Hallo Welt")  # Dies ist auch ein Kommentar
+```
+
+## Tupel, range und set
+
+### Tupel
+
+Ein Tupel ist eine unveränderliche Datenstruktur in Python, die eine geordnete Sammlung von Elementen speichert. Tupel sind ähnlich wie Listen, aber sie können nach der Erstellung nicht mehr geändert werden. Tupel werden mit runden Klammern `()` erstellt.
+
+```python
+tupel = (1, 2, 3, 4, 5)
+```
+
+### range
+
+Eine range ist eine eingebaute Funktion in Python, die eine Sequenz von Zahlen generiert. Sie wird oft in Schleifen verwendet, um über eine Sequenz zu iterieren. Eine range kann mit einem Startwert, einem Endwert und einem Schrittweite erstellt werden.
+
+```python
+for i in range(1, 6):
+    print(i)  # Ausgabe: 1, 2, 3, 4, 5
+```
+
+### set
+
+Ein Set ist eine ungeordnete Sammlung von eindeutigen Elementen in Python. Sets werden oft verwendet, um Duplikate zu entfernen und Mengenoperationen durchzuführen. Sets werden mit geschweiften Klammern `{}` erstellt.
+
+```python
+set1 = {1, 2, 3, 4, 5}
+set2 = {4, 5, 6, 7, 8}
+```
+
+
+# Aufgaben
+
+## Erste Aufgabe: Lottoziehung
+
+### Aufgabenstellung
 
 1. Algorithmus zur Lottoziehung -> keine doppelten Zahlen. Wird in einer Methode gemacht. Ziehe 6 Zahlen zwischen 1 und 45 und gib sie aus. Passendes Programm: `lotto_1.py`
 2. Lottoziehung Statistik als Methode ->

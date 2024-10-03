@@ -9,7 +9,7 @@ max = 45 #der maximale Wert der gezogen werden kann
 #In dieser 
 def lotto_ziehung(x):
     lotto_zahlen = []
-    available_numbers = list(range(min, max+1)) #unser pool an verfügbaren Zahlen
+    available_numbers = [i for i in range(min, max+1)] #unser pool an verfügbaren Zahlen
     for _ in range(x):
         ranzahl = available_numbers[random.randint(0, len(available_numbers)-1)] #Zufällige Zahl aus dem Pool ziehen die len(available_numbers) - 1 gibt die länge des Pools an der verkleinert wird
         available_numbers.remove(ranzahl)   #die gezogene Zahl wird aus dem Pool entfernt und kann daher nicht nochmal gezogen werden
