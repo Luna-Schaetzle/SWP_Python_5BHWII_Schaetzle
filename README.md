@@ -38,7 +38,7 @@ Python ist eine plattformunabhängige, interpretierte und hochabstrakte Programm
 - **Kompilierte Sprachen:** Der Code wird vor dem Ausführen in Maschinencode übersetzt, was zu einer schnelleren Ausführung führen kann. Beispiele: C, C++, Java.
 - **Interpretierte Sprachen:** Der Code wird zur Laufzeit interpretiert, was eine flexiblere und dynamischere Entwicklung ermöglicht. Beispiele: Python, JavaScript, Ruby.
 
-#### Es gibt auch noc
+
 
 ### 3. Hochsprache
 - Python ist eine **höhere Programmiersprache**, was bedeutet, dass sie sehr nah an der natürlichen menschlichen Sprache liegt und einfach zu lesen und zu schreiben ist.
@@ -87,11 +87,29 @@ Der code muss allerdings in Python interpretiert werden, was halt python eine de
 
 ### 5. Standardbibliotheken und Module
 - **Umfangreiche Standardbibliotheken:** Python bietet eine Vielzahl vorinstallierter Module, die häufige Programmieraufgaben abdecken (z.B. für Dateioperationen, Netzwerke, Webentwicklung). Im Vergleich zu Sprachen wie Java oder C# ist die Installation und Nutzung von Bibliotheken in Python besonders einfach.
-  - **Installation von Bibliotheken** erfolgt meist über den Paketmanager `pip`:  
+  - **Installation von Bibliotheken via pip** erfolgt meist über den Paketmanager `pip`:  
     ```bash
     pip install <Bibliothek>
     ```
+  - **Installation von Bibliotheke via apt-get install** erfolgt meist über den Paketmanager `apt-get`:  
+    ```bash
+    sudo apt-get install python3-<Bibliothek>
+    ```
   - In Java hingegen müssen Bibliotheken oft manuell heruntergeladen und in das Projekt integriert werden.
+    - **Installation von Bibliotheken in Java** erfolgt meist über Maven oder Gradle:  
+    ```xml
+    <dependency>
+        <groupId>...</groupId>
+        <artifactId>...</artifactId>
+        <version>...</version>
+    </dependency>
+    ```
+    - **Installation von Bibliotheken in Java** erfolgt meist über Maven oder Gradle:  
+    ```gradle
+    dependencies {
+        implementation '...'
+    }
+    ```
 
 ### 6. Rapid Prototyping
 - Python eignet sich sehr gut für **Rapid Prototyping**, da es in der Regel weniger Code benötigt, um eine Lösung zu implementieren, verglichen mit Sprachen wie Java. Dies macht Python besonders nützlich für schnelle Entwicklungszyklen.
@@ -177,6 +195,10 @@ print(summe(5))  # Ausgabe: 15
 ### Rekursion
 
 Rekursion ist ein Konzept in der Informatik, bei dem eine Funktion sich selbst aufruft, um ein Problem in kleinere Teilprobleme zu zerlegen. Rekursion ist ein leistungsstarkes Werkzeug, um komplexe Probleme auf elegante Weise zu lösen.
+
+### Wichtig bei Rekursion
+
+Eine Rekursion muss immer eine Abbruchbedingung haben, um eine Endlosschleife zu vermeiden. Ohne eine Abbruchbedingung würde die rekursive Funktion sich unendlich oft selbst aufrufen. Denn wenn wir keine Abbruchbedingung haben, dann stürzt das Programm garantiert ab. Da der Programmspeicher der für das Programm zugewiesen ist, irgendwann voll ist.
 
 ### Beispiel: Fakultät berechnen
 Die Fakultät einer Zahl `n` (geschrieben als `n!`) ist das Produkt aller positiven ganzen Zahlen von `1` bis `n`. Die Fakultät einer Zahl `n` kann rekursiv wie folgt berechnet werden:

@@ -1,9 +1,13 @@
 import random
+import matplotlib.pyplot as plt
 
 min = 1   #der minimale Wert der gezogen werden kann
 max = 45 #der maximale Wert der gezogen werden kann
 # in diesem Beispiel machen wir das Oesterreichische Lotto 6 aus 45 
 # In Deutschland ist es 6 aus 49 dann müssten wir min auf 1 und max auf 49 setzen
+name_of_file = "lotto_statistik_balkendiagramm.png"
+# Anzahl der Ziehungen
+ziehungen = 1000
 
 
 #In dieser 
@@ -17,24 +21,32 @@ def lotto_ziehung(x):
 
     return lotto_zahlen
 
+# Statistik Funktion für die Ziehungen
 def statisik_lotto(dict_lotto, ziehungen):
     for zahl in ziehungen:
         if zahl in dict_lotto:
             dict_lotto[zahl] += 1
 
-dict_lotto = {}
-for i in range(min, max+1):
-    dict_lotto[i] = 0
+# Main-Funktion
+def main():
+    # Initialisierung des Lotto-Statistik-Dictionaries
+    dict_lotto = {i: 0 for i in range(min, max+1)} # von Copilot vorgeschlagen
 
-#hier machen wir nun die Ziehungen
-ziehungen = 1000
-groeße_ziehung = 6
+    # Ziehungen durchführen
+    for _ in range(ziehungen):
+        statisik_lotto(dict_lotto, lotto_ziehung(6))
 
-for i in range(1, ziehungen):
-    statisik_lotto(dict_lotto, lotto_ziehung(groeße_ziehung))
+    # Erstellung des Balkendiagramms
+    plt.figure(figsize=(10, 6))
+    plt.bar(dict_lotto.keys(), dict_lotto.values(), color='skyblue')
+    plt.xlabel('Lottozahlen')
+    plt.ylabel('Anzahl der Ziehungen')
+    plt.title('Lotto Statistik von ' + str(ziehungen) + ' Ziehungen')
 
-#Ausgabe der Statistik
-print("Statistik der Lottozahlen:")
-for i in dict_lotto:
-    print(f"Die Zahl {i} wurde {dict_lotto[i]} mal gezogen")
-    print("")
+    # Diagramm anzeigen und speichern
+    plt.tight_layout()
+    plt.savefig(name_of_file)
+    plt.show()
+
+if __name__ == "__main__":
+    main()
