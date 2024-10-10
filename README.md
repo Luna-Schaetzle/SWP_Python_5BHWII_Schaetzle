@@ -315,6 +315,18 @@ quadrate = [i*i for i in range(1, 6)]  # Erstellt eine Liste der Quadrate von 1 
 quadrate_gerade = [i*i for i in range(1, 6) if i % 2 == 0]  # Erstellt eine Liste der Quadrate von 1 bis 5, aber nur die geraden Zahlen
 ```
 
+wir können auch if else bedingungen einbauen:
+
+```python
+ergebnis = ["gerade" if i % 2 == 0 else "ungerade" for i in range(1, 6)]  # Erstellt eine Liste, die angibt, ob die Zahl gerade oder ungerade ist
+```
+
+Beispiel: gib die Zahlen von 50 bis 100 aus aber jede zahl soll durch 5 teilbar sein und alle die durch 10 sollen durch 0 ersetzt werden.
+
+```python
+ergebnis = [0 if i % 10 == 0 else i for i in range(50, 101) if i % 5 == 0]
+```
+
 
 ### Linked Lists
 
@@ -377,6 +389,19 @@ quadrat = {i: i*i for i in range(1, 6)}  # Erstellt ein Dictionary der Quadrate 
 quadrat_gerade = {i: i*i for i in range(1, 6) if i % 2 == 0}  # Erstellt ein Dictionary der Quadrate von 1 bis 5, aber nur die geraden Zahlen
 ```
 
+Man kann auch else if bedingungen einbauen:
+
+```python
+ergebnis = {i: "gerade" if i % 2 == 0 else "ungerade" for i in range(1, 6)}  # Erstellt ein Dictionary, das angibt, ob die Zahl gerade oder ungerade ist
+```
+Beispiel: gib die Zahlen von 50 bis 100 aus aber jede zahl soll durch 5 teilbar sein und alle die durch 10 sollen durch 0 ersetzt werden.
+
+```python
+ergebnis = {i: 0 if i % 10 == 0 else i for i in range(50, 101) if i % 5 == 0}
+```
+
+
+
 ## Array vertauschen 
 
 In Python kann man bei einem Array die Elemente vertauschen. 
@@ -429,6 +454,15 @@ Mittels des slicing kann man sich also einen Teil des Arrays auswählen.
 
 Wenn wir den `:` in einem Array verwenden, dann bedeutet das, dass wir alle Elemente von einem Index bis zu einem anderen Index auswählen. 
 
+## Tupel
+
+Ein Tupel ist eine unveränderliche Datenstruktur in Python, die eine geordnete Sammlung von Elementen speichert. Tupel sind ähnlich wie Listen, aber sie können nach der Erstellung nicht mehr geändert werden. Tupel werden mit runden Klammern `()` erstellt.
+
+```python
+tupel = (1, 2, 3, 4, 5)
+```
+
+
 ## Datentypen in Python
 
 ### ganze Zahlen (int)
@@ -464,6 +498,7 @@ ergebnis = 5 // 2
 print(ergebnis)  # Ausgabe: 2
 ```
 Mittels des "//" können wir also Floor Division machen.
+
 
 ## Schlüßelwörter in Python
 
@@ -517,6 +552,13 @@ Damit weiß das Betriebssystem, dass es den Python-Interpreter verwenden soll, u
 
 Nach dem `#!` wird der Pfad zum Python-Interpreter angegeben, in diesem Fall `python3`. Das `env`-Programm sucht nach dem Python-Interpreter im System und verwendet die Version, die standardmäßig installiert ist.
 
+### Die unterschiedlichen Dateitypen
+
+In einer **.exe** steht für eine ausführbare Datei. Diese Dateien können direkt ausgeführt werden, ohne dass ein spezielles Programm benötigt wird. Da dort Maschienen Code drinnen ist.
+
+In einer **.txt** steht für eine Textdatei. Diese Dateien enthalten Text und können mit einem Texteditor geöffnet und bearbeitet werden. Da stehen nur Text drinnen.
+Es gibt auch andere Textdateien wie .docx oder .pdf die aber nicht so einfach zu öffnen sind, aber auch Programmdateien sind textdateien wie .py oder .java. Diese müssen erst Interpretiert werden. 
+
 ### Tabs sind in Python wichtig
 
 In manchen Programmiersprachen sind Tabs nicht wichtig, aber in Python sind sie sehr wichtig. Tabs werden in Python verwendet, um Blöcke von Code zu definieren, z.B. in Schleifen oder Funktionen. Wenn die Einrückung nicht korrekt ist, wird ein IndentationError ausgelöst.
@@ -559,6 +601,115 @@ Ein Set ist eine ungeordnete Sammlung von eindeutigen Elementen in Python. Sets 
 set1 = {1, 2, 3, 4, 5}
 set2 = {4, 5, 6, 7, 8}
 ```
+
+## Auswertungsreihenfolge der Operatoren
+
+... einfügen ...
+
+## Referenz / Instanz (bestehend aus Idändität, Wert und Typ)
+
+### Identität 
+
+Eine Identität ist eine eindeutige Kennung (Fingerabdruck) eines Objekts in Python. Die Identität eines Objekts wird durch die Funktion `id()` zurückgegeben. Die Identität eines Objekts ändert sich während seiner Lebensdauer nicht.
+
+```python
+x = 42
+print(id(x))  # Ausgabe: 140735000221424
+```
+
+Wenn wir zwei Variablen auf denselben Wert setzen, dann haben sie die gleiche Identität.
+
+```python
+x = 42
+y = 42
+print(id(x))  # Ausgabe: 140735000221424
+print(id(y))  # Ausgabe: 140735000221424
+```
+
+Das kommt daher da Python um Speicher zu sparen, die gleichen Werte auf den gleichen Speicherplatz speichert.
+
+Wenn wir aber zwei Variablen auf unterschiedliche Werte setzen, dann haben sie unterschiedliche Identitäten.
+
+```python
+x = 42
+y = 43
+print(id(x))  # Ausgabe: 140735000221424
+print(id(y))  # Ausgabe: 140735000221456
+```
+
+Wenn wir nun listen oder Dictionaries haben, dann haben sie eine eigene Identität.
+
+```python
+liste1 = [1, 2, 3]
+liste2 = [1, 2, 3]
+print(id(liste1))  # Ausgabe: 140735000221424
+print(id(liste2))  # Ausgabe: 140735000221456
+```
+
+#### Problem des Seiten Effekts
+
+Wenn wir nun eine liste auf eine andere Liste setzen, dann haben sie die gleiche Identität. 
+Das führt dazu das wenn wir eine Liste ändern, dann ändert sich auch die andere Liste.
+
+```python
+liste1 = [1, 2, 3]
+liste2 = liste1
+liste2.append(4)
+print(liste1)  # Ausgabe: [1, 2, 3, 4]
+print(liste2)  # Ausgabe: [1, 2, 3, 4]
+```
+
+**Achtung:** Das ist ein Problem des Seiten Effekts. Das bedeutet das wenn wir eine Liste ändern, dann ändert sich auch die andere Liste. Das kann zu unerwünschten Nebeneffekten führen. Das kann einem das Leben schwer machen weil dadurch Fehler entstehen können.
+
+### Es ergibt sich folgendes:
+
+Bei Datenstruckturen werden eigentlich nur Referenzen auf die Daten gespeichert. Das bedeutet das keine Daten gespeichert werden sondern nur die Referenzen auf die Daten. Das bedeutet das wenn wir eine Liste auf eine andere Liste setzen, dann haben sie die gleiche Identität. Das führt dazu das wenn wir eine Liste ändern, dann ändert sich auch die andere Liste.
+
+## Unterschied zwischen Immutable und Mutable Datentypen
+
+### Immutable Datentypen
+
+Immutable Datentypen (unveränderliche Datentypen) können nach ihrer Erstellung nicht verändert werden. Wenn der Wert einer Variablen geändert wird, die auf einen immutablen Datentyp zeigt, wird eine neue Instanz des Wertes erstellt, und die Referenz der Variablen wird auf diesen neuen Wert gesetzt. Der ursprüngliche Wert bleibt unverändert, es wird lediglich ein neuer Wert erzeugt und der Variable zugewiesen.
+
+```python
+x = 42
+print(id(x))  # Ausgabe: 140735000221424
+x = 43
+print(id(x))  # Ausgabe: 140735000221456
+z = x
+print(id(z))  # Ausgabe: 140735000221456
+z = 55
+print(x)  # Ausgabe: 43, also bleibt x unverändert bei 43
+```
+
+**Beispiele für Immutable Datentypen:**
+- `int`
+- `float`
+- `str`
+- `tuple`
+
+### Mutable Datentypen
+
+Mutable Datentypen (veränderliche Datentypen) können nach ihrer Erstellung direkt verändert werden. Wenn eine Variable auf einen mutable Datentyp zeigt, bleiben Änderungen an der Datenstruktur bestehen, ohne dass eine neue Referenz erstellt wird. Werden zwei Variablen auf dieselbe mutable Datenstruktur gesetzt, beeinflussen Änderungen an einer dieser Variablen auch die andere, da beide auf dasselbe Objekt zeigen.
+
+```python
+liste = [1, 2, 3]
+print(id(liste))  # Ausgabe: 140735000221424
+liste.append(4)
+print(id(liste))  # Ausgabe: 140735000221424
+liste2 = liste
+print(id(liste2))  # Ausgabe: 140735000221424
+liste2.append(5)
+print(liste)  # Ausgabe: [1, 2, 3, 4, 5], die Liste wurde verändert, obwohl wir liste2 bearbeitet haben
+              # liste und liste2 verweisen auf dasselbe Objekt
+```
+
+**Beispiele für Mutable Datentypen:**
+- `list`
+- `dict`
+- `set`
+
+
 
 
 # Aufgaben
