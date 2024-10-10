@@ -667,6 +667,8 @@ Bei Datenstruckturen werden eigentlich nur Referenzen auf die Daten gespeichert.
 
 ## Unterschied zwischen Immutable und Mutable Datentypen
 
+https://openbook.rheinwerk-verlag.de/python/07_003.html#u7.3
+
 ### Immutable Datentypen
 
 Immutable Datentypen (unveränderliche Datentypen) können nach ihrer Erstellung nicht verändert werden. Wenn der Wert einer Variablen geändert wird, die auf einen immutablen Datentyp zeigt, wird eine neue Instanz des Wertes erstellt, und die Referenz der Variablen wird auf diesen neuen Wert gesetzt. Der ursprüngliche Wert bleibt unverändert, es wird lediglich ein neuer Wert erzeugt und der Variable zugewiesen.
@@ -709,7 +711,13 @@ print(liste)  # Ausgabe: [1, 2, 3, 4, 5], die Liste wurde verändert, obwohl wir
 - `dict`
 - `set`
 
+## Laufzeitenmodell in Python
 
+... einfügen aus Website ...
+
+## Sequenzielle Datentypen Zusammenfassung
+
+... einfügen aus Website (Zusammenfassung) ...
 
 
 # Aufgaben
@@ -725,4 +733,24 @@ print(liste)  # Ausgabe: [1, 2, 3, 4, 5], die Liste wurde verändert, obwohl wir
     - Rufe die Methode nach jeder Ziehung auf und inkrementiere den passenden Wert im Dictionary um 1
     - Gib das Dictionary am Ende aus
     - Passendes Programm: `lotto_2.py`
+
+## zweite Aufgabe: Pokerspielsimulator 
+
+- Tip: Liste von 52 Karten erstellen das ist dann unser Deck. Dann ziehen wir eine Zahl z.b. wenn wir 44 erhalten können wir durch flor division durch 4 die Farbe und den Wert der Karte herausfinden. Das Symbol erhalten wir durch modulo 13 und der Restwert sind die Kartenwerte.
+
+- Kominationen stehen in Wikipedia mit Prozentangaben. Diese sollten wir anehernd auch erreichen können.
+
+### Aufgabenstellung
+
+Pokerspielsimulator als Aufgabe ueber mehrere Wochen:
+- Überlegen wie wir die Karten repräsentieren (vier Farben, 13 Symbole)
+- gib zufällig 5 Karten aus
+- recherchiere welche Kombinationen es gibt beim Poker
+- schreibe Funktionen fuer die Kombinationen Paar, Drillinge, Poker, Flash, Strasse usw.
+- spiele 1000 mal und zählen die Anzahl der verschiedenen Kombinationen zu der Gesamtanzahl 
+- berechne den prozentuellen Anteil einer Kombination zu der Gesamtspieleanzahl
+- recherchiere die richtige Anteile im Netz und vergleiche die Ergebnisse
+- Git! 
+
+
 
