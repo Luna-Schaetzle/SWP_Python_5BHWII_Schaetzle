@@ -752,5 +752,128 @@ Pokerspielsimulator als Aufgabe ueber mehrere Wochen:
 - recherchiere die richtige Anteile im Netz und vergleiche die Ergebnisse
 - Git! 
 
+#### Kombinationen beim Poker
 
+### 1. **Royal Flush** (höchste Hand)
+   - Die höchste mögliche Hand im Poker.
+   - Es besteht aus den fünf höchsten Karten einer Farbe: 10, Bube (J), Dame (Q), König (K), Ass (A) derselben Farbe.
+   - Beispiel: 10♠ J♠ Q♠ K♠ A♠ (alle Pik).
+
+### 2. **Straight Flush**
+   - Fünf aufeinanderfolgende Karten derselben Farbe.
+   - Beispiel: 5♣ 6♣ 7♣ 8♣ 9♣ (alle Kreuz).
+   - Wenn zwei Spieler einen Straight Flush haben, gewinnt der mit der höchsten Karte.
+
+### 3. **Four of a Kind (Vierling)**
+   - Vier Karten desselben Werts.
+   - Beispiel: 9♠ 9♣ 9♦ 9♥ K♣.
+   - Wenn zwei Spieler einen Vierling haben, gewinnt der mit den höheren Karten.
+
+### 4. **Full House**
+   - Eine Kombination aus einem Drilling und einem Paar.
+   - Beispiel: 8♠ 8♦ 8♣ K♠ K♦ (Drilling 8er und Paar Könige).
+   - Bei zwei Full Houses gewinnt der mit dem höheren Drilling.
+
+### 5. **Flush**
+   - Fünf beliebige Karten derselben Farbe (nicht aufeinanderfolgend).
+   - Beispiel: 2♠ 6♠ 9♠ Q♠ K♠ (alle Pik).
+   - Wenn zwei Spieler einen Flush haben, gewinnt der mit der höchsten Karte.
+
+### 6. **Straight**
+   - Fünf aufeinanderfolgende Karten, unabhängig von der Farbe.
+   - Beispiel: 4♠ 5♣ 6♦ 7♥ 8♣.
+   - Wenn zwei Spieler einen Straight haben, gewinnt der mit der höchsten Karte.
+
+### 7. **Three of a Kind (Drilling)**
+   - Drei Karten desselben Werts.
+   - Beispiel: 7♠ 7♦ 7♣ 2♠ 4♣.
+   - Bei zwei Drillingen gewinnt der mit dem höheren Drilling.
+
+### 8. **Two Pair (Zwei Paare)**
+   - Zwei Paare von Karten desselben Werts.
+   - Beispiel: 10♠ 10♣ 5♦ 5♠ 3♣.
+   - Bei zwei Paaren gewinnt das höhere Paar, falls das erste Paar gleich ist, entscheidet das zweite.
+
+### 9. **One Pair (Ein Paar)**
+   - Ein Paar von Karten desselben Werts.
+   - Beispiel: A♠ A♦ 4♠ 7♣ 9♥.
+   - Bei zwei Paaren gewinnt das höhere Paar.
+
+### 10. **High Card (Höchste Karte)**
+   - Wenn keine der obigen Kombinationen vorliegt, entscheidet die höchste Karte.
+   - Beispiel: A♠ K♦ 7♣ 4♠ 2♥.
+   - Wenn zwei Spieler keine Kombination haben, gewinnt der mit der höchsten Karte.
+
+### Kurzgefasst:
+- **Royal Flush**: 10, J, Q, K, A einer Farbe.
+- **Straight Flush**: Fünf aufeinanderfolgende Karten derselben Farbe.
+- **Four of a Kind**: Vier gleiche Karten.
+- **Full House**: Drilling und ein Paar.
+- **Flush**: Fünf beliebige Karten derselben Farbe.
+- **Straight**: Fünf aufeinanderfolgende Karten verschiedener Farben.
+- **Three of a Kind**: Drei gleiche Karten.
+- **Two Pair**: Zwei Paare.
+- **One Pair**: Ein Paar.
+- **High Card**: Höchste Karte entscheidet. 
+
+#### Wahrsccheinlichkeiten
+
+Die Wahrscheinlichkeiten für die verschiedenen Pokerhände hängen vom spezifischen Spiel ab, aber für **Texas Hold'em** sind die Wahrscheinlichkeiten für jede Handkombination bei einem Standard-52-Karten-Deck. Hier sind die ungefähren Wahrscheinlichkeiten:
+
+### 1. **Royal Flush**
+   - Wahrscheinlichkeit: **0,000154%** (1 zu 649.740)
+   - Es gibt nur vier mögliche Kombinationen für einen Royal Flush, je eine pro Farbe.
+
+### 2. **Straight Flush** (außer Royal Flush)
+   - Wahrscheinlichkeit: **0,00139%** (1 zu 72.193)
+   - Ein Straight Flush besteht aus fünf aufeinanderfolgenden Karten derselben Farbe, z. B. 5♠ 6♠ 7♠ 8♠ 9♠.
+
+### 3. **Four of a Kind (Vierling)**
+   - Wahrscheinlichkeit: **0,0240%** (1 zu 4.165)
+   - Vier Karten desselben Rangs, z. B. vier Asse oder vier Könige.
+
+### 4. **Full House**
+   - Wahrscheinlichkeit: **0,1441%** (1 zu 693)
+   - Ein Full House besteht aus einem Drilling und einem Paar, z. B. drei Könige und zwei Zehner.
+
+### 5. **Flush**
+   - Wahrscheinlichkeit: **0,197%** (1 zu 508)
+   - Ein Flush sind fünf beliebige Karten derselben Farbe, aber nicht in Reihenfolge.
+
+### 6. **Straight**
+   - Wahrscheinlichkeit: **0,3925%** (1 zu 255)
+   - Ein Straight sind fünf aufeinanderfolgende Karten beliebiger Farbe, z. B. 4♠ 5♣ 6♦ 7♥ 8♣.
+
+### 7. **Three of a Kind (Drilling)**
+   - Wahrscheinlichkeit: **2,1128%** (1 zu 47)
+   - Drei Karten desselben Rangs, z. B. drei Asse.
+
+### 8. **Two Pair (Zwei Paare)**
+   - Wahrscheinlichkeit: **4,7539%** (1 zu 21)
+   - Zwei Paare von Karten desselben Werts, z. B. zwei Könige und zwei Zehner.
+
+### 9. **One Pair (Ein Paar)**
+   - Wahrscheinlichkeit: **42,2569%** (1 zu 2,37)
+   - Ein Paar besteht aus zwei Karten desselben Rangs, z. B. zwei Asse.
+
+### 10. **High Card (Höchste Karte)**
+   - Wahrscheinlichkeit: **50,1177%** (1 zu 1,99)
+   - Keine der oben genannten Kombinationen, die höchste Karte entscheidet, z. B. Ass als höchste Karte.
+
+### Zusammenfassung der Wahrscheinlichkeiten:
+
+| Pokerhand         | Wahrscheinlichkeit   | 1 zu ...       |
+|-------------------|----------------------|----------------|
+| Royal Flush       | 0,000154%            | 649.740        |
+| Straight Flush    | 0,00139%             | 72.193         |
+| Four of a Kind    | 0,0240%              | 4.165          |
+| Full House        | 0,1441%              | 693            |
+| Flush             | 0,197%               | 508            |
+| Straight          | 0,3925%              | 255            |
+| Three of a Kind   | 2,1128%              | 47             |
+| Two Pair          | 4,7539%              | 21             |
+| One Pair          | 42,2569%             | 2,37           |
+| High Card         | 50,1177%             | 1,99           |
+
+Diese Wahrscheinlichkeiten gelten für die erste Verteilung der fünf Karten in **Texas Hold'em**. Die genauen Werte können variieren, je nachdem wie viele Spieler teilnehmen und wie viele Gemeinschaftskarten verwendet werden.
 
