@@ -17,6 +17,73 @@ Python 3.10 installiert auf deinem Computer.
 
 Hier sind die Verbesserungen, der Notizen, die ich wärend der SWP Stunden gemacht habe:
 
+# Table of Contents
+- [Einführung in Python](#einführung-in-python)
+   - [Eigenschaften von Python](#eigenschaften-von-python)
+      - [Plattformunabhängigkeit](#1-plattformunabhängigkeit)
+      - [Interpretierte Sprache](#2-interpretierte-sprache)
+      - [Hochsprache](#3-hochsprache)
+      - [Bytecode in Python](#4-bytecode-in-python)
+      - [Standardbibliotheken und Module](#5-standardbibliotheken-und-module)
+      - [Rapid Prototyping](#6-rapid-prototyping)
+   - [Unterschiede zwischen Python und Java](#unterschiede-zwischen-python-und-java)
+      - [Typisierung](#1-typisierung)
+      - [Programmierparadigmen](#2-programmierparadigmen)
+      - [Speicherverwaltung und Garbage Collection](#3-speicherverwaltung-und-garbage-collection)
+      - [Speicherfreigabe](#4-speicherfreigabe)
+   - [Wichtige Konzepte in Python](#wichtige-konzepte-in-python)
+      - [Instanzen und Referenzen](#1-instanzen-und-referenzen)
+      - [Schlüsselwort `del`](#2-schlüsselwort-del)
+      - [Python interaktiver Modus](#3-python-interaktiver-modus)
+   - [Iteration und Rekursion](#iteration-und-rekursion)
+      - [Iteration](#iteration)
+      - [Rekursion](#rekursion)
+   - [Unterschied zwischen Prozess und Thread](#unterschied-zwischen-prozess-und-thread)
+      - [Prozess](#prozess)
+      - [Thread](#thread)
+   - [Array Lists](#array-lists)
+      - [Arrays](#arrays)
+      - [Listen](#listen)
+      - [Linked Lists](#linked-lists)
+      - [Array Lists](#array-lists-1)
+   - [Dictionary](#dictionary)
+      - [Dictionary Komprehension](#dictionary-komprehension)
+   - [Array vertauschen](#array-vertauschen)
+   - [Array einfach letztes Element heraussuchen](#array-einfach-letztes-element-heraussuchen)
+   - [Array slicing](#array-slicing)
+   - [Tupel](#tupel)
+   - [Datentypen in Python](#datentypen-in-python)
+      - [ganze Zahlen (int)](#ganze-zahlen-int)
+      - [Division zweier ganzer Zahlen](#division-zweier-ganzer-zahlen)
+      - [Floor Division in Python](#floor-division-in-python)
+   - [Schlüsselwörter in Python](#schlüsselwörter-in-python)
+   - [Programmendung .py](#programmendung-py)
+      - [Sehbang](#sehbang)
+      - [Die unterschiedlichen Dateitypen](#die-unterschiedlichen-dateitypen)
+      - [Tabs sind in Python wichtig](#tabs-sind-in-python-wichtig)
+   - [Kommentare](#kommentare)
+   - [Tupel, range und set](#tupel-range-und-set)
+      - [Tupel](#tupel-1)
+      - [range](#range)
+      - [set](#set)
+   - [Auswertungsreihenfolge der Operatoren](#auswertungsreihenfolge-der-operatoren)
+   - [Referenz / Instanz (bestehend aus Identität, Wert und Typ)](#referenz--instanz-bestehend-aus-identität-wert-und-typ)
+      - [Identität](#identität)
+      - [Problem des Seiten Effekts](#problem-des-seiten-effekts)
+      - [Es ergibt sich folgendes](#es-ergibt-sich-folgendes)
+   - [Unterschied zwischen Immutable und Mutable Datentypen](#unterschied-zwischen-immutable-und-mutable-datentypen)
+      - [Immutable Datentypen](#immutable-datentypen)
+      - [Mutable Datentypen](#mutable-datentypen)
+   - [Laufzeitenmodell in Python](#laufzeitenmodell-in-python)
+   - [Sequenzielle Datentypen Zusammenfassung](#sequenzielle-datentypen-zusammenfassung)
+- [Aufgaben](#aufgaben)
+   - [Erste Aufgabe: Lottoziehung](#erste-aufgabe-lottoziehung)
+      - [Aufgabenstellung](#aufgabenstellung)
+   - [Zweite Aufgabe: Pokerspielsimulator](#zweite-aufgabe-pokerspielsimulator)
+      - [Aufgabenstellung](#aufgabenstellung-1)
+      - [Kombinationen beim Poker](#kombinationen-beim-poker)
+      - [Wahrscheinlichkeiten](#wahrscheinlichkeiten)
+
 # Einführung in Python
 
 Python ist eine plattformunabhängige, interpretierte und hochabstrakte Programmiersprache. Diese Eigenschaften machen Python vielseitig und leicht zugänglich für Entwickler.
@@ -454,6 +521,29 @@ Mittels des slicing kann man sich also einen Teil des Arrays auswählen.
 
 Wenn wir den `:` in einem Array verwenden, dann bedeutet das, dass wir alle Elemente von einem Index bis zu einem anderen Index auswählen. 
 
+### Das problem mit Arrays in Python 
+
+In Python gibt es eigentlich keine Arrays sondern nur Arraylisten. Das bedeutet das die Arrays in Python nicht so effizient sind wie in Java. Das liegt daran das die Arrays in Python dynamisch sind und in Java statisch. Das bedeutet das die Arrays in Python langsamer sind als in Java.
+
+**Beispiel:**
+
+```python
+arr = [1, 2, 3, 4, 5]
+arr.append(6)  # Fügt ein Element am Ende der Liste hinzu
+```
+
+in Java würde das so aussehen:
+
+```java
+int[] arr = {1, 2, 3, 4, 5};
+int[] arr2 = new int[6];
+for (int i = 0; i < arr.length; i++) {
+    arr2[i] = arr[i];
+}
+arr2[5] = 6;
+```
+
+
 ## Tupel
 
 Ein Tupel ist eine unveränderliche Datenstruktur in Python, die eine geordnete Sammlung von Elementen speichert. Tupel sind ähnlich wie Listen, aber sie können nach der Erstellung nicht mehr geändert werden. Tupel werden mit runden Klammern `()` erstellt.
@@ -718,6 +808,169 @@ print(liste)  # Ausgabe: [1, 2, 3, 4, 5], die Liste wurde verändert, obwohl wir
 ## Sequenzielle Datentypen Zusammenfassung
 
 ... einfügen aus Website (Zusammenfassung) ...
+
+## Python isinstance() Funktion
+
+[Python isinstance() Funktion Beschreibung](https://www.programiz.com/python-programming/methods/built-in/isinstance)
+
+Die `isinstance()` Funktion wird verwendet, um zu überprüfen, ob ein Objekt einer bestimmten Klasse oder einem bestimmten Datentyp entspricht. Die Funktion gibt `True` zurück, wenn das Objekt der angegebenen Klasse oder dem angegebenen Datentyp entspricht, andernfalls gibt sie `False` zurück.
+
+### Syntax
+
+```python
+isinstance(object, classinfo)
+```
+**Beispiel:**
+
+```python
+x = 5
+print(isinstance(x, int))  # Ausgabe: True
+print(isinstance(x, str))  # Ausgabe: False
+liste = [1, 2, 3]
+print(isinstance(liste, list))  # Ausgabe: True
+print(isinstance(liste, tuple))  # Ausgabe: False
+list_2 = (1, 2, 3) # Tuple weil es mit runden Klammern erstellt wurde
+print(isinstance(list_2, list))  # Ausgabe: False
+print(isinstance(list_2, tuple))  # Ausgabe: True
+```
+
+### Praktische Anwendung
+
+Da wir in Pyhton listen gemischt verwenden können, ist es manchmal nützlich zu überprüfen, ob ein Objekt einer bestimmten Klasse oder einem bestimmten Datentyp entspricht. Das kann uns helfen, Fehler zu vermeiden und sicherzustellen, dass wir mit den richtigen Daten arbeiten.
+
+**Beispiel:**
+
+```python
+liste = [1, 2, 3, "vier", "fünf"]
+#wir saubern die liste in einer Zeile
+liste_clean = [x for x in liste if isinstance(x, int)]
+print(liste_clean)  # Ausgabe: [1, 2, 3]
+```
+
+## Time Complexity
+
+**Zeitkomplexität** beschreibt, wie sich die Ausführungszeit eines Algorithmus mit wachsender Eingabemenge verhält. In Python ist es wichtig, diese Konzepte zu verstehen, um effizienten Code zu schreiben, der auch mit großen Datenmengen gut arbeitet.
+
+#### Big-O-Notation
+
+Die **Big-O-Notation** wird verwendet, um die obere Grenze der Zeitkomplexität eines Algorithmus zu beschreiben, also die schlimmste mögliche Ausführungszeit im Vergleich zur Größe der Eingabedaten. Sie hilft dabei, Algorithmen hinsichtlich ihrer Effizienz zu bewerten.
+
+Hier sind einige der häufigsten Zeitkomplexitäten:
+
+1. **O(1) – Konstante Zeitkomplexität**: 
+   - Ein Algorithmus mit **O(1)** benötigt immer die gleiche Zeit, unabhängig von der Größe der Eingabe. Ein gutes Beispiel dafür ist das Zugreifen auf ein Element einer Liste über den Index.
+   
+   ```python
+   def get_element(lst, index):
+       return lst[index]  # O(1) Zeitkomplexität
+   ```
+
+2. **O(n) – Lineare Zeitkomplexität**: 
+   - Ein Algorithmus mit **O(n)** wächst mit der Eingabemenge. Dies sieht man häufig bei Schleifen, die über alle Elemente einer Liste iterieren.
+   
+   ```python
+   def sum_list(lst):
+       total = 0
+       for number in lst:
+           total += number  # O(n) Zeitkomplexität
+       return total
+   ```
+
+3. **O(n^2) – Quadratische Zeitkomplexität**: 
+   - **O(n^2)** tritt häufig bei Algorithmen mit verschachtelten Schleifen auf, wo jede Iteration der äußeren Schleife eine innere Schleife mit proportionaler Anzahl an Durchläufen verursacht.
+   
+   ```python
+   def bubble_sort(lst):
+       n = len(lst)
+       for i in range(n):
+           for j in range(0, n-i-1):
+               if lst[j] > lst[j+1]:
+                   lst[j], lst[j+1] = lst[j+1], lst[j]  # O(n^2) Zeitkomplexität
+   ```
+
+4. **O(log n) – Logarithmische Zeitkomplexität**:
+   - **O(log n)** beschreibt Algorithmen, die die Eingabe bei jedem Schritt halbieren. Ein Beispiel ist die **binäre Suche**, die sehr effizient ist.
+   
+   ```python
+   def binary_search(lst, target):
+       low, high = 0, len(lst) - 1
+       while low <= high:
+           mid = (low + high) // 2
+           if lst[mid] == target:
+               return mid  # O(log n) Zeitkomplexität
+           elif lst[mid] < target:
+               low = mid + 1
+           else:
+               high = mid - 1
+       return -1
+   ```
+
+5. **O(n log n) – Lineare Logarithmische Zeitkomplexität**: 
+   - Viele effiziente Sortieralgorithmen wie **Merge Sort** oder **Quick Sort** haben eine Zeitkomplexität von **O(n log n)**, was schneller ist als quadratische Algorithmen bei großen Datensätzen.
+   
+   ```python
+   def merge_sort(lst):
+       if len(lst) > 1:
+           mid = len(lst) // 2
+           left_half = lst[:mid]
+           right_half = lst[mid:]
+   
+           merge_sort(left_half)
+           merge_sort(right_half)
+   
+           i = j = k = 0
+           while i < len(left_half) and j < len(right_half):
+               if left_half[i] < right_half[j]:
+                   lst[k] = left_half[i]
+                   i += 1
+               else:
+                   lst[k] = right_half[j]
+                   j += 1
+               k += 1
+   
+           while i < len(left_half):
+               lst[k] = left_half[i]
+               i += 1
+               k += 1
+   
+           while j < len(right_half):
+               lst[k] = right_half[j]
+               j += 1
+               k += 1  # O(n log n) Zeitkomplexität
+   ```
+
+#### Analyse der Zeitkomplexität in Python
+
+Bei der Analyse der Zeitkomplexität in Python untersucht man oft die Struktur von Schleifen und rekursiven Aufrufen. Auch die eingebauten Datenstrukturen wie Listen, Dictionaries und Sets haben spezifische Zeitkomplexitäten:
+
+- **Listen**: Der Zugriff auf ein Element über den Index ist **O(1)**, aber das Suchen nach einem Element oder das Anhängen eines Elements ist **O(n)**.
+- **Dictionaries und Sets**: Die Operationen wie Suchen, Einfügen und Löschen sind im Durchschnitt **O(1)** dank der Hash-Tabellen-Implementierung, können aber im schlimmsten Fall auf **O(n)** abfallen, wenn es viele Kollisionen gibt.
+
+#### Beispiele für Zeitkomplexität in Python:
+1. **Listenoperationen**:
+   - **Zugriff per Index**: `O(1)`
+   - **Anhängen ans Ende**: `O(1)`
+   - **Einfügen in die Mitte**: `O(n)`
+   - **Suche nach einem Element**: `O(n)`
+
+2. **Dictionaries**:
+   - **Einfügen/Aktualisieren**: `O(1)`
+   - **Suchen**: `O(1)`
+   - **Löschen**: `O(1)`
+
+3. **Sets**:
+   - **Einfügen/Aktualisieren**: `O(1)`
+   - **Suche nach einem Element**: `O(1)`
+
+#### Bedeutung der Zeitkomplexität
+
+Die Zeitkomplexität ist entscheidend, weil sie hilft, die Effizienz eines Algorithmus zu bewerten. Ein Algorithmus mit einer schlechten Zeitkomplexität kann bei großen Eingabemengen sehr langsam werden und unnötig viel Zeit benötigen. Daher ist es wichtig, bei der Auswahl von Algorithmen und Datenstrukturen auch auf ihre Zeitkomplexität zu achten.
+
+#### Fazit
+
+Die Zeitkomplexität ist ein zentrales Konzept beim Schreiben von effizienten Algorithmen in Python. Sie hilft, die Leistungsfähigkeit von Algorithmen zu verstehen und die richtige Wahl für die jeweilige Aufgabe zu treffen. Wenn du die Zeitkomplexität deiner Algorithmen im Blick behältst, kannst du sicherstellen, dass dein Code auch mit großen Datenmengen gut funktioniert.
+
+Für weiterführende Informationen zur Zeitkomplexität und deren Analyse kannst du Ressourcen wie das Buch *Introduction to Algorithms* von Cormen et al. oder Python-spezifische Dokumentationen und Tutorials verwenden.
 
 
 # Aufgaben
