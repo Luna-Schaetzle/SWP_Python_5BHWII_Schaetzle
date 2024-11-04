@@ -1,12 +1,13 @@
 import random
 from collections import Counter
 
-# Definiere Farben und Kartentypen
-farben = ['Kreuz', 'Pik', 'Herz', 'Karo']
-karten_typen = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Bube', 'Dame', 'König', 'Ass']
+# Define suits and card types
+suits = ['Clubs', 'Spades', 'Hearts', 'Diamonds']
+card_types = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace']
 
-# Wir machen ein Dictionary in dem wir speichern, wie oft eine der Möglichkeiten vorgekommen ist
-kombinationen_zaehler = {
+# We create a dictionary to store how often each possibility has occurred
+# you could use defaultdict(int) instead it would be a smoother way to do it
+combinations_counter = { 
     "Royal Flush": 0,
     "Straight Flush": 0,
     "Four of a Kind": 0,
@@ -19,100 +20,100 @@ kombinationen_zaehler = {
     "High Card": 0
 }
 
-ziehungen = 1000000
-handgroeße = 5
+draws = 1000000
+hand_size = 5
 
-# Erstelle ein Deck mit allen Karten
-def deck_reset():
-    return [(farbe, kartentyp) for farbe in farben for kartentyp in karten_typen]
+# Create a deck with all cards
+def reset_deck():
+    return [(suit, card_type) for suit in suits for card_type in card_types]
 
-# Funktion, um eine Karte zu ziehen und aus dem Deck zu entfernen
-def ziehe_karte(deck):
-    gezogene_karte = random.choice(deck)
-    deck.remove(gezogene_karte)
-    return gezogene_karte
+# Function to draw a card and remove it from the deck
+def draw_card(deck):
+    drawn_card = random.choice(deck)
+    deck.remove(drawn_card)
+    return drawn_card
 
-# Funktion, um eine Hand zu ziehen
+# Function to draw a hand
 def draw_hand(deck):
-    return [ziehe_karte(deck) for _ in range(handgroeße)]
+    return [draw_card(deck) for _ in range(hand_size)]
 
-# Funktion, um die Kartentypen den richtigen Wert zuzuordnen
-def set_rang(karte):
-    order_rang = {'2': 0, '3': 1, '4': 2, '5': 3, '6': 4, '7': 5, '8': 6, '9': 7, '10': 8, 'Bube': 9, 'Dame': 10, 'König': 11, 'Ass': 12}
-    return order_rang[karte]
+# Function to assign the correct value to card types
+def set_rank(card):
+    rank_order = {'2': 0, '3': 1, '4': 2, '5': 3, '6': 4, '7': 5, '8': 6, '9': 7, '10': 8, 'Jack': 9, 'Queen': 10, 'King': 11, 'Ace': 12}
+    return rank_order[card]
 
-# Funktion, um die Hand nach den Rängen zu sortieren
+# Function to sort the hand by ranks
 def set_order(hand):
-    return sorted(hand, key=lambda karte: set_rang(karte[1]))
+    return sorted(hand, key=lambda card: set_rank(card[1]))
 
-# Funktion, um eine Royal Flush zu überprüfen
+# Function to check for a Royal Flush
 def royal_flush(hand):
-    reihenfolge_royal_flush = ['10', 'Bube', 'Dame', 'König', 'Ass']
-    farben_in_hand = [karte[0] for karte in hand]
-    karten_in_hand = [karte[1] for karte in hand]
-    return len(set(farben_in_hand)) == 1 and all(typ in karten_in_hand for typ in reihenfolge_royal_flush)
+    royal_flush_order = ['10', 'Jack', 'Queen', 'King', 'Ace']
+    suits_in_hand = [card[0] for card in hand]
+    cards_in_hand = [card[1] for card in hand]
+    return len(set(suits_in_hand)) == 1 and all(card_type in cards_in_hand for card_type in royal_flush_order)
 
-# Funktion, um Pokerkombinationen zu erkennen
-def kombination_bestimmen(hand):
-    farben_in_hand = [karte[0] for karte in hand]
-    karten_in_hand = [karte[1] for karte in hand]
-    karten_counter = Counter(karten_in_hand)
+# Function to determine poker combinations
+def determine_combination(hand):
+    suits_in_hand = [card[0] for card in hand]
+    cards_in_hand = [card[1] for card in hand]
+    cards_counter = Counter(cards_in_hand)
     
-    geordnete_hand = set_order(hand)
-    geordnete_werte = [set_rang(karte[1]) for karte in geordnete_hand]
+    ordered_hand = set_order(hand)
+    ordered_values = [set_rank(card[1]) for card in ordered_hand]
     
     # Royal Flush
     if royal_flush(hand):
         return "Royal Flush"
 
     # Straight Flush
-    if len(set(farben_in_hand)) == 1 and geordnete_werte == list(range(geordnete_werte[0], geordnete_werte[0] + 5)):
+    if len(set(suits_in_hand)) == 1 and ordered_values == list(range(ordered_values[0], ordered_values[0] + 5)):
         return "Straight Flush"
     
     # Four of a Kind
-    if 4 in karten_counter.values():
+    if 4 in cards_counter.values():
         return "Four of a Kind"
 
     # Full House
-    if 2 in karten_counter.values() and 3 in karten_counter.values():
+    if 2 in cards_counter.values() and 3 in cards_counter.values():
         return "Full House"
 
     # Flush
-    if len(set(farben_in_hand)) == 1:
+    if len(set(suits_in_hand)) == 1:
         return "Flush"
 
     # Straight
-    if geordnete_werte == list(range(geordnete_werte[0], geordnete_werte[0] + 5)):
+    if ordered_values == list(range(ordered_values[0], ordered_values[0] + 5)):
         return "Straight"
 
     # Three of a Kind
-    if 3 in karten_counter.values():
+    if 3 in cards_counter.values():
         return "Three of a Kind"
 
     # Two Pair
-    if list(karten_counter.values()).count(2) == 2:
+    if list(cards_counter.values()).count(2) == 2:
         return "Two Pair"
 
     # One Pair
-    if 2 in karten_counter.values():
+    if 2 in cards_counter.values():
         return "One Pair"
 
     # High Card
     return "High Card"
 
-# Erhebung der Statistik
-def statistik_erheben():
-    for _ in range(ziehungen):
-        deck = deck_reset()
+# Collect statistics
+def collect_statistics():
+    for _ in range(draws):
+        deck = reset_deck()
         hand = draw_hand(deck)
-        kombination = kombination_bestimmen(hand)
-        kombinationen_zaehler[kombination] += 1
+        combination = determine_combination(hand)
+        combinations_counter[combination] += 1
 
-    # Ausgabe der Ergebnisse
-    for kombination, anzahl in kombinationen_zaehler.items():
-        print(f"{kombination}: {anzahl} ({anzahl/ziehungen*100:.9f}%)")
+    # Output the results
+    for combination, count in combinations_counter.items():
+        print(f"{combination}: {count} ({count/draws*100:.9f}%)")
 
-# Hauptfunktion zum Ausführen des Tests
+# Main function to run the test
 if __name__ == "__main__":
-    statistik_erheben()
-    print("Ziehungen:", ziehungen)
+    collect_statistics()
+    print("Draws:", draws)

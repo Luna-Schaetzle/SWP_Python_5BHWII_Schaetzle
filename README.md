@@ -801,6 +801,63 @@ print(liste)  # Ausgabe: [1, 2, 3, 4, 5], die Liste wurde verändert, obwohl wir
 - `dict`
 - `set`
 
+### Copy und Deepcopy
+
+#### Copy
+
+In Python gibt es die Funktionen `copy` und `deepcopy` aus dem Modul `copy`, um Kopien von Datenstrukturen zu erstellen. Diese Funktion erstellt eine flache Kopie der Datenstruktur, d.h. nur die oberste Ebene der Datenstruktur wird kopiert. Bei einer flachen Kopie wird die Datenstruktur kopiert, aber die Elemente der Datenstruktur bleiben die gleichen.
+
+```python
+import copy
+
+liste = [1, 2, 3]
+liste2 = copy.copy(liste)
+liste2.append(4)
+print(liste)  # Ausgabe: [1, 2, 3], die Liste wurde nicht verändert
+```
+
+Somit wird der seiten Effekt umgangen.
+
+#### Deepcopy
+
+In Python gibt es die Funktionen `copy` und `deepcopy` aus dem Modul `copy`, um Kopien von Datenstrukturen zu erstellen. Diese Funktion erstellt eine tiefe Kopie der Datenstruktur, d.h. die gesamte Datenstruktur wird kopiert. Bei einer tiefen Kopie wird die Datenstruktur kopiert und alle Elemente der Datenstruktur werden ebenfalls kopiert.
+
+```python
+import copy
+
+liste = [1, 2, 3, [4, 5]]
+liste2 = copy.deepcopy(liste)
+liste2[4] = 6
+print(liste)  # Ausgabe: [1, 2, 3, [4, 5]], die Liste wurde nicht verändert
+```
+Wenn wir nur copy angewändet hätten, dann wäre die Liste verändert worden.
+
+# DUNDER (Double Under) Methoden
+
+... einfügen ...
+
+## Programm einfügen __name__ == "__main__"
+
+Wenn wir in einem Programm `__name__ == "__main__"` schreiben, dann erhält das Programm das wir ausführen dem Namen `__main__`. Das bedeutet das wir das Programm direkt ausführen und nicht importieren. Das ist nützlich wenn wir ein Programm schreiben und es testen wollen. 
+
+```python
+def main():
+    print("Hallo Welt")
+   
+if __name__ == "__main__":
+      main()
+```
+
+Das bedeutet das wenn wir das Programm ausführen, dann wird die Funktion `main()` ausgeführt. Wenn wir das Programm importieren, dann wird die Funktion `main()` nicht ausgeführt. Das ist nützlich wenn wir ein Programm schreiben und es testen wollen.
+
+Mittels `import` können wir das Programm in ein anderes Programm importieren und die Funktion `main()` ausführen.
+
+```python
+import mein_programm
+
+mein_programm.main()
+```
+
 ## Laufzeitenmodell in Python
 
 ... einfügen aus Website ...
@@ -971,6 +1028,19 @@ Die Zeitkomplexität ist entscheidend, weil sie hilft, die Effizienz eines Algor
 Die Zeitkomplexität ist ein zentrales Konzept beim Schreiben von effizienten Algorithmen in Python. Sie hilft, die Leistungsfähigkeit von Algorithmen zu verstehen und die richtige Wahl für die jeweilige Aufgabe zu treffen. Wenn du die Zeitkomplexität deiner Algorithmen im Blick behältst, kannst du sicherstellen, dass dein Code auch mit großen Datenmengen gut funktioniert.
 
 Für weiterführende Informationen zur Zeitkomplexität und deren Analyse kannst du Ressourcen wie das Buch *Introduction to Algorithms* von Cormen et al. oder Python-spezifische Dokumentationen und Tutorials verwenden.
+
+## Verschiedene Arten von Python Interpreter
+
+Es gibt verschiedene Arten von Python-Interpretern, die für unterschiedliche Zwecke und Anwendungen entwickelt wurden. Hier sind einige der bekanntesten Python-Interpretern:
+
+1. **CPython**: 
+   - CPython ist der Standard-Interpreter für Python und wird von der Python-Software-Stiftung entwickelt. Er ist in C geschrieben und implementiert die offizielle Python-Spezifikation. CPython ist die am weitesten verbreitete Implementierung von Python und wird für die meisten Anwendungen verwendet.
+2. **JYTHON**: 
+   - Jython ist eine Implementierung von Python, die in Java geschrieben ist und auf der Java Virtual Machine (JVM) ausgeführt wird. Jython ermöglicht die nahtlose Integration von Python-Code in Java-Anwendungen und umgekehrt.
+3. **IronPython**:
+   - IronPython ist eine Implementierung von Python, die in C# geschrieben ist und auf der .NET-Plattform ausgeführt wird. IronPython ermöglicht die Integration von Python-Code in .NET-Anwendungen und umgekehrt.
+
+
 
 
 # Aufgaben
