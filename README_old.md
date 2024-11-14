@@ -1,32 +1,5 @@
-# SWP Python Projekte - 5BHWII - Luna Schäzle
-Willkommen im Repository für alle SWP Python-Projekte der 5. Klasse von Luna Schäzle. Hier findest du alle Programme und Projekte, die im Rahmen des SWP-Unterrichts (Softwareentwicklung und Programmierung) erstellt wurden.
-
-# Inhalt
-Dieses Repository enthält:
-
-Verschiedene Python-Programme und -Skripte, die während des Schuljahres entwickelt wurden.
-Lösungen zu Aufgaben und Projekten aus dem Unterricht.
-Beispielanwendungen und kleine Projekte, die verschiedene Aspekte der Python-Programmierung abdecken, wie Datenstrukturen, Algorithmen, Dateiverarbeitung und vieles mehr.
-
-# Voraussetzungen
-Um die hier enthaltenen Python-Skripte auszuführen, benötigst du:
-
-Python 3.10 installiert auf deinem Computer.
-
-# Mitschriften 
-
-Hier sind die Verbesserungen, der Notizen, die ich wärend der SWP Stunden gemacht habe:
-
 # Table of Contents
 - [Einführung in Python](#einführung-in-python)
-   - [Eigenschaften von Python](#eigenschaften-von-python)
-      - [Plattformunabhängigkeit](#1-plattformunabhängigkeit)
-      - [Interpretierte Sprache](#2-interpretierte-sprache)
-      - [Hochsprache](#3-hochsprache)
-      - [Bytecode in Python](#4-bytecode-in-python)
-      - [Standardbibliotheken und Module](#5-standardbibliotheken-und-module)
-      - [Rapid Prototyping](#6-rapid-prototyping)
-   - [Unterschiede zwischen Python und Java](#unterschiede-zwischen-python-und-java)
       - [Typisierung](#1-typisierung)
       - [Programmierparadigmen](#2-programmierparadigmen)
       - [Speicherverwaltung und Garbage Collection](#3-speicherverwaltung-und-garbage-collection)
@@ -34,7 +7,6 @@ Hier sind die Verbesserungen, der Notizen, die ich wärend der SWP Stunden gemac
    - [Wichtige Konzepte in Python](#wichtige-konzepte-in-python)
       - [Instanzen und Referenzen](#1-instanzen-und-referenzen)
       - [Schlüsselwort `del`](#2-schlüsselwort-del)
-      - [Python interaktiver Modus](#3-python-interaktiver-modus)
    - [Iteration und Rekursion](#iteration-und-rekursion)
       - [Iteration](#iteration)
       - [Rekursion](#rekursion)
@@ -57,11 +29,6 @@ Hier sind die Verbesserungen, der Notizen, die ich wärend der SWP Stunden gemac
       - [Division zweier ganzer Zahlen](#division-zweier-ganzer-zahlen)
       - [Floor Division in Python](#floor-division-in-python)
    - [Schlüsselwörter in Python](#schlüsselwörter-in-python)
-   - [Programmendung .py](#programmendung-py)
-      - [Sehbang](#sehbang)
-      - [Die unterschiedlichen Dateitypen](#die-unterschiedlichen-dateitypen)
-      - [Tabs sind in Python wichtig](#tabs-sind-in-python-wichtig)
-   - [Kommentare](#kommentare)
    - [Tupel, range und set](#tupel-range-und-set)
       - [Tupel](#tupel-1)
       - [range](#range)
@@ -86,100 +53,19 @@ Hier sind die Verbesserungen, der Notizen, die ich wärend der SWP Stunden gemac
 
 # Einführung in Python
 
-Python ist eine plattformunabhängige, interpretierte und hochabstrakte Programmiersprache. Diese Eigenschaften machen Python vielseitig und leicht zugänglich für Entwickler.
-
 ## Eigenschaften von Python
 
 ### 1. Plattformunabhängigkeit
-- **Plattformunabhängig** bedeutet, dass Python auf allen gängigen Betriebssystemen (Windows, Linux, macOS) läuft. Einmal geschriebener Code kann ohne Anpassungen auf verschiedenen Systemen ausgeführt werden.
 
 ### 2. Interpretierte Sprache
-- Python ist eine **interpretierte Sprache**, d.h. der Code wird zur Laufzeit direkt interpretiert, anstatt vorab in Maschinencode (wie bei kompilierte Sprachen) übersetzt zu werden. Dies ermöglicht eine direkte Ausführung des Codes ohne Zwischenschritte.
-
-**Beispiele für Interpreter Sprachen:**
-- Python
-- php 
-- Ruby
-
-**Unterschied zwischen interpretierten und kompilierten Sprachen**
-- **Kompilierte Sprachen:** Der Code wird vor dem Ausführen in Maschinencode übersetzt, was zu einer schnelleren Ausführung führen kann. Beispiele: C, C++, Java.
-- **Interpretierte Sprachen:** Der Code wird zur Laufzeit interpretiert, was eine flexiblere und dynamischere Entwicklung ermöglicht. Beispiele: Python, JavaScript, Ruby.
-
-
 
 ### 3. Hochsprache
-- Python ist eine **höhere Programmiersprache**, was bedeutet, dass sie sehr nah an der natürlichen menschlichen Sprache liegt und einfach zu lesen und zu schreiben ist.
-  
-  **Vergleich:**  
-  - **Maschinensprachen** wie C oder Assembler sind schwerer zu verstehen und zu schreiben, da sie sehr nah an der Hardware arbeiten.  
-  - **Hochsprachen** wie Python, Java oder C# abstrahieren viele hardwarenahe Details und machen das Programmieren einfacher.
-
-Ein Beispiel für Assembler Code:
-```asm
-section .data
-  num1 db 5
-  num2 db 10
-  result db 0
-
-section .text
-  global _start
-
-_start:
-  ; Load the first number into AL register
-  mov al, [num1]
-  
-  ; Add the second number to AL register
-  add al, [num2]
-  
-  ; Store the result in the result variable
-  mov [result], al
-  
-  ; Exit the program
-  mov eax, 60         ; syscall: exit
-  xor edi, edi        ; status: 0
-  syscall
-```
-Das gleiche Programm in Python:
-```python
-num1 = 5
-num2 = 10
-result = num1 + num2
-```
-Also man sieht das der Python Code viel einfacher zu lesen und zu schreiben ist.
-
-Der code muss allerdings in Python interpretiert werden, was halt python eine der langsameren Sprachen macht.
 
 ### 4. Bytecode in Python
-- Obwohl Python interpretiert wird, gibt es sogenannte **Bytecode-Dateien** (mit der Endung `.pyc`), die beim Speichern von Python-Dateien erstellt werden. Diese Dateien enthalten eine kompilierte Version des Codes, die bei späteren Ausführungen die Startzeit verkürzen kann. Python kann den Code jedoch auch ohne diese Bytecode-Dateien ausführen.
-
+- 
 ### 5. Standardbibliotheken und Module
-- **Umfangreiche Standardbibliotheken:** Python bietet eine Vielzahl vorinstallierter Module, die häufige Programmieraufgaben abdecken (z.B. für Dateioperationen, Netzwerke, Webentwicklung). Im Vergleich zu Sprachen wie Java oder C# ist die Installation und Nutzung von Bibliotheken in Python besonders einfach.
-  - **Installation von Bibliotheken via pip** erfolgt meist über den Paketmanager `pip`:  
-    ```bash
-    pip install <Bibliothek>
-    ```
-  - **Installation von Bibliotheke via apt-get install** erfolgt meist über den Paketmanager `apt-get`:  
-    ```bash
-    sudo apt-get install python3-<Bibliothek>
-    ```
-  - In Java hingegen müssen Bibliotheken oft manuell heruntergeladen und in das Projekt integriert werden.
-    - **Installation von Bibliotheken in Java** erfolgt meist über Maven oder Gradle:  
-    ```xml
-    <dependency>
-        <groupId>...</groupId>
-        <artifactId>...</artifactId>
-        <version>...</version>
-    </dependency>
-    ```
-    - **Installation von Bibliotheken in Java** erfolgt meist über Maven oder Gradle:  
-    ```gradle
-    dependencies {
-        implementation '...'
-    }
-    ```
 
 ### 6. Rapid Prototyping
-- Python eignet sich sehr gut für **Rapid Prototyping**, da es in der Regel weniger Code benötigt, um eine Lösung zu implementieren, verglichen mit Sprachen wie Java. Dies macht Python besonders nützlich für schnelle Entwicklungszyklen.
 
 ## Unterschiede zwischen Python und Java
 
@@ -221,19 +107,7 @@ Der code muss allerdings in Python interpretiert werden, was halt python eine de
 ## Wichtige Konzepte in Python
 
 ### 1. Instanzen und Referenzen
-- **Instanz:** Eine Instanz ist ein konkretes Objekt auf dem ein Zeiger (Referenz) zeigt. Instanzen können Klassenattribute und Methoden enthalten.
-  
-  ```python
-  class Person:
-      def __init__(self, name):
-          self.name = name
-  
-  p1 = Person("Alice")  # p1 ist eine Instanz der Klasse Person
-  ```
-- **Referenz:** Eine Referenz zeigt auf eine Instanz, d.h. es ist eine Art Zeiger auf den Speicherort einer Instanz. Mehrere Referenzen können auf dieselbe Instanz zeigen.
-    ```python
-    p2 = p1  # p2 zeigt auf die gleiche Instanz wie p1
-    ```
+
 
 ### 2. Schlüsselwort `del`
 - Mit dem Schlüsselwort `del` kann man eine Instanz oder Referenz explizit löschen. Allerdings wird dabei nur die Referenz gelöscht, nicht das Objekt selbst, es sei denn, keine weiteren Referenzen zeigen mehr auf das Objekt.
@@ -248,31 +122,6 @@ del p1  # Löscht die Referenz auf p1
 ```
 
 ### 3. Python interaktiver Modus
-
-Der Interaktive Modus ist ein Modus in Python, in dem der Code Zeile für Zeile ausgeführt wird. Dies ermöglicht es, den Code schrittweise zu testen und die Ausgabe direkt zu sehen. 
-'''bash
-python3
-'''
-mit diesem Beffehl starten wir den interaktiven Modus von Python.
-
-Der sieht dann so aus:
-```bash
-Python 3.10.0 (default, Oct  8 2021, 16:02:42)
-[GCC 10.2.0] on linux
-Type "help", "copyright", "credits" or "license" for more information.
->>>
-```
-Dann kann man in Python code eingeben und er wird sofort ausgeführt. Das sieht dann so aus:
-```bash
->>> print("Hallo Welt")
-Hallo Welt
-```
-
-Man kann auch Rechnungen machen:
-```bash
->>> 5 + 5
-10
-```
 
 ## Iteration und Rekursion
 
@@ -632,37 +481,14 @@ In Python gibt es ca. 35 Schlüsselwörter. Diese Schlüsselwörter sind reservi
 
 ## Programmendung .py
 
-Dateiendungen sind in der Informatik wichtig, da sie anzeigen, um welchen Dateityp es sich handelt und welches Programm verwendet werden soll, um die Datei zu öffnen. In Python haben Dateien mit der Endung `.py` eine besondere Bedeutung, da sie Python-Skripte enthalten. Python-Skripte sind Textdateien, die Python-Code enthalten und mit dem Python-Interpreter ausgeführt werden können. 
-
 ### Sehbang
 
-Der Shebang ist eine spezielle Zeile am Anfang einer Datei, die dem Betriebssystem mitteilt, welcher Interpreter verwendet werden soll, um die Datei auszuführen. In Python-Skripten wird oft der Shebang `#!/usr/bin/env python3` verwendet, um den Python-Interpreter zu starten.
-
-Damit weiß das Betriebssystem, dass es den Python-Interpreter verwenden soll, um das Skript auszuführen. Der Shebang ist optional, aber empfohlen, da er die Ausführung des Skripts erleichtert. 
-
-Nach dem `#!` wird der Pfad zum Python-Interpreter angegeben, in diesem Fall `python3`. Das `env`-Programm sucht nach dem Python-Interpreter im System und verwendet die Version, die standardmäßig installiert ist.
 
 ### Die unterschiedlichen Dateitypen
 
-In einer **.exe** steht für eine ausführbare Datei. Diese Dateien können direkt ausgeführt werden, ohne dass ein spezielles Programm benötigt wird. Da dort Maschienen Code drinnen ist.
-
-In einer **.txt** steht für eine Textdatei. Diese Dateien enthalten Text und können mit einem Texteditor geöffnet und bearbeitet werden. Da stehen nur Text drinnen.
-Es gibt auch andere Textdateien wie .docx oder .pdf die aber nicht so einfach zu öffnen sind, aber auch Programmdateien sind textdateien wie .py oder .java. Diese müssen erst Interpretiert werden. 
-
 ### Tabs sind in Python wichtig
 
-In manchen Programmiersprachen sind Tabs nicht wichtig, aber in Python sind sie sehr wichtig. Tabs werden in Python verwendet, um Blöcke von Code zu definieren, z.B. in Schleifen oder Funktionen. Wenn die Einrückung nicht korrekt ist, wird ein IndentationError ausgelöst.
-
-In Python 3 ist ein Tab als 4 Leerzeichen definiert. Das bedeutet, dass ein Tab durch 4 Leerzeichen ersetzt wird. Es ist wichtig, konsistent zu sein und entweder Tabs oder Leerzeichen zu verwenden, aber nicht beides gemischt.
-
 ## Kommentare 
-
-Kommentare macht man mit einem `#` in Python. Kommentare sind nützlich, um den Code zu dokumentieren und zu erklären, was er tut. Kommentare werden vom Interpreter ignoriert und haben keinen Einfluss auf die Ausführung des Codes.
-
-```python
-# Dies ist ein Kommentar
-print("Hallo Welt")  # Dies ist auch ein Kommentar
-```
 
 ## Tupel, range und set
 
@@ -694,210 +520,20 @@ set2 = {4, 5, 6, 7, 8}
 
 ## Auswertungsreihenfolge der Operatoren
 
-In Python gibt es eine bestimmte Reihenfolge, in der Operatoren ausgewertet werden. Diese Reihenfolge wird als Operatorpräzedenz bezeichnet. Hier ist eine Übersicht der Operatoren in absteigender Reihenfolge ihrer Präzedenz:
-
-1. **Klammern**: `()`
-   - Klammern haben die höchste Präzedenz und werden zuerst ausgewertet.
-   - Beispiel: `(2 + 3) * 4` ergibt `20`.
-
-2. **Exponentiation**: `**`
-   - Exponentiation wird vor allen anderen arithmetischen Operationen ausgewertet.
-   - Beispiel: `2 ** 3 ** 2` ergibt `512` (nicht `64`).
-
-3. **Vorzeichen**: `+x`, `-x`, `~x`
-   - Vorzeichenoperatoren werden vor Multiplikation und Division ausgewertet.
-   - Beispiel: `-3 ** 2` ergibt `-9`.
-
-4. **Multiplikation, Division, Modulo und Ganzzahl-Division**: `*`, `/`, `//`, `%`
-   - Diese Operatoren haben die gleiche Präzedenz und werden von links nach rechts ausgewertet.
-   - Beispiel: `10 / 2 * 3` ergibt `15`.
-
-5. **Addition und Subtraktion**: `+`, `-`
-   - Diese Operatoren haben die gleiche Präzedenz und werden von links nach rechts ausgewertet.
-   - Beispiel: `10 - 2 + 3` ergibt `11`.
-
-6. **Bitweise Verschiebung**: `<<`, `>>`
-   - Diese Operatoren verschieben die Bits eines Wertes nach links oder rechts.
-   - Beispiel: `2 << 3` ergibt `16`.
-
-7. **Bitweise UND**: `&`
-   - Dieser Operator führt ein bitweises UND durch.
-   - Beispiel: `5 & 3` ergibt `1`.
-
-8. **Bitweise XOR**: `^`
-   - Dieser Operator führt ein bitweises exklusives ODER durch.
-   - Beispiel: `5 ^ 3` ergibt `6`.
-
-9. **Bitweise ODER**: `|`
-   - Dieser Operator führt ein bitweises ODER durch.
-   - Beispiel: `5 | 3` ergibt `7`.
-
-10. **Vergleichsoperatoren**: `==`, `!=`, `>`, `<`, `>=`, `<=`, `is`, `is not`, `in`, `not in`
-    - Diese Operatoren vergleichen Werte und geben `True` oder `False` zurück.
-    - Beispiel: `3 > 2` ergibt `True`.
-
-11. **Logisches NICHT**: `not`
-    - Dieser Operator negiert einen booleschen Wert.
-    - Beispiel: `not True` ergibt `False`.
-
-12. **Logisches UND**: `and`
-    - Dieser Operator gibt `True` zurück, wenn beide Operanden `True` sind.
-    - Beispiel: `True and False` ergibt `False`.
-
-13. **Logisches ODER**: `or`
-    - Dieser Operator gibt `True` zurück, wenn mindestens einer der Operanden `True` ist.
-    - Beispiel: `True or False` ergibt `True`.
-
-### Beispiel zur Operatorpräzedenz
-
-```python
-result = 3 + 4 * 2 / (1 - 5) ** 2
-print(result)  # Ausgabe: 3.5
-```
-
-In diesem Beispiel wird die Reihenfolge der Auswertung wie folgt sein:
-1. Klammern: `(1 - 5)` ergibt `-4`
-2. Exponentiation: `(-4) ** 2` ergibt `16`
-3. Multiplikation und Division: `4 * 2 / 16` ergibt `0.5`
-4. Addition: `3 + 0.5` ergibt `3.5`
-
-Die Kenntnis der Operatorpräzedenz hilft dabei, den Code korrekt zu schreiben und zu verstehen, wie Ausdrücke ausgewertet werden.
-
 ## Referenz / Instanz (bestehend aus Idändität, Wert und Typ)
 
 ### Identität 
 
-Eine Identität ist eine eindeutige Kennung (Fingerabdruck) eines Objekts in Python. Die Identität eines Objekts wird durch die Funktion `id()` zurückgegeben. Die Identität eines Objekts ändert sich während seiner Lebensdauer nicht.
-
-```python
-x = 42
-print(id(x))  # Ausgabe: 140735000221424
-```
-
-Wenn wir zwei Variablen auf denselben Wert setzen, dann haben sie die gleiche Identität.
-
-```python
-x = 42
-y = 42
-print(id(x))  # Ausgabe: 140735000221424
-print(id(y))  # Ausgabe: 140735000221424
-```
-
-Das kommt daher da Python um Speicher zu sparen, die gleichen Werte auf den gleichen Speicherplatz speichert.
-
-Wenn wir aber zwei Variablen auf unterschiedliche Werte setzen, dann haben sie unterschiedliche Identitäten.
-
-```python
-x = 42
-y = 43
-print(id(x))  # Ausgabe: 140735000221424
-print(id(y))  # Ausgabe: 140735000221456
-```
-
-Wenn wir nun listen oder Dictionaries haben, dann haben sie eine eigene Identität.
-
-```python
-liste1 = [1, 2, 3]
-liste2 = [1, 2, 3]
-print(id(liste1))  # Ausgabe: 140735000221424
-print(id(liste2))  # Ausgabe: 140735000221456
-```
-
 #### Problem des Seiten Effekts
-
-Wenn wir nun eine liste auf eine andere Liste setzen, dann haben sie die gleiche Identität. 
-Das führt dazu das wenn wir eine Liste ändern, dann ändert sich auch die andere Liste.
-
-```python
-liste1 = [1, 2, 3]
-liste2 = liste1
-liste2.append(4)
-print(liste1)  # Ausgabe: [1, 2, 3, 4]
-print(liste2)  # Ausgabe: [1, 2, 3, 4]
-```
-
-**Achtung:** Das ist ein Problem des Seiten Effekts. Das bedeutet das wenn wir eine Liste ändern, dann ändert sich auch die andere Liste. Das kann zu unerwünschten Nebeneffekten führen. Das kann einem das Leben schwer machen weil dadurch Fehler entstehen können.
-
-### Es ergibt sich folgendes:
-
-Bei Datenstruckturen werden eigentlich nur Referenzen auf die Daten gespeichert. Das bedeutet das keine Daten gespeichert werden sondern nur die Referenzen auf die Daten. Das bedeutet das wenn wir eine Liste auf eine andere Liste setzen, dann haben sie die gleiche Identität. Das führt dazu das wenn wir eine Liste ändern, dann ändert sich auch die andere Liste.
+iste.
 
 ## Unterschied zwischen Immutable und Mutable Datentypen
 
 https://openbook.rheinwerk-verlag.de/python/07_003.html#u7.3
 
-### Immutable Datentypen
 
-Immutable Datentypen (unveränderliche Datentypen) können nach ihrer Erstellung nicht verändert werden. Wenn der Wert einer Variablen geändert wird, die auf einen immutablen Datentyp zeigt, wird eine neue Instanz des Wertes erstellt, und die Referenz der Variablen wird auf diesen neuen Wert gesetzt. Der ursprüngliche Wert bleibt unverändert, es wird lediglich ein neuer Wert erzeugt und der Variable zugewiesen.
-
-```python
-x = 42
-print(id(x))  # Ausgabe: 140735000221424
-x = 43
-print(id(x))  # Ausgabe: 140735000221456
-z = x
-print(id(z))  # Ausgabe: 140735000221456
-z = 55
-print(x)  # Ausgabe: 43, also bleibt x unverändert bei 43
-```
-
-**Beispiele für Immutable Datentypen:**
-- `int`
-- `float`
-- `str`
-- `tuple`
-
-### Mutable Datentypen
-
-Mutable Datentypen (veränderliche Datentypen) können nach ihrer Erstellung direkt verändert werden. Wenn eine Variable auf einen mutable Datentyp zeigt, bleiben Änderungen an der Datenstruktur bestehen, ohne dass eine neue Referenz erstellt wird. Werden zwei Variablen auf dieselbe mutable Datenstruktur gesetzt, beeinflussen Änderungen an einer dieser Variablen auch die andere, da beide auf dasselbe Objekt zeigen.
-
-```python
-liste = [1, 2, 3]
-print(id(liste))  # Ausgabe: 140735000221424
-liste.append(4)
-print(id(liste))  # Ausgabe: 140735000221424
-liste2 = liste
-print(id(liste2))  # Ausgabe: 140735000221424
-liste2.append(5)
-print(liste)  # Ausgabe: [1, 2, 3, 4, 5], die Liste wurde verändert, obwohl wir liste2 bearbeitet haben
-              # liste und liste2 verweisen auf dasselbe Objekt
-```
-
-**Beispiele für Mutable Datentypen:**
-- `list`
-- `dict`
-- `set`
 
 ### Copy und Deepcopy
-
-#### Copy
-
-In Python gibt es die Funktionen `copy` und `deepcopy` aus dem Modul `copy`, um Kopien von Datenstrukturen zu erstellen. Diese Funktion erstellt eine flache Kopie der Datenstruktur, d.h. nur die oberste Ebene der Datenstruktur wird kopiert. Bei einer flachen Kopie wird die Datenstruktur kopiert, aber die Elemente der Datenstruktur bleiben die gleichen.
-
-```python
-import copy
-
-liste = [1, 2, 3]
-liste2 = copy.copy(liste)
-liste2.append(4)
-print(liste)  # Ausgabe: [1, 2, 3], die Liste wurde nicht verändert
-```
-
-Somit wird der seiten Effekt umgangen.
-
-#### Deepcopy
-
-In Python gibt es die Funktionen `copy` und `deepcopy` aus dem Modul `copy`, um Kopien von Datenstrukturen zu erstellen. Diese Funktion erstellt eine tiefe Kopie der Datenstruktur, d.h. die gesamte Datenstruktur wird kopiert. Bei einer tiefen Kopie wird die Datenstruktur kopiert und alle Elemente der Datenstruktur werden ebenfalls kopiert.
-
-```python
-import copy
-
-liste = [1, 2, 3, [4, 5]]
-liste2 = copy.deepcopy(liste)
-liste2[4] = 6
-print(liste)  # Ausgabe: [1, 2, 3, [4, 5]], die Liste wurde nicht verändert
-```
-Wenn wir nur copy angewändet hätten, dann wäre die Liste verändert worden.
 
 # DUNDER (Double Under) Methoden
 
@@ -935,41 +571,6 @@ mein_programm.main()
 
 ## Python isinstance() Funktion
 
-[Python isinstance() Funktion Beschreibung](https://www.programiz.com/python-programming/methods/built-in/isinstance)
-
-Die `isinstance()` Funktion wird verwendet, um zu überprüfen, ob ein Objekt einer bestimmten Klasse oder einem bestimmten Datentyp entspricht. Die Funktion gibt `True` zurück, wenn das Objekt der angegebenen Klasse oder dem angegebenen Datentyp entspricht, andernfalls gibt sie `False` zurück.
-
-### Syntax
-
-```python
-isinstance(object, classinfo)
-```
-**Beispiel:**
-
-```python
-x = 5
-print(isinstance(x, int))  # Ausgabe: True
-print(isinstance(x, str))  # Ausgabe: False
-liste = [1, 2, 3]
-print(isinstance(liste, list))  # Ausgabe: True
-print(isinstance(liste, tuple))  # Ausgabe: False
-list_2 = (1, 2, 3) # Tuple weil es mit runden Klammern erstellt wurde
-print(isinstance(list_2, list))  # Ausgabe: False
-print(isinstance(list_2, tuple))  # Ausgabe: True
-```
-
-### Praktische Anwendung
-
-Da wir in Pyhton listen gemischt verwenden können, ist es manchmal nützlich zu überprüfen, ob ein Objekt einer bestimmten Klasse oder einem bestimmten Datentyp entspricht. Das kann uns helfen, Fehler zu vermeiden und sicherzustellen, dass wir mit den richtigen Daten arbeiten.
-
-**Beispiel:**
-
-```python
-liste = [1, 2, 3, "vier", "fünf"]
-#wir saubern die liste in einer Zeile
-liste_clean = [x for x in liste if isinstance(x, int)]
-print(liste_clean)  # Ausgabe: [1, 2, 3]
-```
 
 ## Time Complexity
 
@@ -1097,15 +698,6 @@ Die Zeitkomplexität ist ein zentrales Konzept beim Schreiben von effizienten Al
 Für weiterführende Informationen zur Zeitkomplexität und deren Analyse kannst du Ressourcen wie das Buch *Introduction to Algorithms* von Cormen et al. oder Python-spezifische Dokumentationen und Tutorials verwenden.
 
 ## Verschiedene Arten von Python Interpreter
-
-Es gibt verschiedene Arten von Python-Interpretern, die für unterschiedliche Zwecke und Anwendungen entwickelt wurden. Hier sind einige der bekanntesten Python-Interpretern:
-
-1. **CPython**: 
-   - CPython ist der Standard-Interpreter für Python und wird von der Python-Software-Stiftung entwickelt. Er ist in C geschrieben und implementiert die offizielle Python-Spezifikation. CPython ist die am weitesten verbreitete Implementierung von Python und wird für die meisten Anwendungen verwendet.
-2. **JYTHON**: 
-   - Jython ist eine Implementierung von Python, die in Java geschrieben ist und auf der Java Virtual Machine (JVM) ausgeführt wird. Jython ermöglicht die nahtlose Integration von Python-Code in Java-Anwendungen und umgekehrt.
-3. **IronPython**:
-   - IronPython ist eine Implementierung von Python, die in C# geschrieben ist und auf der .NET-Plattform ausgeführt wird. IronPython ermöglicht die Integration von Python-Code in .NET-Anwendungen und umgekehrt.
 
 
 # Exception Handling in Python
