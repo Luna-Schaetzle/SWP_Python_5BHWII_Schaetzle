@@ -1107,22 +1107,439 @@ Es gibt verschiedene Arten von Python-Interpretern, die für unterschiedliche Zw
 3. **IronPython**:
    - IronPython ist eine Implementierung von Python, die in C# geschrieben ist und auf der .NET-Plattform ausgeführt wird. IronPython ermöglicht die Integration von Python-Code in .NET-Anwendungen und umgekehrt.
 
+# Fehlerbehandlung in Python: `try` und `except`
 
-# Exception Handling in Python
+## Was ist Fehlerbehandlung?
 
-## Raise Exception
+Fehlerbehandlung ermöglicht es deinem Programm, auf **Ausnahmen** (Fehler) zu reagieren, ohne abzustürzen. Mit `try` und `except` kannst du solche Fehler abfangen und angemessen darauf reagieren.
 
-In Python können wir Ausnahmen (Exceptions oder Fehler) mit der `raise` Anweisung explizit auslösen. Das ist nützlich, wenn wir einen Fehlerzustand erkennen und eine Ausnahme auslösen wollen, um das Programm zu stoppen und eine Fehlermeldung auszugeben.
+## Grundstruktur
 
 ```python
-x = 10
-if x > 5:
-    raise Exception("Der Wert von x ist zu groß")
+try:
+    # Code, der ausgeführt wird und Fehler verursachen kann
+    result = 10 / 0
+except ZeroDivisionError:
+    # Code, der ausgeführt wird, wenn ein ZeroDivisionError auftritt
+    print("Division durch Null ist nicht erlaubt.")
 ```
 
+**Erklärung:**
+- **`try`-Block:** Enthält den Code, der potenziell Fehler verursachen könnte.
+- **`except`-Block:** Fängt spezifische Fehler ab und definiert, wie darauf reagiert werden soll.
 
-__ Einfügen __
+## Allgemeine Syntax
 
+```python
+try:
+    # Gefährlicher Code
+    pass
+except [Fehlertyp]:
+    # Fehlerbehandlung
+    pass
+```
+
+## Häufig verwendete `except`-Blöcke
+
+### Fangen eines spezifischen Fehlers
+
+```python
+try:
+    zahl = int(input("Gib eine Zahl ein: "))
+    result = 10 / zahl
+except ZeroDivisionError:
+    print("Du kannst nicht durch Null teilen.")
+except ValueError:
+    print("Bitte gib eine gültige Zahl ein.")
+```
+
+### Allgemeiner Fehlerabfang
+
+```python
+try:
+    # Gefährlicher Code
+    pass
+except Exception as e:
+    print(f"Ein Fehler ist aufgetreten: {e}")
+```
+
+**Hinweis:** Das Fangen aller Fehler mit `Exception` sollte sparsam verwendet werden, um spezifische Fehler nicht zu übersehen.
+
+## `else`-Block
+
+Wird ausgeführt, wenn kein Fehler im `try`-Block auftritt.
+
+```python
+try:
+    zahl = int(input("Gib eine Zahl ein: "))
+    result = 10 / zahl
+except ZeroDivisionError:
+    print("Du kannst nicht durch Null teilen.")
+else:
+    print(f"Ergebnis ist {result}")
+```
+
+## `finally`-Block
+
+Wird immer ausgeführt, unabhängig davon, ob ein Fehler aufgetreten ist oder nicht. Nützlich für Aufräumarbeiten.
+
+```python
+try:
+    datei = open("beispiel.txt", "r")
+    inhalt = datei.read()
+except FileNotFoundError:
+    print("Datei nicht gefunden.")
+finally:
+    datei.close()
+    print("Datei wurde geschlossen.")
+```
+
+## Mehrere `except`-Blöcke
+
+Du kannst mehrere `except`-Blöcke verwenden, um verschiedene Fehlertypen unterschiedlich zu behandeln.
+
+```python
+try:
+    # Gefährlicher Code
+    pass
+except ValueError:
+    print("Ein Wertfehler ist aufgetreten.")
+except TypeError:
+    print("Ein Typfehler ist aufgetreten.")
+except Exception as e:
+    print(f"Ein unerwarteter Fehler ist aufgetreten: {e}")
+```
+
+## Benutzerdefinierte Fehler werfen
+
+Du kannst eigene Fehler mit `raise` auslösen.
+
+```python
+def überprüfe_alter(alter):
+    if alter < 0:
+        raise ValueError("Alter kann nicht negativ sein.")
+    else:
+        print(f"Alter ist {alter}")
+
+try:
+    überprüfe_alter(-5)
+except ValueError as ve:
+    print(f"Fehler: {ve}")
+```
+
+## Best Practices
+
+- **Spezifische Fehler fangen:** Fange immer die spezifischen Fehler, die auftreten können, anstatt allgemeine Fehler.
+- **Vermeide leere `except`-Blöcke:** Fange nicht einfach alle Fehler ab, ohne sie zu behandeln.
+- **Nutze `finally` für Aufräumarbeiten:** Stelle sicher, dass Ressourcen wie Dateien oder Netzwerksockets ordnungsgemäß geschlossen werden.
+- **Verwende `else` für Code ohne Fehlerbehandlung:** Halte den `try`-Block für den fehleranfälligen Code und den `else`-Block für den erfolgreichen Ablauf.
+
+## Zusammenfassung
+
+- **`try`-Block:** Enthält den Code, der potenziell Fehler verursachen kann.
+- **`except`-Block:** Fängt und behandelt spezifische Fehler.
+- **`else`-Block:** Wird ausgeführt, wenn kein Fehler auftritt.
+- **`finally`-Block:** Wird immer ausgeführt, unabhängig vom Fehlerstatus.
+- **Benutzerdefinierte Fehler:** Mit `raise` können eigene Fehler ausgelöst werden.
+- **Best Practices:** Fange spezifische Fehler, vermeide allgemeine und leere `except`-Blöcke, nutze `finally` für Aufräumarbeiten.
+
+
+# Python f-Strings (formatierte String-Literale)
+
+## Was sind f-Strings?
+
+- **f-Strings** (formatierte String-Literale) sind eine Möglichkeit zur String-Formatierung in Python, eingeführt in Python 3.6.
+- Sie ermöglichen das Einfügen von Variablen und Ausdrücken direkt innerhalb von Strings durch Voranstellen eines `f` vor den Anführungszeichen.
+
+## Grundlegende Syntax
+
+```python
+name = "Alice"
+alter = 30
+grüße = f"Hallo, mein Name ist {name} und ich bin {alter} Jahre alt."
+print(grüße)
+# Ausgabe: Hallo, mein Name ist Alice und ich bin 30 Jahre alt.
+```
+
+## Vorteile von f-Strings
+
+- **Lesbarkeit:** Klar und intuitiv.
+- **Performance:** Schneller als ältere Formatierungsmethoden (`%`-Operator, `str.format()`).
+- **Flexibilität:** Unterstützt Ausdrücke und komplexe Formatierungen.
+
+## Einfügen von Ausdrücken
+
+```python
+a = 5
+b = 10
+ergebnis = f"Fünf plus zehn ist {a + b}."
+print(ergebnis)
+# Ausgabe: Fünf plus zehn ist 15.
+```
+
+## Formatierungsmöglichkeiten
+
+### Zahlenformatierung
+
+- **Dezimalstellen festlegen:**
+
+  ```python
+  pi = 3.14159
+  formatted = f"Pi auf zwei Dezimalstellen: {pi:.2f}"
+  print(formatted)
+  # Ausgabe: Pi auf zwei Dezimalstellen: 3.14
+  ```
+
+- **Ganzzahlen mit führenden Nullen:**
+
+  ```python
+  zahl = 42
+  formatted = f"Die Zahl ist {zahl:05}"
+  print(formatted)
+  # Ausgabe: Die Zahl ist 00042
+  ```
+
+### Zeichenkettenausrichtung
+
+- **Links-, Rechts- und Zentrierte Ausrichtung:**
+
+  ```python
+  text = "Python"
+  links = f"{text:<10}"    # Links ausgerichtet
+  rechts = f"{text:>10}"   # Rechts ausgerichtet
+  mitte = f"{text:^10}"    # Zentriert
+  print(links, rechts, mitte)
+  # Ausgabe: Python    Python    Python   
+  ```
+
+## Mehrzeilige f-Strings
+
+- Verwendung von dreifachen Anführungszeichen für mehrzeilige Strings:
+
+  ```python
+  name = "Bob"
+  alter = 25
+  info = f"""
+  Name: {name}
+  Alter: {alter}
+  """
+  print(info)
+  # Ausgabe:
+  # Name: Bob
+  # Alter: 25
+  ```
+
+## Escaping und Literale
+
+- **Doppelte geschweifte Klammern für Literale:**
+
+  ```python
+  literal = f"{{Dies ist ein Literal}}"
+  print(literal)
+  # Ausgabe: {Dies ist ein Literal}
+  ```
+
+## Debugging mit f-Strings
+
+- **Ausgabe von Variablen und ihren Werten:**
+
+  ```python
+  wert = 100
+  debug = f"{wert=}"
+  print(debug)
+  # Ausgabe: wert=100
+  ```
+
+## Best Practices
+
+- **Verwendung von f-Strings für einfache und lesbare Formatierungen.**
+- **Vermeidung von komplexen Ausdrücken innerhalb der geschweiften Klammern für bessere Lesbarkeit.**
+- **Kombination mit Funktionen und Methoden zur sauberen Strukturierung.**
+
+## Fazit
+
+f-Strings sind eine leistungsstarke und flexible Methode zur String-Formatierung in Python. Sie verbessern die Lesbarkeit und Wartbarkeit des Codes und bieten gleichzeitig eine hohe Performance. Durch die Unterstützung von Ausdrücken und umfangreichen Formatierungsoptionen sind f-Strings ideal für eine Vielzahl von Anwendungsfällen.
+
+
+# Python `unittest` Modul Zusammenfassung
+
+## Einführung in `unittest`
+
+- **`unittest`** ist das standardmäßige Testframework in Python.
+- Es basiert auf dem **xUnit**-Framework und unterstützt automatisiertes Testen von Code.
+- Ermöglicht das Schreiben und Ausführen von **Testfällen**, **Test-Suites** und **Test-Runnern**.
+
+
+Es ist sehr nützlich da man mit `unittest` sich alle Tests die man vertielt hat, 
+
+## Grundkonzepte
+
+### TestCase
+
+- **`TestCase`** ist die Basisklasse für alle Testfälle.
+- Jeder Testfall ist eine Methode innerhalb einer `TestCase`-Unterklasse, die mit `test_` beginnt.
+
+**Beispiel:**
+
+```python
+import unittest
+
+class TestMathe(unittest.TestCase):
+    def test_addition(self):
+        self.assertEqual(1 + 1, 2)
+```
+
+### Testmethoden
+
+- Testmethoden müssen mit `test_` beginnen, damit sie vom Test-Runner erkannt werden.
+- Innerhalb dieser Methoden werden **Assertions** verwendet, um Erwartungen zu überprüfen.
+
+### Assertions
+
+- Methoden zur Überprüfung von Bedingungen.
+- Wichtige Assertions:
+  - `assertEqual(a, b)`: Prüft, ob `a == b`.
+  - `assertNotEqual(a, b)`: Prüft, ob `a != b`.
+  - `assertTrue(x)`: Prüft, ob `x` wahr ist.
+  - `assertFalse(x)`: Prüft, ob `x` falsch ist.
+  - `assertRaises(exception, func, *args, **kwargs)`: Prüft, ob eine Exception ausgelöst wird.
+
+**Beispiel:**
+
+```python
+def test_subtraktion(self):
+    self.assertEqual(5 - 3, 2)
+
+def test_exception(self):
+    with self.assertRaises(ZeroDivisionError):
+        1 / 0
+```
+
+## Test Fixtures
+
+- **Fixtures** sind Setup- und Teardown-Methoden, die vor und nach jedem Test ausgeführt werden.
+- Methoden:
+  - `setUp()`: Wird vor jedem Test ausgeführt.
+  - `tearDown()`: Wird nach jedem Test ausgeführt.
+  - `setUpClass()`: Wird einmal vor allen Tests in der Klasse ausgeführt.
+  - `tearDownClass()`: Wird einmal nach allen Tests in der Klasse ausgeführt.
+
+**Beispiel:**
+
+```python
+class TestDatabase(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.db = DatenbankVerbindung()
+
+    def setUp(self):
+        self.db.start_transaction()
+
+    def tearDown(self):
+        self.db.rollback_transaction()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.db.close()
+```
+
+## Test Suites
+
+- **Test-Suites** gruppieren mehrere Testfälle.
+- Ermöglichen das gleichzeitige Ausführen mehrerer Tests.
+
+**Beispiel:**
+
+```python
+def suite():
+    suite = unittest.TestSuite()
+    suite.addTest(TestMathe('test_addition'))
+    suite.addTest(TestMathe('test_subtraktion'))
+    return suite
+
+if __name__ == '__main__':
+    runner = unittest.TextTestRunner()
+    runner.run(suite())
+```
+
+## Test Runner
+
+- **Test Runner** führt die Tests aus und gibt die Ergebnisse aus.
+- Standardmäßig wird der **TextTestRunner** verwendet, der Ergebnisse in der Konsole anzeigt.
+
+**Ausführen der Tests:**
+
+```bash
+python -m unittest test_module.py
+```
+
+## Organisieren von Tests
+
+- Tests können in separate Dateien und Verzeichnisse organisiert werden.
+- Verwendung von Namenskonventionen (`test_*.py`) erleichtert das Auffinden durch den Test-Runner.
+
+**Beispiel-Verzeichnisstruktur:**
+
+```
+projekt/
+│
+├── modul.py
+├── test_modul.py
+└── tests/
+    ├── __init__.py
+    └── test_andere_modul.py
+```
+
+## Erweiterte Features
+
+### Mocking
+
+- **`unittest.mock`** ermöglicht das Ersetzen von Teilen des Systems unter Test durch Mock-Objekte.
+- Nützlich für das Testen von Komponenten in Isolation.
+
+**Beispiel:**
+
+```python
+from unittest.mock import patch
+
+class TestAPI(unittest.TestCase):
+    @patch('modul.requests.get')
+    def test_api_call(self, mock_get):
+        mock_get.return_value.status_code = 200
+        response = modul.api_call()
+        self.assertEqual(response.status_code, 200)
+```
+
+### Skipping Tests
+
+- Tests können übersprungen werden mit:
+  - `@unittest.skip(reason)`
+  - `@unittest.skipIf(condition, reason)`
+  - `@unittest.skipUnless(condition, reason)`
+
+**Beispiel:**
+
+```python
+@unittest.skip("Wird momentan nicht unterstützt")
+def test_feature(self):
+    pass
+```
+
+## Best Practices
+
+- **Isolierte Tests:** Jeder Test sollte unabhängig von anderen Tests sein.
+- **Aussagekräftige Namen:** Testmethoden sollten klar den getesteten Aspekt beschreiben.
+- **Verwendung von Fixtures:** Gemeinsame Setup-/Teardown-Logik zentralisieren.
+- **Regelmäßiges Ausführen:** Tests sollten häufig ausgeführt werden, z.B. bei jedem Commit.
+
+## Zusammenfassung
+
+- **`unittest`** ist ein leistungsfähiges Framework für automatisierte Tests in Python.
+- Ermöglicht das Schreiben von **Testfällen** mit **Assertions**, **Test Fixtures** zur Vorbereitung und Reinigung sowie **Test Suites** zur Gruppierung von Tests.
+- Unterstützt **Mocking** und das **Überspringen** von Tests für flexible Teststrategien.
+- Förderung von **guter Testpraxis** durch klare Strukturierung und Isolierung von Tests.
+
+# integration test in python
 
 # Aufgaben
 
