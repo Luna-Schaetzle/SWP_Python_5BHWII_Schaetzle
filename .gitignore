@@ -129,6 +129,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+vererbung_venv/
 
 # Spyder project settings
 .spyderproject

@@ -110,10 +110,13 @@ def main():
     "One Pair": 0,
     "High Card": 0
     }
-    draws = int(input("How many draws would you like to simulate? "))
-    hand_size = int(input("How many cards should be in a hand? (Normaly 5)"))
-    collect_statistics(draws, hand_size, combinations_counter)
-    print(f"{draws} draws simulated with {hand_size} cards in a hand.")
+    try:
+        draws = int(input("How many draws would you like to simulate? "))
+        hand_size = int(input("How many cards should be in a hand? (Normaly 5)"))
+        collect_statistics(draws, hand_size, combinations_counter)
+        print(f"{draws} draws simulated with {hand_size} cards in a hand.")
+    except ValueError:
+        print("Please enter a valid number.")
 
 
 # Main function to run the test

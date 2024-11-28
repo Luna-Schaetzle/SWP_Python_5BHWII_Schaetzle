@@ -1539,7 +1539,443 @@ def test_feature(self):
 - Unterstützt **Mocking** und das **Überspringen** von Tests für flexible Teststrategien.
 - Förderung von **guter Testpraxis** durch klare Strukturierung und Isolierung von Tests.
 
-# integration test in python
+
+# Anonyme Funktionen in Python: `lambda`-Ausdrücke
+
+## Einführung in `lambda`-Ausdrücke
+
+Lambda-Ausdrücke sind eine Möglichkeit, **anonyme Funktionen** in Python zu erstellen. Sie sind nützlich für kurze Funktionen, die nur einmal verwendet werden.
+
+## Grundlegende Syntax
+
+```python
+f = lambda x: x * 2
+print(f(3))  # Ausgabe: 6
+```
+
+Es können auch mehrere Argumente verwendet werden:
+
+```python
+g = lambda x, y: x + y
+print(g(2, 3))  # Ausgabe: 5
+```
+
+---
+
+## Unterschied zwischen `def` und `lambda`
+
+### `def` ist eine Anweisung (Statement)
+- Eine Anweisung führt eine **Aktion** aus und hat keinen Wert.
+- Mit `def` wird ein **Objekt vom Typ `function`** erzeugt, die Definition selbst ist jedoch **kein Ausdruck**.
+- Beispiel:
+  ```python
+  def ist_even(x):
+      return x % 2 == 0
+
+  print(ist_even(4))  # Ausgabe: True
+  ```
+  Hier ist die Funktion `ist_even` ein benanntes Objekt, das wiederverwendet werden kann.
+
+---
+
+### `lambda` ist ein Ausdruck (Expression)
+- Ein Ausdruck hat **einen Wert** und kann direkt **ausgewertet** werden.
+- `lambda` kann überall verwendet werden, wo ein **Ausdruck erwartet** wird, z. B. in Funktionen, Schleifen oder anderen Ausdrücken.
+- Beispiel:
+  ```python
+  numbers = [1, 2, 3, 4, 5, 6]
+  even_numbers = list(filter(lambda x: x % 2 == 0, numbers))
+  print(even_numbers)  # Ausgabe: [2, 4, 6]
+  ```
+  Hier wird der `lambda`-Ausdruck direkt innerhalb der `filter`-Funktion verwendet.
+
+---
+
+## Warum `lambda`-Ausdrücke?
+
+- **Kürze:** Kompakte Darstellung von Funktionen.
+- **Einfachheit:** Weniger Code und weniger Ablenkung.
+- **Lesbarkeit:** Bei kurzen Funktionen klar und verständlich.
+- **geringfügige Funktionen:** Ideal für **kurzlebige Funktionen**, z. B. für Transformationen und Filter.
+
+---
+
+## Einschränkungen von `lambda`
+- `lambda` kann nur **einen einzigen Ausdruck** enthalten.
+- Es ist nicht geeignet für komplexere Logik oder mehrere Anweisungen.
+- Beispiel:
+  ```python
+  # Nicht möglich:
+  # lambda x: if x > 0: print(x)  # SyntaxError
+  ```
+
+---
+
+**Zusammenfassung**: `lambda`-Ausdrücke sind nützlich für kurze, einmalige Funktionen, während `def` für längere und komplexere Funktionsdefinitionen verwendet wird. Beide haben ihren Platz in Python und ergänzen sich je nach Anwendungsfall.
+
+
+## `map()` Funktion
+
+Die `map()` Funktion in Python wird verwendet, um eine Funktion auf jedes 
+Element einer iterierbaren Objekt anzuwenden und das Ergebnis als neues 
+iterables zurückzugeben.
+
+#### Syntax
+```python
+map(function, iterable)
+```
+
+- **function**: Die Funktion, die auf jedes Element angewendet werden 
+soll.
+- **iterable**: Ein iterierbares Objekt (z.B. eine Liste, ein Tupel 
+usw.), dessen Elemente mit der Funktion verarbeitet werden.
+
+#### Beispiele
+
+1. **Multiplizieren von Zahlen in einer Liste:**
+   ```python
+   def multiply_by_two(x):
+       return x * 2
+
+   numbers = [1, 2, 3, 4, 5]
+   result = map(multiply_by_two, numbers)
+   print(list(result))  # Output: [2, 4, 6, 8, 10]
+   ```
+
+2. **Umwandeln von Text in Großbuchstaben:**
+   ```python
+   def to_upper(text):
+       return text.upper()
+
+   words = ["hello", "world", "python"]
+   result = map(to_upper, words)
+   print(list(result))  # Output: ['HELLO', 'WORLD', 'PYTHON']
+   ```
+
+3. **Zwei Listen addieren:**
+   ```python
+   def add(a, b):
+       return a + b
+
+   list1 = [1, 2, 3]
+   list2 = [4, 5, 6]
+   result = map(add, list1, list2)
+   print(list(result))  # Output: [5, 7, 9]
+   ```
+
+Wenn die funktion 1 Argument hat dann muss auch eine Iterierbare Objekt angegeben werden. Wenn die Funktion 2 Argumente hat dann müssen auch 2 Iterierbare Objekte angegeben werden.
+
+also bei `map()` wird die Funktion auf jedes Element des Iterierbaren Objekts angewendet und das Ergebnis wird in einem neuen Iterierbaren Objekt zurückgegeben.
+
+### Arten der Funktionen in map()
+
+Es gibt verschiedene Arten von Funktionen, die mit `map()` verwendet werden können:
+- **Benannte Funktionen:** Definierte Funktionen, die auf jedes Element angewendet werden.
+- **Lambda-Funktionen:** Kurze, anonyme Funktionen, die direkt in `map()` verwendet werden können.
+- **Methoden:** Methoden von Objekten können auch auf jedes Element angewendet werden.
+
+#### Hinweise
+- Die `map()` Funktion gibt ein map-Objekt zurück, das durch Iteration 
+durchlaufen werden kann.
+- Es ist wichtig, die Ergebnisse oft in eine Liste oder anderes iterables 
+umzuwandeln, wenn man sie direkt verwenden möchte.
+
+# Python: `filter`-Funktion
+
+Die `filter`-Funktion ist ein eingebautes Werkzeug in Python, das verwendet wird, um Elemente aus einer iterierbaren Datenstruktur (wie Listen, Tupel, Sets etc.) basierend auf einer bestimmten Bedingung zu filtern. Sie arbeitet in Kombination mit einer Funktion, die eine Bedingung definiert.
+
+## Unterschied zwischen `map` und `filter`
+
+- **`map`**: Wird verwendet, um eine Funktion auf jedes Element einer iterierbaren Datenstruktur anzuwenden und die Ergebnisse zurückzugeben.
+- **`filter`**: Wird verwendet, um eine Funktion auf jedes Element einer iterierbaren Datenstruktur anzuwenden und nur die Elemente zurückzugeben, für die die Funktion `True` zurückgibt.
+
+## Syntax:
+```python
+filter(function, iterable)
+```
+
+- **`function`**: Eine Funktion, die auf jedes Element der `iterable` angewendet wird. Sie sollte `True` oder `False` zurückgeben.
+- **`iterable`**: Eine Sammlung von Elementen (z. B. Liste, Tupel, Set), die gefiltert werden soll.
+
+### Rückgabewert:
+Ein **Iterator**, der nur die Elemente enthält, für die die `function` den Wert `True` zurückgibt.
+
+---
+
+## Beispiel 1: Gerade Zahlen filtern
+```python
+# Definieren einer Bedingungsfunktion
+def is_even(number):
+    return number % 2 == 0
+
+# Liste von Zahlen
+numbers = [1, 2, 3, 4, 5, 6]
+
+# Filter anwenden
+even_numbers = filter(is_even, numbers)
+
+# Ergebnis in eine Liste umwandeln
+print(list(even_numbers))  # Ausgabe: [2, 4, 6]
+```
+
+---
+
+## Beispiel 2: Anonyme Funktion mit `lambda`
+Anstatt eine separate Funktion zu definieren, kann man eine `lambda`-Funktion verwenden:
+```python
+numbers = [1, 2, 3, 4, 5, 6]
+
+# Filter mit lambda
+even_numbers = filter(lambda x: x % 2 == 0, numbers)
+
+print(list(even_numbers))  # Ausgabe: [2, 4, 6]
+```
+
+---
+
+## Beispiel 3: Strings filtern
+Filtern von Wörtern, die mit einem bestimmten Buchstaben beginnen:
+```python
+words = ["apple", "banana", "cherry", "date", "apricot"]
+
+# Wörter, die mit 'a' beginnen
+words_starting_with_a = filter(lambda word: word.startswith('a'), words)
+
+print(list(words_starting_with_a))  # Ausgabe: ['apple', 'apricot']
+```
+
+---
+
+## Wichtige Hinweise:
+1. **Iterator-Verhalten**: Die `filter`-Funktion gibt einen Iterator zurück. Um die Ergebnisse anzuzeigen, muss dieser in eine Liste oder ein anderes iterierbares Format umgewandelt werden (z. B. `list()`, `tuple()`).
+2. **Unveränderte Originaldaten**: Die Originaldatenstruktur bleibt unverändert.
+3. **Alternativen**: Für einfache Filteroperationen kann auch List Comprehension verwendet werden:
+   ```python
+   even_numbers = [x for x in numbers if x % 2 == 0]
+   print(even_numbers)  # Ausgabe: [2, 4, 6]
+   ```
+
+
+# zip Funktion in Python
+
+Die Zip funktion in Python kann verwendet werden, um zwei oder mehr Listen, Tupel oder andere Sequenzen zu kombinieren, indem sie Elemente paarweise in einer Liste von Tupeln zusammenfasst. Dies ist besonders
+
+## Syntax
+```python
+zip(iterable1, iterable2, ...)
+```
+
+- **`iterable
+- **`iterable2`**: Eine weitere Sequenz, die kombiniert werden soll.
+
+### Rückgabewert
+
+Ein **Iterator** von Tupeln, wobei das erste Element jedes Iterators zu einem Tupel zusammengefasst wird, das dann das erste Element des Ergebnisses ist.
+
+---
+
+## Beispiel 1: Kombinieren von Listen
+```python
+names = ["Alice", "Bob", "Charlie"]
+ages = [25, 30, 35]
+names_and_ages = zip(names, ages)
+print(list(names_and_ages))  # Ausgabe: [('Alice', 25), ('Bob', 30), ('Charlie', 35)]
+```
+
+## vorteile 
+
+- **Kombination von Daten**: Ermöglicht die Kombination von Daten aus verschiedenen Quellen.
+- **Effizienz**: Spart Speicherplatz, da es nur Tupel von Referenzen auf die ursprünglichen Daten erstellt.
+- **Einfachheit**: Einfache Syntax und Verwendung.
+
+# Virtuelle Umgebungen in Python: `venv`
+
+Virtuelle Umgebungen (venvs) ermöglichen es, Python-Projekte voneinander zu isolieren, sodass jedes Projekt seine eigenen Abhängigkeiten und Bibliotheken hat.
+
+
+Ein virtuelle Umgebung in Python ist ein isolierter Bereich, in dem Python-Pakete installiert werden können, ohne das System-Python oder andere Projekte zu beeinflussen. Dies ermöglicht es, verschiedene Projekte mit unterschiedlichen Paketversionen zu entwickeln, ohne Konflikte zu verursachen.
+
+Es diehnt außerdem zur verbesserung der Sicherheit, da es verhindert, dass Pakete auf Systemebene installiert werden, die möglicherweise das System beeinträchtigen könnten.
+
+
+## Virtuelle Umgebung erstellen
+
+1. **Neue virtuelle Umgebung erstellen**:
+   ```bash
+   python3 -m venv meine_venv
+   ```
+   - `meine_venv` ist der Name der Umgebung (kann beliebig gewählt werden).
+
+2. **Inhalt der virtuellen Umgebung**:
+   - `bin/` (oder `Scripts/` auf Windows): Enthält ausführbare Dateien.
+   - `lib/`: Speichert installierte Pakete.
+
+---
+
+## Virtuelle Umgebung aktivieren
+
+1. **Auf Linux/macOS**:
+   ```bash
+   source meine_venv/bin/activate
+   ```
+2. **Auf Windows**:
+   ```cmd
+   meine_venv\Scripts\activate
+   ```
+
+Nach der Aktivierung siehst du den Namen der Umgebung in deinem Terminal:
+```
+(meine_venv) $
+```
+
+---
+
+## Pakete in der venv installieren
+
+Installiere Abhängigkeiten nur innerhalb der virtuellen Umgebung:
+```bash
+pip install requests
+```
+
+Überprüfen der installierten Pakete:
+```bash
+pip list
+```
+
+---
+
+## Virtuelle Umgebung deaktivieren
+
+Um die virtuelle Umgebung zu verlassen:
+```bash
+deactivate
+```
+
+
+## Beispiel-Skript mit einer venv
+
+1. **Virtuelle Umgebung erstellen und aktivieren**:
+   ```bash
+   python3 -m venv projekt_env
+   source projekt_env/bin/activate
+   ```
+
+2. **Ein Paket installieren**:
+   ```bash
+   pip install flask
+   ```
+
+3. **Ein Python-Skript erstellen**:
+   ```python
+   # app.py
+   from flask import Flask
+   app = Flask(__name__)
+
+   @app.route('/')
+   def home():
+       return "Hello, venv!"
+
+   if __name__ == '__main__':
+       app.run(debug=True)
+   ```
+
+4. **Das Skript ausführen**:
+   ```bash
+   python app.py
+   ```
+
+5. **Virtuelle Umgebung deaktivieren**:
+   ```bash
+   deactivate
+   ```
+---
+
+# Objektorientierte Programmierung (OOP) in Python
+
+Die objektorientierte Programmierung (OOP) ist ein Paradigma, das Programme strukturiert, indem verwandte Eigenschaften und Verhaltensweisen in einzelnen Objekten gebündelt werden. In Python wird OOP durch Klassen und Objekte realisiert.
+
+**Definition einer Klasse:**
+Eine Klasse dient als Blaupause für Objekte. Sie definiert Attribute (Eigenschaften) und Methoden (Verhaltensweisen), die die Objekte besitzen. In Python wird eine Klasse mit dem Schlüsselwort `class` definiert:
+
+```python
+class Hund:
+    def __init__(self, name, alter):
+        self.name = name
+        self.alter = alter
+```
+
+Hierbei ist `__init__` eine spezielle Methode, die als Konstruktor dient und beim Erstellen eines neuen Objekts aufgerufen wird. Das `self`-Argument referenziert die Instanz des Objekts selbst.
+
+**Instanziierung einer Klasse:**
+Um ein Objekt (Instanz) einer Klasse zu erstellen, ruft man die Klasse wie eine Funktion auf:
+
+```python
+mein_hund = Hund("Bello", 3)
+```
+
+Nun kann auf die Attribute und Methoden des Objekts zugegriffen werden:
+
+```python
+print(mein_hund.name)  # Ausgabe: Bello
+print(mein_hund.alter)  # Ausgabe: 3
+```
+
+### Vererbung:
+Python unterstützt die Vererbung, wodurch eine neue Klasse (Kindklasse) Eigenschaften und Methoden einer bestehenden Klasse (Elternklasse) erben kann:
+
+```python
+class Schäferhund(Hund):
+    def __init__(self, name, alter, trainingsstand):
+        super().__init__(name, alter)
+        self.trainingsstand = trainingsstand
+```
+
+Hierbei ruft `super().__init__(name, alter)` den Konstruktor der Elternklasse auf, um die geerbten Attribute zu initialisieren.
+
+#### super() Funktion
+
+Die `super()` Funktion wird verwendet, um auf die Methoden und Attribute der Elternklasse zuzugreifen. Sie wird häufig in der `__init__`-Methode der Kindklasse verwendet, um die Initialisierung der geerbten Attribute zu unterstützen. 
+
+**WICHTIG:** `super()` ìst nur eine Referenz auf die Elternklasse und nicht die Elternklasse selbst.
+
+
+## Einfach- und Mehrfachvererbung
+
+In python kann man anders als in Java auch von mehreren Klassen erben. 
+
+```python
+class A:
+    pass
+
+class B(A):     # B erbt von A -> Einfachvererbung
+    pass
+
+class C(A, B):  # C erbt von A und B in einem schritt -> Mehrfachvererbung
+    pass
+```
+
+
+
+
+
+## die Dunder Methoden
+
+- **`__init__`:** Konstruktor, der beim Erstellen eines Objekts aufgerufen wird.
+- **`__str__`:** Gibt eine lesbare Darstellung des Objekts zurück (z. B. für `print`).
+- **`__repr__`:** Gibt eine unmissverständliche Darstellung des Objekts zurück. also so wie man es eingeben würde. z. B.:
+```python 
+objekt = Hund("Bello", 3)
+print(__repr__) # Ausgabe: Hund("Bello", 3)
+```
+- **`__eq__`:** Definiert die Gleichheit von Objekten (verwendet `==`).
+- **`__lt__`, `__gt__`, `__le__`, `__ge__`: Vergleichsoperatoren.
+- **`__add__`, `__sub__`, `__mul__`, `__truediv__`: Arithmetische Operatoren.
+
+**Zusammenfassung:**
+Die objektorientierte Programmierung in Python ermöglicht es, Programme modular und übersichtlich zu gestalten, indem Daten und Funktionen, die auf diese Daten wirken, in Klassen und Objekten zusammengefasst werden. Dies fördert die Wiederverwendbarkeit und Wartbarkeit des Codes. 
+
+
+
 
 # Aufgaben
 
