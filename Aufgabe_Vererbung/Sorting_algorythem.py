@@ -1,25 +1,31 @@
 import random
 
-
+# Base class for sorting algorithms
 class SortingAlgorithm:
     """Basisklasse für Sortieralgorithmen."""
+    
     def __init__(self, data):
+        # Initialize with data to be sorted
         self.data = data
 
     def sort(self):
         """Sortiermethode, die in Unterklassen implementiert wird."""
+        # Method to be implemented in subclasses
         raise NotImplementedError("Die Sortiermethode muss in der Unterklasse implementiert werden!")
 
     def print_data(self):
         """Gibt die sortierten Daten aus."""
+        # Print the sorted data
         print(self.data)
 
     def is_sorted(self):
         """Überprüft, ob die Daten sortiert sind."""
+        # Check if the data is sorted
         return all(self.data[i] <= self.data[i + 1] for i in range(len(self.data) - 1))
 
     def sort_and_check(self):
         """Sortiert die Daten und überprüft, ob sie korrekt sortiert sind."""
+        # Sort the data and check if it is sorted
         sorted_data = self.sort()
         if not self.is_sorted():
             print("Sorting failed")
@@ -27,13 +33,14 @@ class SortingAlgorithm:
             print("Sorting successful")
         return sorted_data
 
-
+# Implementation of Stalin Sort
 class StalinSort(SortingAlgorithm):
     """Implementierung von Stalin Sort."""
+    
     def __init__(self, data):
         super().__init__(data)
 
-    def sort(self):
+    def sort(self): # Stalin Sort takes the first element and then checks if the next element is greater than the previous one. If it is, it is added to the sorted list. If not, it is removed. 
         if not self.data:
             return []
         sorted_data = [self.data[0]]
@@ -45,9 +52,10 @@ class StalinSort(SortingAlgorithm):
         self.data = sorted_data
         return self.data
 
-
+# Implementation of Bubble Sort
 class BubbleSort(SortingAlgorithm):
     """Implementierung von Bubble Sort."""
+    
     def sort(self):
         n = len(self.data)
         for i in range(n):
@@ -56,9 +64,10 @@ class BubbleSort(SortingAlgorithm):
                     self.data[j], self.data[j + 1] = self.data[j + 1], self.data[j]
         return self.data
 
-
+# Implementation of Quick Sort
 class QuickSort(SortingAlgorithm):
     """Implementierung von Quick Sort."""
+    
     def sort(self):
         self.data = self.quick_sort(self.data)
         return self.data
@@ -72,7 +81,7 @@ class QuickSort(SortingAlgorithm):
         right = [x for x in data if x > pivot]
         return self.quick_sort(left) + middle + self.quick_sort(right)
 
-
+# Implementation of Bogo Sort
 class BogoSort(SortingAlgorithm):
     """Implementierung von Bogo Sort."""
     iterations = 0
@@ -85,10 +94,10 @@ class BogoSort(SortingAlgorithm):
         print(f"Sorting took {self.iterations} iterations")
         return self.data
 
-
+# Test function for BogoSort
 def BogoSortTest():
     data = [3, 2, 1, 5, 4]
-    #the mission is to find how many times you need to execute the BogoSort to get the sorted list by the first time ()
+    # The mission is to find how many times you need to execute the BogoSort to get the sorted list by the first time
     times = 0
     while True:
         bogo_sort = BogoSort(data.copy())
@@ -98,8 +107,7 @@ def BogoSortTest():
             break
     print(f"Sorting took {times} times to get the sorted list by the first time")
 
-
-# Test
+# Main function to test all sorting algorithms
 def main():
     data = [3, 2, 1, 5, 4]
 
@@ -123,7 +131,6 @@ def main():
     bogo_sort.sort_and_check()
     bogo_sort.print_data()
 
-
 if __name__ == "__main__":
     main()
-    #BogoSortTest()
+    # BogoSortTest()

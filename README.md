@@ -1973,6 +1973,137 @@ print(__repr__) # Ausgabe: Hund("Bello", 3)
 Die objektorientierte Programmierung in Python ermöglicht es, Programme modular und übersichtlich zu gestalten, indem Daten und Funktionen, die auf diese Daten wirken, in Klassen und Objekten zusammengefasst werden. Dies fördert die Wiederverwendbarkeit und Wartbarkeit des Codes. 
 
 
+## **MRO (Method Resolution Order)**
+
+- **MRO** (Method Resolution Order) ist der Algorithmus, den Python verwendet, um die Reihenfolge zu bestimmen, in der Methoden und Attribute in einer Klassenhierarchie aufgelöst werden, insbesondere bei Mehrfachvererbung.
+- Die MRO gibt an, welche Klasse zuerst durchsucht wird, wenn eine Methode oder ein Attribut angefordert wird.
+
+### **Funktionsweise**
+MRO definiert die Reihenfolge der Klassen, die durchsucht werden, wenn auf eine Methode oder ein Attribut zugegriffen wird. Python verwendet dazu den **C3-Linearisierungsalgorithmus**, um sicherzustellen, dass die Reihenfolge konsistent ist und Konflikte in Mehrfachvererbungen vermieden werden.
+
+### **Beispiel: MRO in Aktion**
+
+```python
+class A:
+    pass
+
+class B(A):
+    pass
+
+class C(A):
+    pass
+
+class D(B, C):
+    pass
+
+# MRO anzeigen
+print(D.mro())
+```
+
+In diesem Beispiel ist die **MRO** für die Klasse `D`:
+```plaintext
+[<class '__main__.D'>, <class '__main__.B'>, <class '__main__.C'>, <class '__main__.A'>, <class 'object'>]
+```
+
+Das bedeutet:
+1. Zuerst wird in `D` gesucht.
+2. Falls nicht gefunden, wird `B` durchsucht.
+3. Danach wird `C` durchsucht.
+4. Schließlich wird `A` und zuletzt die Basisklasse `object` durchsucht.
+
+### **MRO und `super()`**
+- Die Methode `super()` ruft die nächste Klasse in der MRO auf.
+- Dadurch wird die Reihenfolge der MRO eingehalten, auch wenn Mehrfachvererbung verwendet wird.
+
+### **Anzeige der MRO**
+Die MRO einer Klasse kann auf zwei Arten angezeigt werden:
+1. **Mit der Methode `mro()`:**
+   ```python
+   print(D.mro())
+   ```
+2. **Mit der Funktion `help()`:**
+   ```python
+   help(D)
+   ```
+
+---
+
+## **Proxies**
+
+Ein **Proxy** ist eine Zwischenschicht zwischen einem Client (z. B. einem Nutzer oder einer Anwendung) und einem Objekt. Der Proxy kann verwendet werden, um den Zugriff auf das Objekt zu kontrollieren oder zusätzliche Funktionalität hinzuzufügen.
+
+### **Beispiel: Proxy-Klasse**
+
+```python
+class Proxy:
+    def __init__(self, obj):
+        self._obj = obj  # Referenz auf das echte Objekt
+
+    def __getattr__(self, name):
+        # Zugriff auf Attribute des echten Objekts
+        return getattr(self._obj, name)
+
+    def __setattr__(self, name, value):
+        if name.startswith('_'):  # Schutz für interne Attribute
+            super().__setattr__(name, value)
+        else:
+            # Setzen von Attributen des echten Objekts
+            setattr(self._obj, name, value)
+```
+
+### **Erklärung des Codes**
+1. **`__init__`**:
+   - Speichert eine Referenz auf das "echte" Objekt im Proxy.
+
+2. **`__getattr__`**:
+   - Leitet alle Attributzugriffe, die nicht auf dem Proxy definiert sind, an das echte Objekt weiter.
+
+3. **`__setattr__`**:
+   - Kontrolliert, wie Attribute auf dem echten Objekt gesetzt werden:
+     - Interne Attribute (`_obj`) werden direkt im Proxy gespeichert.
+     - Andere Attribute werden auf dem echten Objekt gespeichert.
+
+### **Anwendungsbeispiel**
+```python
+class RealObject:
+    def __init__(self):
+        self.value = 42
+
+    def show_value(self):
+        print(f"Value is {self.value}")
+
+# Proxy verwenden
+real = RealObject()
+proxy = Proxy(real)
+
+proxy.show_value()  # Zugriff über den Proxy
+proxy.value = 100   # Ändert das Attribut im echten Objekt
+proxy.show_value()
+```
+
+### **Anwendung von Proxies**
+- **Zugriffskontrolle**: Einschränkung oder Erlaubnis des Zugriffs auf bestimmte Methoden oder Attribute.
+- **Logging**: Protokollierung von Attributänderungen oder Methodenaufrufen.
+- **Caching**: Zwischenspeicherung von häufig genutzten Daten, um die Leistung zu verbessern.
+- **Lazy Initialization**: Verzögerte Initialisierung eines Objekts, bis es tatsächlich benötigt wird.
+
+---
+
+## **Zusammenfassung**
+
+### **MRO**
+- **Definition**: Reihenfolge, in der Python nach Methoden oder Attributen in einer Klassenhierarchie sucht.
+- **Verwendung**: Bestimmt durch den C3-Linearisierungsalgorithmus.
+- **Tools**: `mro()` oder `help()` zur Anzeige.
+
+### **Proxies**
+- **Definition**: Ein Proxy ist ein Wrapper für ein Objekt, der den Zugriff darauf kontrolliert.
+- **Nutzen**:
+  - Logging.
+  - Zugriffskontrolle.
+  - Zwischenspeicherung (Caching).
+  - Lazy Initialization.
+- **Beispiel**: Verwenden von `__getattr__` und `__setattr__`, um Attribute an das echte Objekt weiterzuleiten.
 
 
 # Aufgaben
