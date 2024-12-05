@@ -30,6 +30,9 @@ class SortingAlgorithm:
 
 class StalinSort(SortingAlgorithm):
     """Implementierung von Stalin Sort."""
+    def __init__(self, data):
+        super().__init__(data)
+
     def sort(self):
         if not self.data:
             return []
@@ -83,6 +86,19 @@ class BogoSort(SortingAlgorithm):
         return self.data
 
 
+def BogoSortTest():
+    data = [3, 2, 1, 5, 4]
+    #the mission is to find how many times you need to execute the BogoSort to get the sorted list by the first time ()
+    times = 0
+    while True:
+        bogo_sort = BogoSort(data.copy())
+        bogo_sort.sort_and_check()
+        times += 1
+        if bogo_sort.iterations == 1:
+            break
+    print(f"Sorting took {times} times to get the sorted list by the first time")
+
+
 # Test
 def main():
     data = [3, 2, 1, 5, 4]
@@ -110,3 +126,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    #BogoSortTest()
