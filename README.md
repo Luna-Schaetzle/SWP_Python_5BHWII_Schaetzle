@@ -1956,8 +1956,6 @@ class C(A, B):  # C erbt von A und B in einem schritt -> Mehrfachvererbung
 
 
 
-
-
 ## die Dunder Methoden
 
 - **`__init__`:** Konstruktor, der beim Erstellen eines Objekts aufgerufen wird.
