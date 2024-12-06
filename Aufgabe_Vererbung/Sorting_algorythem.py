@@ -1,4 +1,8 @@
 import random
+import ollama
+import time
+import threading
+import json
 
 # Base class for sorting algorithms
 class SortingAlgorithm:
@@ -107,9 +111,101 @@ def BogoSortTest():
             break
     print(f"Sorting took {times} times to get the sorted list by the first time")
 
+# Mirecal sort
+# The mission is to implement a sorting algorithm that only relies on the power of beliving that the list is sorted or somhow gets sorted by itself by the power of the universe
+class MirecalSort(SortingAlgorithm):
+    """Implementierung von Mirecal Sort."""
+    
+    def __init__(self, data):
+        super().__init__(data)
+
+    def sort(self):
+        sorted_data = self.data
+        return sorted_data
+
+import json  # Zum Parsen der API-Antwort
+
+class AISort(SortingAlgorithm):
+    """Implementierung von AI Sort mit externer AI."""
+
+    def __init__(self, data):
+        super().__init__(data)
+
+    def sort(self):
+        try:
+            # Anfrage an die AI-API
+            response = ollama.chat(model='llama3.2:1b', messages=[
+                {'role': 'user', 'content': (
+                    'Only Reply With the Sorted List NOT WITH MORE INFORMATION ONLY THE SORTED LIST '
+                    '(Gib die Liste in Folgendem Format [1, 2, 3]) Sort the list: ' + str(self.data)
+                )}
+            ])
+            
+            # Antwort der AI lesen
+            sorted_data = response['message']['content']
+            print(f"AI Sort Response (Raw): {sorted_data}")
+
+            # Entfernen von unerwünschten Zeichen oder Text (falls AI mehr Informationen liefert)
+            sorted_data_cleaned = ''.join(filter(lambda x: x in '0123456789[], ', sorted_data))
+            print(f"AI Sort Response (Cleaned): {sorted_data_cleaned}")
+            
+            # Versuch, die bereinigte Antwort in eine Liste umzuwandeln
+            sorted_data = json.loads(sorted_data_cleaned)
+            
+            # Validierung der sortierten Liste
+            if isinstance(sorted_data, list) and sorted(sorted_data) == sorted_data:
+                return sorted_data
+            else:
+                raise ValueError("AI returned an invalid or incorrectly sorted list.")
+        
+        except json.JSONDecodeError:
+            print("AI Sort Error: Could not parse AI response as a list.")
+            return self.data  # Rückgabe der unsortierten Liste im Fehlerfall
+        except Exception as e:
+            print(f"AI Sort Error: {e}")
+            return self.data  # Rückgabe der unsortierten Liste im Fehlerfall
+
+
+# Sleep sort
+# The mission is to implement a sorting algorithm that uses the power of sleep to sort the list 
+# It sleeps for the time of the element and then adds it to the sorted list
+class SleepSort:
+    """Implementierung von Sleep Sort mit Threads."""
+
+    def __init__(self, data):
+        self.data = data
+        self.sorted_data = []  # Synchronisierte Liste für das Ergebnis
+        self.lock = threading.Lock()  # Lock für den Thread-Safe-Zugriff
+
+    def _sleep_and_append(self, value):
+        """Hilfsfunktion: Schlafen und Wert zur Liste hinzufügen."""
+        # Skalierung der Schlafzeit, um zu lange Wartezeiten zu vermeiden
+        # Hier multiplizieren wir mit 0.01, um die Schlafzeit in Sekunden zu halten
+        scaled_sleep_time = value * 0.01  
+        time.sleep(scaled_sleep_time)  # Zeit basiert auf dem Wert
+        with self.lock:  # Zugriff auf die Liste sichern
+            self.sorted_data.append(value)
+
+    def sort(self):
+        threads = []
+        for element in self.data:
+            if element < 0:
+                raise ValueError("Sleep Sort funktioniert nur mit positiven Zahlen.")
+            thread = threading.Thread(target=self._sleep_and_append, args=(element,))
+            threads.append(thread)
+            thread.start()
+
+        # Warten auf alle Threads
+        for thread in threads:
+            thread.join()
+
+        # Liste sollte jetzt sortiert sein
+        return self.sorted_data
+    
+
 # Main function to test all sorting algorithms
 def main():
-    data = [3, 2, 1, 5, 4]
+    data = [3, 2, 1, 5, 4, 10, 30]
 
     print("\nStalin Sort")
     stalin_sort = StalinSort(data.copy())
@@ -130,6 +226,23 @@ def main():
     bogo_sort = BogoSort(data.copy())
     bogo_sort.sort_and_check()
     bogo_sort.print_data()
+
+    print("\nMirecal Sort")
+    mirecal_sort = MirecalSort(data.copy())
+    mirecal_sort.sort_and_check()
+    mirecal_sort.print_data()
+
+    print("\nAI Sort")
+    ai_sort = AISort(data.copy())
+    sorted_data = ai_sort.sort()
+    print(f"Final Sorted Data: {sorted_data}")
+    print(f"AI might have sorted the list by the power of the universe, it also might have dreamed of electric sheeps")
+
+
+    print("\nSleepSort")
+    sorter = SleepSort(data.copy())
+    sorted_list = sorter.sort()
+    print("Sortiert:", sorted_list)
 
 if __name__ == "__main__":
     main()
