@@ -1,0 +1,18 @@
+// UML Diagramm der Klassen
+digraph {
+	graph [dpi=500 fontname=Helvetica fontsize=12 nodesep=1 rankdir=LR ranksep=2 splines=true]
+	node [color="#333333" fillcolor="#f9f9f9" fontname=Helvetica fontsize=10 shape=record style="filled,rounded"]
+	edge [color="#555555" fontname=Helvetica fontsize=9]
+	Person [label="{ Person | + name: str\l+ age: int\l+ gender: str | + __init__(name, age, gender)\l+ show() \l }}" fillcolor="#AED6F1"]
+	Employee [label="{ Employee | + department: str | + __init__(name, age, gender, department)\l+ show() \l }}" fillcolor="#A3E4D7"]
+	HeadOfDepartment [label="{ HeadOfDepartment |  | + __init__(name, age, gender, department)\l+ show() \l }}" fillcolor="#F9E79F"]
+	Department [label="{ Department | + name: str\l+ employees: List[Employee]\l+ head_of_department: HeadOfDepartment | + __init__(name, head_of_department)\l+ show() \l }}" fillcolor="#F5B7B1"]
+	Company [label="{ Company | + name: str\l+ departments: List[Department] | + __init__(name)\l+ add_department(department)\l+ add_employee(department, employee)\l+ add_head_of_department(department, head_of_department)\l+ show_Departments()\l+ show_Employees()\l+ show_HeadOfDepartments()\l+ show_biggest_department()\l+ show_gender_equalety_percentage()\l+ _get_all_employees()\l+ _count_genders(employees)\l+ _print_gender_percentage(gender_count, total_employees) \l }}" fillcolor="#D2B4DE"]
+	main [label="{ main |  | + main() \l }}" fillcolor="#F7DC6F"]
+	Employee -> Person [arrowhead=onormal color="#1F618D" style=solid]
+	HeadOfDepartment -> Employee [arrowhead=onormal color="#1F618D" style=solid]
+	Department -> HeadOfDepartment [label=has arrowhead=vee color="#117A65" style=dashed]
+	Department -> Employee [label=has arrowhead=vee color="#117A65" style=dashed]
+	Company -> Department [label=contains arrowhead=vee color="#117A65" style=dashed]
+	main -> Company [label=uses arrowhead=vee color="#AF7AC5" style=dotted]
+}
