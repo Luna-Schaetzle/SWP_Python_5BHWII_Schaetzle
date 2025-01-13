@@ -2106,6 +2106,28 @@ proxy.show_value()
 - **Beispiel**: Verwenden von `__getattr__` und `__setattr__`, um Attribute an das echte Objekt weiterzuleiten.
 
 
+# Fehlerbehandlung
+
+## Zwei arten von Strategien
+
+### LBYL (Look Before You Leap)
+
+Bei dieser Methode verwenden wir if else Bedingungen, um zu überprüfen, ob eine Operation sicher ausgeführt werden kann, bevor sie tatsächlich ausgeführt wird. Dies bedeutet, dass wir vor dem Ausführen einer Operation prüfen, ob sie erfolgreich sein wird.
+
+### EAFP (Easier to Ask for Forgiveness than Permission)
+
+Bei dieser Methode gehen wir davon aus, dass die Operation erfolgreich sein wird, und fangen Ausnahmen ab, wenn sie auftreten. Dies bedeutet, dass wir die Operation einfach ausführen und im Fehlerfall darauf reagieren.
+
+## Zwei Arten von Fehlern
+
+### neue errors
+
+### hoch"geblubberte" errors
+
+
+
+
+
 # Aufgaben
 
 ## Erste Aufgabe: Lottoziehung

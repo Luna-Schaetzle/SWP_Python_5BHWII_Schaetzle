@@ -1,13 +1,21 @@
 from faker import Faker
+from enum import Enum
+import sys
+
+class Gender(Enum):
+    MALE = "male"
+    FEMALE = "female"
+    NON_BINARY = "non-binary"
+    OTHER = "other"
 
 class Person:
     def __init__(self, name, age, gender):
         self.name = name
         self.age = age
-        self.gender = gender
+        self.gender = Gender(gender)
 
     def show(self):
-        print(f'Name: {self.name}, Age: {self.age}, Gender: {self.gender}')
+        print(f'Name: {self.name}, Age: {self.age}, Gender: {self.gender.value}')
 
 class Employee(Person):
     def __init__(self, name, age, gender, department):
@@ -63,6 +71,17 @@ class Company:
         for department in self.departments:
             department.head_of_department.show()
     
+    def show_number_of_employees(self):
+        all_employees = self._get_all_employees()
+        print(f'Number of employees: {len(all_employees)}')
+    
+    def show_number_of_heads_of_departments(self):
+        number_of_heads = 0
+        for department in self.departments:
+            if department.head_of_department is not None:
+                number_of_heads += 1
+        print(f'Number of heads of departments: {number_of_heads}')
+    
     def show_biggest_department(self):
         biggest_department = self.departments[0]
         for department in self.departments:
@@ -78,17 +97,16 @@ class Company:
     def _get_all_employees(self):
         all_employees = []
         for department in self.departments:
-            all_employees += department.employees
-            all_employees.append(department.head_of_department)
+            if department.head_of_department is not None:
+                all_employees.append(department.head_of_department)
+            if department.employees:
+                all_employees.extend(department.employees)  
         return all_employees
 
     def _count_genders(self, employees):
-        gender_count = {'male': 0, 'female': 0, 'other': 0}
+        gender_count = {gender: 0 for gender in Gender}
         for employee in employees:
-            if employee.gender.lower() in gender_count:
-                gender_count[employee.gender.lower()] += 1
-            else:
-                gender_count['other'] += 1
+            gender_count[employee.gender] += 1
         return gender_count
 
     def _print_gender_percentage(self, gender_count, total_employees):
@@ -98,7 +116,7 @@ class Company:
         
         for gender, count in gender_count.items():
             percentage = (count / total_employees) * 100
-            print(f'{gender.capitalize()} employees: {percentage:.2f}%')
+            print(f'{gender.value.capitalize()} employees: {percentage:.2f}%')
 
 # A few test cases in the main 
 
@@ -107,12 +125,11 @@ def main():
 
     # Create a company
     company = Company("Tech Solutions")
-
     # Create departments with heads
-    it_department = Department("IT", HeadOfDepartment(fake.name(), fake.random_int(min=30, max=60), fake.random_element(elements=["male", "female", "non-binary"]), "IT"))
-    hr_department = Department("HR", HeadOfDepartment(fake.name(), fake.random_int(min=30, max=60), fake.random_element(elements=["male", "female", "non-binary"]), "HR"))
-    sales_department = Department("Sales", HeadOfDepartment(fake.name(), fake.random_int(min=30, max=60), fake.random_element(elements=["male", "female", "non-binary"]), "Sales"))
-    finance_department = Department("Finance", HeadOfDepartment(fake.name(), fake.random_int(min=30, max=60), fake.random_element(elements=["male", "female", "non-binary"]), "Finance"))
+    it_department = Department("IT", HeadOfDepartment(fake.name(), fake.random_int(min=30, max=60), fake.random_element(elements=[Gender.MALE, Gender.FEMALE, Gender.NON_BINARY]), "IT"))
+    hr_department = Department("HR", HeadOfDepartment(fake.name(), fake.random_int(min=30, max=60), fake.random_element(elements=[Gender.MALE, Gender.FEMALE, Gender.NON_BINARY]), "HR"))
+    sales_department = Department("Sales", HeadOfDepartment(fake.name(), fake.random_int(min=30, max=60), fake.random_element(elements=[Gender.MALE, Gender.FEMALE, Gender.NON_BINARY]), "Sales"))
+    finance_department = Department("Finance", HeadOfDepartment(fake.name(), fake.random_int(min=30, max=60), fake.random_element(elements=[Gender.MALE, Gender.FEMALE, Gender.NON_BINARY]), "Finance"))
 
     # Add departments to the company
     company.add_department(it_department)
@@ -122,22 +139,22 @@ def main():
 
     # Add employees to IT department
     for _ in range(15):
-        employee = Employee(fake.name(), fake.random_int(min=20, max=50), fake.random_element(elements=["male", "female", "non-binary"]), "IT")
+        employee = Employee(fake.name(), fake.random_int(min=20, max=50), fake.random_element(elements=[Gender.MALE, Gender.FEMALE, Gender.NON_BINARY]), "IT")
         company.add_employee(it_department, employee)
 
     # Add employees to HR department
     for _ in range(12):
-        employee = Employee(fake.name(), fake.random_int(min=20, max=50), fake.random_element(elements=["male", "female", "non-binary"]), "HR")
+        employee = Employee(fake.name(), fake.random_int(min=20, max=50), fake.random_element(elements=[Gender.MALE, Gender.FEMALE, Gender.NON_BINARY]), "HR")
         company.add_employee(hr_department, employee)
 
     # Add employees to Sales department
     for _ in range(20):
-        employee = Employee(fake.name(), fake.random_int(min=20, max=50), fake.random_element(elements=["male", "female", "non-binary"]), "Sales")
+        employee = Employee(fake.name(), fake.random_int(min=20, max=50), fake.random_element(elements=[Gender.MALE, Gender.FEMALE, Gender.NON_BINARY]), "Sales")
         company.add_employee(sales_department, employee)
 
     # Add employees to Finance department
     for _ in range(10):
-        employee = Employee(fake.name(), fake.random_int(min=20, max=50), fake.random_element(elements=["male", "female", "non-binary"]), "Finance")
+        employee = Employee(fake.name(), fake.random_int(min=20, max=50), fake.random_element(elements=[Gender.MALE, Gender.FEMALE, Gender.NON_BINARY]), "Finance")
         company.add_employee(finance_department, employee)
 
     # Show all departments
@@ -152,6 +169,14 @@ def main():
     print("\nHeads of Departments:")
     company.show_HeadOfDepartments()
 
+    print("\nStatistics:")
+
+    # Show number of employees
+    company.show_number_of_employees()
+
+    # Show number of heads of departments
+    company.show_number_of_heads_of_departments()
+
     # Show the biggest department
     print("\nBiggest Department:")
     company.show_biggest_department()
@@ -161,4 +186,8 @@ def main():
     company.show_gender_equalety_percentage()
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        sys.exit(1)
