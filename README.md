@@ -2105,28 +2105,249 @@ proxy.show_value()
   - Lazy Initialization.
 - **Beispiel**: Verwenden von `__getattr__` und `__setattr__`, um Attribute an das echte Objekt weiterzuleiten.
 
+---
 
-# Fehlerbehandlung
+# Einführung in Python-Module und -Pakete
 
-## Zwei arten von Strategien
+Basis Artikel: "[Python Modules and Packages – An Introduction](https://realpython.com/python-modules-packages/)" von Real Python 
 
-### LBYL (Look Before You Leap)
+## Was ist ein Modul?
+- Ein **Modul** ist eine einzelne Python-Datei mit der Endung `.py`, die Python-Code enthält. Module helfen dabei, Funktionen, Klassen und Variablen zu organisieren.
+- Vorteile der Verwendung von Modulen:
+  - Erhöhte Lesbarkeit und Wartbarkeit.
+  - Ermöglicht die Wiederverwendung von Code.
+  - Bietet eine klare Trennung des Namensraums.
 
-Bei dieser Methode verwenden wir if else Bedingungen, um zu überprüfen, ob eine Operation sicher ausgeführt werden kann, bevor sie tatsächlich ausgeführt wird. Dies bedeutet, dass wir vor dem Ausführen einer Operation prüfen, ob sie erfolgreich sein wird.
+### Importieren von Modulen
+- Module können mit der `import`-Anweisung in andere Python-Skripte eingebunden werden:
+  ```python
+  import modulname
+  ```
+- Beispiele für verschiedene Importmethoden:
+  - Importieren des gesamten Moduls:
+    ```python
+    import math
+    print(math.sqrt(16))  # Ausgabe: 4.0
+    ```
+  - Importieren einer spezifischen Funktion oder Variable:
+    ```python
+    from math import sqrt
+    print(sqrt(16))  # Ausgabe: 4.0
+    ```
+  - Verwenden eines Alias:
+    ```python
+    import math as m
+    print(m.sqrt(16))  # Ausgabe: 4.0
+    ```
+  - Importieren aller Inhalte eines Moduls (nicht empfohlen):
+    ```python
+    from math import *
+    ```
 
-### EAFP (Easier to Ask for Forgiveness than Permission)
+## Modul-Suchpfad
+- Python sucht Module anhand des Modul-Suchpfads, der in der Liste `sys.path` definiert ist.
+- Standardmäßig enthält `sys.path` folgende Pfade:
+  - Das Verzeichnis des aktuellen Skripts.
+  - Standardmodule von Python.
+  - Benutzerdefinierte Module in angegebenen Pfaden.
 
-Bei dieser Methode gehen wir davon aus, dass die Operation erfolgreich sein wird, und fangen Ausnahmen ab, wenn sie auftreten. Dies bedeutet, dass wir die Operation einfach ausführen und im Fehlerfall darauf reagieren.
+### Anpassung des Modul-Suchpfads
+- Der Suchpfad kann dynamisch angepasst werden:
+  ```python
+  import sys
+  sys.path.append('/pfad/zum/modul')
+  ```
 
-## Zwei Arten von Fehlern
+## Wichtige Funktionen für Module
+- **`dir()`**: Listet alle Attribute und Methoden eines Moduls auf.
+  ```python
+  import math
+  print(dir(math))
+  ```
+- **`__name__`**: Gibt an, ob ein Modul direkt ausgeführt oder importiert wurde.
+  ```python
+  if __name__ == '__main__':
+      print("Dieses Modul wurde direkt ausgeführt.")
+  ```
 
-### neue errors
+## Pakete in Python
+- Ein **Paket** ist ein Verzeichnis, das mehrere Module enthält und durch eine Datei namens `__init__.py` gekennzeichnet ist.
+- Pakete erlauben die hierarchische Organisation von Modulen.
 
-### hoch"geblubberte" errors
+### Erstellen eines Pakets
+1. Struktur eines einfachen Pakets:
+   ```
+   mein_paket/
+       __init__.py
+       modul1.py
+       modul2.py
+   ```
+2. Beispiel für den Import eines Moduls aus einem Paket:
+   ```python
+   from mein_paket import modul1
+   modul1.meine_funktion()
+   ```
+
+### Initialisierung eines Pakets
+- Die `__init__.py`-Datei wird ausgeführt, wenn ein Paket importiert wird. Sie kann verwendet werden, um:
+  - Module vorzuladen.
+  - Globale Variablen oder Funktionen zu definieren.
+  - Die `__all__`-Liste zu erstellen, um festzulegen, welche Module exportiert werden sollen.
+
+### Unterpakete
+- Pakete können weitere Pakete enthalten, die als **Unterpakete** bezeichnet werden:
+  ```
+  mein_paket/
+      __init__.py
+      unterpaket/
+          __init__.py
+          modul3.py
+  ```
+
+## Häufig verwendete Praktiken
+- **Wiederladen eines Moduls**: Während der Entwicklung kann ein Modul mit `importlib.reload()` neu geladen werden:
+  ```python
+  import importlib
+  importlib.reload(modulname)
+  ```
+- **Verwendung von `__all__`**: Definiert in `__init__.py`, um zu kontrollieren, welche Module mit `from paket import *` importiert werden.
+  ```python
+  __all__ = ['modul1', 'modul2']
+  ```
+
+## Fazit
+- Die Modularisierung in Python durch Module und Pakete ermöglicht:
+  - **Bessere Organisation**: Code wird in logisch getrennte Einheiten unterteilt.
+  - **Wiederverwendbarkeit**: Gemeinsamer Code kann in mehreren Projekten genutzt werden.
+  - **Einfachere Wartung**: Änderungen in einem Modul wirken sich nicht direkt auf andere Module aus.
+  - **Namensraumtrennung**: Konflikte durch identische Namen in verschiedenen Modulen werden vermieden.
+
+---
+
+# Fehlerbehandlung in Python
+
+## Strategien der Fehlerbehandlung
+
+### 1. **LBYL (Look Before You Leap)**
+- Bedeutung: Prüfen, bevor gehandelt wird.
+- Ansatz: `if-else`-Strukturen werden verwendet, um potenzielle Fehler zu vermeiden.
+- Beispiel:
+  ```python
+  if os.path.exists('file.txt'):
+      with open('file.txt') as file:
+          content = file.read()
+  else:
+      print("Die Datei existiert nicht.")
+  ```
+
+### 2. **EAFP (Easier to Ask Forgiveness than Permission)**
+- Bedeutung: Handeln und bei Fehlern korrigieren.
+- Ansatz: Verwendung von `try-except`-Blöcken.
+- Beispiel:
+  ```python
+  try:
+      with open('file.txt') as file:
+          content = file.read()
+  except FileNotFoundError:
+      print("Die Datei existiert nicht.")
+  ```
+
+## Arten von Fehlern
+
+### 1. **Neue Fehler**
+- Beschreibung: Fehler werden erkannt und ein neuer Fehler wird erzeugt.
+- Beispiel: Ein nicht vorhandener Wert wird als Fehler gemeldet.
+
+### 2. **Hochgeblubberte Fehler**
+- Beschreibung: Fehler, die in einer aufgerufenen Funktion auftreten und weitergereicht werden.
+
+## Arten von Fehlerbehebungen
+
+### 1. **Behebbare Fehler**
+- Fehler können im Code sinnvoll behandelt und gelöst werden.
+
+### 2. **Nicht behebbare Fehler**
+- Fehler, die nicht gelöst werden können und daher weitergegeben werden müssen.
+
+## Kombinationen von Fehlern
+
+### a) **Neuer Fehler & Behebbar**
+- Der Fehler wird erkannt und behandelt.
+- Beispiel:
+  ```python
+  def add_song_to_database(song):
+      if song.year is None:
+          song.year = 'Unknown'  # Standardwert setzen
+  ```
+
+### b) **Hochgeblubberter Fehler & Behebbar**
+- Ein Fehler von einer aufgerufenen Funktion wird abgefangen und behandelt.
+- Beispiel:
+  ```python
+  def add_song_to_database(song):
+      try:
+          artist = get_artist_from_database(song.artist)
+      except NotFound:
+          artist = add_artist_to_database(song.artist)  # Fehler beheben
+  ```
+
+### c) **Neuer Fehler & Nicht behebar**
+- Ein Fehler wird erkannt, kann aber nicht gelöst werden, sodass ein neuer Fehler erzeugt wird.
+- Beispiel:
+  ```python
+  def add_song_to_database(song):
+      if song.name is None:
+          raise ValueError('The song must have a name')  # Fehler werfen
+  ```
+
+### d) **Hochgeblubberter Fehler & Nicht behebar**
+- Ein Fehler tritt auf und wird nicht behandelt. Er wird an die nächsthöhere Ebene weitergereicht.
+- Beispiel:
+  ```python
+  def new_song():
+      song = get_song_from_user()
+      add_song_to_database(song)  # Fehler wird nicht behandelt
+  ```
+
+
+## Umgang mit nicht behebbarem Fehler
+
+### Warum keine Behandlung?
+- Fehler, die nicht gelöst werden können, sollten nicht gefangen werden.
+- Beispiel: In einer Web-App sind `print`-Statements nicht hilfreich.
+- **Hoffnung:** Die nächsthöhere Ebene kann den Fehler behandeln.
+
+### Beispiel für CLI-Anwendung:
+- Ziel: Die Applikation soll mit einem definierten Fehlercode terminieren und nicht abstürzen.
+- Beispiel:
+  ```python
+  import sys
+
+  def my_cli():
+      # Anwendungscode
+      pass
+
+  if __name__ == '__main__':
+      try:
+          my_cli()
+      except Exception as error:
+          print(f"Unexpected error: {error}")
+          sys.exit(1)
+  ```
+- **Vorteil:** Die aufrufende Instanz (z. B. ein Bash-Skript) wird informiert, dass ein Fehler aufgetreten ist, aber die Anwendung nicht gecrasht ist.
+
+
+## Zusammenfassung
+
+- **LBYL**: Fehler vermeiden durch vorherige Prüfungen.
+- **EAFP**: Fehler akzeptieren und bei Bedarf behandeln.
+- Fehler können neu sein oder von Funktionen weitergereicht werden.
+- Nicht alle Fehler sind behebbar – manche müssen weitergegeben werden.
+- Ein guter Fehlerbehandlungsansatz verbessert die Robustheit und Wartbarkeit des Codes.
 
 
 
-
+---
 
 # Aufgaben
 

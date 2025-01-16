@@ -3,6 +3,8 @@ import ollama
 import time
 import threading
 import json
+import sys
+
 
 # Base class for sorting algorithms
 class SortingAlgorithm:
@@ -203,8 +205,6 @@ class SleepSort:
         return self.sorted_data
     
 
-
-
 # Main function to test all sorting algorithms
 def main():
     data = [3, 2, 1, 5, 4, 10, 30]
@@ -246,6 +246,59 @@ def main():
     sorted_list = sorter.sort()
     print("Sortiert:", sorted_list)
 
+def main_with_error_handling():
+    data = [3, 2, 1, 5, 4, 10, 30, -1]
+
+    print("\nDemonstration der Fehlerarten")
+
+    # a) Neuer Fehler und behebbar (LBYL)
+    print("\nA: Neuer Fehler und behebbar")
+    try:
+        print("Daten vor Fehlerbehebung:", data)
+        if any(x < 0 for x in data):
+            print("Negative Werte gefunden! Negative Werte werden auf 0 gesetzt.")
+            data = [max(0, x) for x in data]  # Negative Werte durch 0 ersetzen
+        print("Daten nach Fehlerbehebung:", data)
+    except Exception as e:
+        print(f"Unerwarteter Fehler: {e}")
+
+    # b) Hochgeblubberter Fehler und behebbar (EAFP)
+    print("\nB: Hochgeblubberter Fehler und behebbar")
+    try:
+        print("Daten sortieren mit BubbleSort:")
+        bubble_sort = BubbleSort(data.copy())
+        sorted_data = bubble_sort.sort()
+        print("Erfolgreich sortiert:", sorted_data)
+    except ValueError as e:
+        print(f"Behandelter Fehler: {e}")
+    except Exception as e:
+        print(f"Unerwarteter Fehler: {e}")
+
+    data = [3, 2, 1, 5, 4, 10, 30, -1]
+    # c) Neuer Fehler und NICHT behebbar
+    print("\nC: Neuer Fehler und NICHT behebbar")
+    try:
+        print("Daten sortieren mit SleepSort:")
+        sleep_sort = SleepSort(data.copy())
+        sorted_data = sleep_sort.sort()  # Erwarteter Fehler wegen negativen Werten
+        print("Erfolgreich sortiert:", sorted_data)
+    except ValueError as e:
+        print(f"Nicht behebbarer Fehler erkannt: {e}")
+
+    # d) Hochgeblubberter Fehler und NICHT behebbar
+    print("\nD: Hochgeblubberter Fehler und NICHT behebbar")
+    try:
+        print("Sortieren mit AI Sort:")
+        ai_sort = AISort(data.copy())
+        sorted_data = ai_sort.sort()
+        print("Ergebnis der Sortierung durch AI:", sorted_data)
+    except Exception as e:
+        print(f"Unerwarteter Fehler beim Hochblubbern: {e}")
+        print("Dieser Fehler ist nicht behebbar und wird an die Aufruferfunktion weitergegeben.")
+
 if __name__ == "__main__":
-    main()
-    # BogoSortTest()
+    try:
+        main_with_error_handling()
+    except Exception as e:
+        print(f"Die Anwendung ist unerwartet mit einem Fehler beendet: {e}")
+        sys.exit(1)
