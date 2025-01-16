@@ -63,12 +63,17 @@ class BubbleSort(SortingAlgorithm):
     """Implementierung von Bubble Sort."""
     
     def sort(self):
-        n = len(self.data)
-        for i in range(n):
-            for j in range(n - i - 1):
-                if self.data[j] > self.data[j + 1]:
-                    self.data[j], self.data[j + 1] = self.data[j + 1], self.data[j]
-        return self.data
+        try:
+            n = len(self.data)
+            for i in range(n):
+                for j in range(n - i - 1):
+                    if self.data[j] > self.data[j + 1]:
+                        self.data[j], self.data[j + 1] = self.data[j + 1], self.data[j]
+            return self.data
+        except Exception as e:
+            print(f"An error occurred during Bubble Sort: {e}")
+            return self.data
+
 
 # Implementation of Quick Sort
 class QuickSort(SortingAlgorithm):
