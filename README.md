@@ -2374,9 +2374,91 @@ Basis Artikel: "[Python Modules and Packages – An Introduction](https://realpy
 - Nicht alle Fehler sind behebbar – manche müssen weitergegeben werden.
 - Ein guter Fehlerbehandlungsansatz verbessert die Robustheit und Wartbarkeit des Codes.
 
+---
 
+# Namespaces und Gültigkeitsbereiche in Python
+
+## Was ist ein Namespace?
+
+Ein **Namespace** ist eine Sammlung von Namen (Bezeichnern), die auf Objekte verweisen. Man kann sich einen Namespace als ein Wörterbuch vorstellen, in dem die Schlüssel die Namen und die Werte die entsprechenden Objekte sind. Dies hilft dabei, Namen in einem Programm eindeutig zu halten und Kollisionen zu vermeiden.
+
+## Arten von Namespaces in Python
+
+Python verwaltet verschiedene Arten von Namespaces, die zu unterschiedlichen Zeiten erstellt und gelöscht werden:
+
+1. **Built-in Namespace**: Enthält alle eingebauten Funktionen und Ausnahmen von Python, wie `len()` oder `Exception`. Dieser Namespace ist immer verfügbar.
+
+2. **Globaler Namespace**: Wird für jedes Modul erstellt und enthält alle Namen, die auf Modulebene definiert sind. Er bleibt bestehen, solange das Programm läuft.
+
+3. **Enclosing Namespace**: Betrifft verschachtelte Funktionen. Wenn eine Funktion innerhalb einer anderen definiert ist, ist der Namespace der äußeren Funktion der "enclosing" Namespace für die innere Funktion.
+
+4. **Lokaler Namespace**: Wird bei jedem Funktionsaufruf erstellt und enthält die Namen, die innerhalb der Funktion definiert sind. Dieser Namespace existiert nur während der Ausführung der Funktion.
+
+## Der LEGB-Suchreihenfolge
+
+Python verwendet die **LEGB-Regel**, um die Reihenfolge festzulegen, in der Namen aufgelöst werden:
+
+1. **Local**: Der lokale Namespace der aktuellen Funktion.
+
+2. **Enclosing**: Der Namespace der umschließenden Funktion, falls vorhanden.
+
+3. **Global**: Der globale Namespace des aktuellen Moduls.
+
+4. **Built-in**: Der eingebaute Namespace von Python.
+
+![LEGB-Regeln](image.png)
+
+## Zugriff auf Namespaces
+
+Python bietet Funktionen, um auf die Inhalte von Namespaces zuzugreifen:
+
+- **`globals()`**: Gibt ein Wörterbuch des globalen Namespaces zurück.
+
+- **`locals()`**: Gibt ein Wörterbuch des aktuellen lokalen Namespaces zurück.
+
+## Modifizieren von Variablen außerhalb des lokalen Gültigkeitsbereichs
+
+Um Variablen in äußeren Gültigkeitsbereichen zu ändern, verwendet man:
+
+- **`global`**: Deklariert, dass eine Variable im globalen Namespace geändert wird.
+
+  ```python
+  count = 0
+
+  def increment():
+      global count
+      count += 1
+  ```
+
+- **`nonlocal`**: Wird in verschachtelten Funktionen verwendet, um anzugeben, dass eine Variable im umschließenden Namespace geändert wird.
+
+  ```python
+  def outer():
+      x = 5
+      def inner():
+          nonlocal x
+          x = 10
+      inner()
+      print(x)  # Ausgabe: 10
+  ```
+
+## Best Practices
+
+- **Minimiere die Verwendung von `global`**: Globale Variablen können den Code schwer verständlich und fehleranfällig machen.
+
+- **Bevorzuge lokale Variablen**: Sie fördern die Modularität und Wiederverwendbarkeit des Codes.
+
+- **Vermeide Namenskonflikte**: Wähle eindeutige Namen, um Kollisionen zwischen verschiedenen Namespaces zu verhindern.
+
+## Fazit
+
+Das Verständnis von Namespaces und Gültigkeitsbereichen in Python ist entscheidend, um sauberen, effizienten und fehlerfreien Code zu schreiben. Sie helfen dabei, den Code zu organisieren und die Sichtbarkeit von Variablen zu kontrollieren.
+
+Weitere Informationen findest du im vollständigen Artikel: [Namespaces and Scope in Python](https://realpython.com/python-namespaces-scope/).
 
 ---
+
+
 
 # Aufgaben
 
