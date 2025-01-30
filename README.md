@@ -2382,6 +2382,10 @@ Basis Artikel: "[Python Modules and Packages – An Introduction](https://realpy
 
 Ein **Namespace** ist eine Sammlung von Namen (Bezeichnern), die auf Objekte verweisen. Man kann sich einen Namespace als ein Wörterbuch vorstellen, in dem die Schlüssel die Namen und die Werte die entsprechenden Objekte sind. Dies hilft dabei, Namen in einem Programm eindeutig zu halten und Kollisionen zu vermeiden.
 
+## Das wörter buch das Python erstellt 
+
+zur Laufzeit erstellt Python ein Wörterbuch, das die Namen und die zugehörigen Objekte enthält. Dieses Wörterbuch wird als **Namespace** bezeichnety
+
 ## Arten von Namespaces in Python
 
 Python verwaltet verschiedene Arten von Namespaces, die zu unterschiedlichen Zeiten erstellt und gelöscht werden:
@@ -2458,7 +2462,9 @@ Weitere Informationen findest du im vollständigen Artikel: [Namespaces and Scop
 
 ---
 
+# Magic Methodes 
 
+Verbinden unsere Funktionen mit den eingebauten Funktionen von Python.
 
 # Aufgaben
 
