@@ -1,0 +1,42 @@
+{
+    "name": "Grand Hotel",
+    "rooms": [
+        {
+            "room_no": 101,
+            "room_type": "Single",
+            "room_price": 50,
+            "room_status": "Available"
+        },
+        {
+            "room_no": 102,
+            "room_type": "Double",
+            "room_price": 80,
+            "room_status": "Available"
+        },
+        {
+            "room_no": 103,
+            "room_type": "Suite",
+            "room_price": 150,
+            "room_status": "Available"
+        }
+    ],
+    "bookings": [
+        {
+            "room_no": 101,
+            "guest_name": "Test",
+            "guest_age": 20,
+            "guest_phone": "645645",
+            "check_in_day": 1,
+            "check_out_day": 11
+        }
+    ],
+    "balance": 2000,
+    "current_day": 1,
+    "reputation": 50,
+    "staff": [
+        "Mitarbeiter"
+    ],
+    "income": 0,
+    "expenses": 0,
+    "guest_queue": []
+}
