@@ -2460,6 +2460,169 @@ Das Verständnis von Namespaces und Gültigkeitsbereichen in Python ist entschei
 
 Weitere Informationen findest du im vollständigen Artikel: [Namespaces and Scope in Python](https://realpython.com/python-namespaces-scope/).
 
+# Args und Kwargs in Python
+
+Bei args und kwargs geht es um eine Dynamische länge von Argumenten die an eine Funktion übergeben werden können.
+
+args sind listen und kwargs sind Wörterbücher.
+
+Beispiel:
+
+```python
+# Eine Summenfunktion die eine beliebige Anzahl von Argumenten akzeptiert
+def summe(*args):
+    sum = 0
+    for arg in args:
+        sum += arg
+    return sum
+
+print(summe(1, 2, 3))  # Ausgabe: 6
+print(summe(1, 2, 3, 4, 5))  # Ausgabe: 15
+```
+
+## **args**
+
+- **`*args`** ist ein spezieller Parameter, der eine beliebige Anzahl von Argumenten als Tupel akzeptiert.
+- Der Name `args` ist konventionell, aber nicht obligatorisch.
+- `*args` kann mit anderen Parametern kombiniert werden, muss jedoch am Ende der Parameterliste stehen.
+- der Stern * ist ein Operator der die Argumente in ein Tupel packt.
+
+### Beispiel
+
+```python
+def summe(*args):
+    sum = 0
+    for arg in args:
+        sum += arg
+    return sum
+
+print(summe(1, 2, 3))  # Ausgabe: 6
+print(summe(1, 2, 3, 4, 5))  # Ausgabe: 15
+```
+
+## Nutzen:
+
+- **Flexibilität**: Ermöglicht die Definition von Funktionen, die eine variable Anzahl von Argumenten akzeptieren.
+- **Erweiterbarkeit**: Ermöglicht die Erweiterung von Funktionen, ohne die Signatur zu ändern.
+- **Lesbarkeit**: Erlaubt es, Funktionen mit einer Vielzahl von Argumenten aufzurufen, ohne die Lesbarkeit zu beeinträchtigen.
+
+
+## **kwargs**
+
+- **`**kwargs`** ist ein spezieller Parameter, der eine beliebige Anzahl von Schlüsselwortargumenten als Wörterbuch akzeptiert.
+- Der Name `kwargs` ist konventionell, aber nicht obligatorisch.
+- `**kwargs` kann mit anderen Parametern kombiniert werden, muss jedoch am Ende der Parameterliste stehen.
+- der Doppelstern ** ist ein Operator der die Argumente in ein Wörterbuch packt.
+
+### Beispiel
+
+```python
+def details(**kwargs):
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+details(name="Alice", age=25, city="New York")
+```
+
+## Nutzen: 
+
+- **Flexibilität**: Ermöglicht die Definition von Funktionen, die eine variable Anzahl von Argumenten akzeptieren.
+- **Erweiterbarkeit**: Ermöglicht die Erweiterung von Funktionen, ohne die Signatur zu ändern.
+- **Lesbarkeit**: Erlaubt es, Funktionen mit einer Vielzahl von Argumenten aufzurufen, ohne die Lesbarkeit zu beeinträchtigen.
+
+## Pros und Cons von args und kwargs
+
+| **Vorteile von `*args`** | **Nachteile von `*args`** |
+|--------------------------|---------------------------|
+| Flexibilität bei der Anzahl der Argumente | Keine benannten Argumente |
+| Einfache Handhabung von Tupeln | Schwieriger zu lesen und zu debuggen |
+| Erweiterbarkeit von Funktionen | Kann zu unerwarteten Ergebnissen führen |
+
+| **Vorteile von `**kwargs`** | **Nachteile von `**kwargs`** |
+|---------------------------|----------------------------|
+| Flexibilität bei der Anzahl der Schlüsselwortargumente | Keine Reihenfolge der Argumente |
+| Einfache Handhabung von Wörterbüchern | Kann zu unerwarteten Ergebnissen führen |
+| Erweiterbarkeit von Funktionen | Schwieriger zu lesen und zu debuggen |
+
+## Beispiel zur Funktionsweise von args und kwargs
+
+```python
+def myFunction(parameter_1, parameter_2, *args, **kwargs):
+    print(f"parameter_1: {parameter_1}")
+    print(f"parameter_2: {parameter_2}")
+    print(f"args: {args}")
+    print(f"kwargs: {kwargs}")
+
+myFunction('A', *(100,200,300))
+>>> parameter_1: A
+>>> parameter_2: 100
+>>> args: (200, 300)
+>>> kwargs: {}
+
+# -> A wird als parameter_1 übergeben, dann gibt es keinen zweiten Parameter dann schaut der Compiler nach *args 
+#    und packt den ersten Wert in parameter_2 und den Rest in args.
+#    kwargs bleibt leer.
+
+myFunction('A', **{'parameter_2': 1000})
+>>> parameter_1: A
+>>> parameter_2: 1000
+>>> args: ()
+>>> kwargs: {}
+
+# -> A wird als parameter_1 übergeben, dann schaut der Compiler in die args und findet nichts, dann schaut er in die kwargs
+#    und findet den Wert für parameter_2 und packt ihn in parameter_2.
+#    der schlüssel muss 'parameter_2' benannt sein,
+#    nun wird parameter_2 aus dem kwargs in parameter_2 gepackt. und kwargs bleibt leer.
+#    args bleibt leer.
+
+myFunction(parameter_2=1000, *('A',))
+>>> parameter_1: A
+>>> parameter_2: 1000
+>>> args: ()
+>>> kwargs: {}
+
+# -> Es funktioniert auch wenn wir als erstes den parameter_2 übergeben und dann den parameter_1 aus den args holen.
+#    kwargs bleibt leer.
+#    args bleibt leer. -> da der wert in parameter_1 gepackt wird.
+
+myFunction('A', **{'parameter_1': 1000, 'parameter_2': 2000})
+>>> TypeError: myFunction() got multiple values for argument 'parameter_1'
+
+# Hier wird ein Fehler geworfen, da der Compiler nicht weiss ob er den parameter_1 aus der definition vorher oder aus den kwargs nehmen soll.
+
+myFunction('A', *(1,2,3,),**{'parameter_2': 1000})
+>>> TypeError: myFunction() got multiple values for argument 'parameter_2'
+
+# -> Hier wird ein Fehler geworfen, da der Compiler nicht weiss ob er den parameter_2 aus den args oder aus den kwargs nehmen soll.
+#    Da in kwargs der schlüssel 'parameter_2' vorhanden ist, der Compiler aber schon einen parameter_2 aus den args hat.
+#    somit wird ein Fehler geworfen.
+```
+
+
+# inner funcitons in Python
+
+In Python können Funktionen innerhalb von Funktionen definiert werden. 
+Diese Funktionen werden als **innere Funktionen** oder **nested functions** bezeichnet.
+Der Hauptvorteil von inneren Funktionen besteht darin, dass sie auf den Gültigkeitsbereich der äußeren Funktion zugreifen können.
+Des weiteren kann man mit diesen Funktionen den Code besser strukturieren und die Lesbarkeit verbessern.
+Man kann auch die Inneren funktionen öfters in der äußeren Funktion verwenden.
+Des weitern ist es besser für die Wartbarkeit des Codes.
+Es kann auch hilfreich sein wenn die innere funktion rekursiv ist.
+
+## Beispiel
+
+```python
+def outer_function():
+    def inner_function():
+        print("Innere Funktion")
+    inner_function()
+
+outer_function()
+>>> Innere Funktion
+```
+
+
+
 ---
 
 # Magic Methodes 
