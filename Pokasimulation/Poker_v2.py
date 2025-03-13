@@ -1,5 +1,31 @@
 import random
 from collections import Counter
+import time
+from functools import wraps
+
+# Decorator to measure the time
+def timeit(func):
+    @wraps(func)
+    def timeit_wrapper(*args, **kwargs):
+        start_time = time.perf_counter()
+        result = func(*args, **kwargs)
+        end_time = time.perf_counter()
+        total_time = end_time - start_time
+        print(f'Function {func.__name__}{args} {kwargs} Took {total_time:.4f} seconds')
+        return result
+    return timeit_wrapper
+
+# Decorator for Debugging
+def debuger(func):
+    @wraps(func)
+    def debuger_wrapper(*args, **kwargs):
+        print(f'Function {func.__name__}{args} {kwargs} Started')
+        result = func(*args, **kwargs)
+        print(f'Function {func.__name__}{args} {kwargs} Ended')
+        print(f'Return Value: {result}')
+        return result
+    return debuger_wrapper
+
 
 # Create a deck with all cards
 def reset_deck():
@@ -74,7 +100,6 @@ def determine_combination(hand, hand_size):
     # Two Pair
     if list(cards_counter.values()).count(2) == 2:
         return "Two Pair"
-
     # One Pair
     if 2 in cards_counter.values():
         return "One Pair"
@@ -82,6 +107,13 @@ def determine_combination(hand, hand_size):
     # High Card
     return "High Card"
 
+@debuger
+def test():
+    print('Test Started')
+    print('Test Ended')
+    return 'Test'
+
+@timeit # Decorator to measure the time
 # Collect statistics
 def collect_statistics(draws, hand_size, combinations_counter):
     for _ in range(draws):
@@ -122,3 +154,4 @@ def main():
 # Main function to run the test
 if __name__ == "__main__":
     main()
+    #test()

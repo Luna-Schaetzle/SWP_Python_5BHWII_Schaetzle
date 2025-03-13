@@ -1,0 +1,4 @@
+- Mache eine Verkettete liste in Python 
+- Beachte alle die möglichkeiten wie man was hinzufügen kann
+- Beachte object etc. 
+- 

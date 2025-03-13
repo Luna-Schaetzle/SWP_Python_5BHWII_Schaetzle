@@ -2621,6 +2621,39 @@ outer_function()
 >>> Innere Funktion
 ```
 
+---
+
+# Python Dekoratoren
+
+Mit Python Dekoratoren können Funktionen oder Methoden modifiziert oder erweitert werden, ohne deren ursprünglichen Code zu ändern.
+
+Der Vorteil von Dekoratoren liegt darin, dass sie es ermöglichen, Funktionalitäten mit nur einer Zeile Code hinzuzufügen, was dem DRY-Prinzip (Don't Repeat Yourself) entspricht.
+
+## Beispiel
+
+```python
+def my_decorator(func):
+    def wrapper():
+        print("Etwas passiert, bevor die Funktion aufgerufen wird.")
+        func()
+        print("Etwas passiert, nachdem die Funktion aufgerufen wurde.")
+    return wrapper
+
+def say_hello():
+    print("Hallo!")
+
+say_hello = my_decorator(say_hello)
+
+say_hello()
+```
+
+**Ausgabe:**
+```
+Etwas passiert, bevor die Funktion aufgerufen wird.
+Hallo!
+Etwas passiert, nachdem die Funktion aufgerufen wurde.
+```
+
 
 
 ---
