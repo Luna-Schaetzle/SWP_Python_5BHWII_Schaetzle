@@ -1,9 +1,8 @@
-import random
+
+
 
 class Node:
-    def __init__(self, data: int):
-        if not isinstance(data, int):
-            raise TypeError("Nur Ganzahl-Werte sind erlaubt!")
+    def __init__(self, data=None):
         self.data = data
         self.next = None
 
@@ -54,27 +53,19 @@ class LinkedList:
         print()
 
 def main():
-    # Liste instanziieren
-    linked_list = LinkedList()
+    ll = LinkedList()
+    ll.append(10)
+    ll.append(20)
+    ll.append(30)
 
-    # Beispielliste mit zufälligen Ganzzahlen füllen (z.B. 10 Zahlen zwischen 0 und 100)
-    for _ in range(10):
-        num = random.randint(0, 100)
-        linked_list.append(num)
+    print("Alle Elemente in der Liste:")
+    ll.print_all()
 
-    # Ausgabe der Länge der Liste
-    print("Länge der Liste:", len(linked_list))
+    print("Länge der Liste:", len(ll))
 
-    # Ausgabe aller Elemente der Liste
-    print("Elemente der Liste:")
-    linked_list.print_all()
+    print("Iterieren über die Liste:")
+    for value in ll:
+        print(value)
 
-    # Holt sich mittels der Iterator-Implementierung alle Elemente der Liste
-    # und gibt diese aus
-    print("Elemente der Liste (über Iterator):")
-    data = [d for d in linked_list]
-    print(data)
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
